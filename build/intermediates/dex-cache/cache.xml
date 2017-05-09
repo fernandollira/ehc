@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/dd4751ccc20c7e343747bcf84023dfeb1fcc3ec6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_52a1f724076e73d1f823081ea4f00c04895cc226/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/ca2ff2afbb87ebda703bda2c24c1b0916cd26386/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_223341c460a0f68595fdbc310f147973e5767667/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/54908a302479a1a2b21b2ec4d60deb88b9d2ddf6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_461682395482b4571e83648090390e0cb8d9b43b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/751574cd83d13587a5fef08c1f72a84fe9e7f2fa/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_33c06205b510c4e017bbd5aa831ffac3c4624f9b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/8326d19ab8627edc67b5c7dda3ca3d4726981bc7/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d666702694cdb4ebe755b8774a2211a9f4a24826/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/a66e7e04c6e958d12510d95d9fed7a381a1e0db4/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_92cf2d59239926ffef34bb3b9e70ad1d35a8864d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_87d63afcb50e94a3333793a0aa9e311df1da0153/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f2220bafa3d31b6da50f262446524ef0e3c35623">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_34e079a6c82122a4500154af98e85c94727a5303/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/aa3c957504422173f3457eb45522b6a3e6543b0c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4f94af8a70f20705b7b95381eaf0325928dd384a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_96ff8a960a482e886a597e971b0ffb1aa111fb2a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/f29ac2af41e5817a9d9f02dc87037870d241caad/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_2c1eb56973b48bb65302bdb3d9915e428b40e476/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/4f5662c3287a6f8f0fc0a85c7f7fd35c674dae5d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0dcee3c1bb8bae7fa60cfed333537331e380923c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/16317b285cf78493027727d2840424d054ae6aec/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fce738aade4147ffdf84a1a10d70622e63b2d3cc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/4fbbdfbe083f0612a8cfec543571adbd4dd8fc75/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ec49a754dd10b312da554ec6ee0f8864dbdd9002/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/.android/build-cache/0f5f6641c7ded92c32b081a1e692339007e587f0/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b905ea02914f6cb950851f5aed66701ae63d39fd/classes.dex" />
+    </item>
+
+</items>
