@@ -1,8 +1,18 @@
 <resources>
-    <string name="app_name">EHC</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
+    <string name="about">Sobre</string>
     <string name="action_settings">Configurações</string>
+    <string name="app_full_name">EHC - Easy Home Control</string>
+    <string name="app_name">EHC</string>
+    <string name="developer1_email">professorgilmagro@gmail.com</string>
+    <string name="developer2_email">ricardoboreto@gmail.com</string>
+    <string name="environments">Ambientes</string>
+    <string name="my_account">Minha conta</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="parameters">Parâmetros</string>
+    <string name="places">Locais</string>
+    <string name="profile">Perfil</string>
+    <string name="resources">Recursos</string>
+    <string name="users">Usuários</string>
+    <string name="ehc_description">Easy Home Control</string>
 </resources>
