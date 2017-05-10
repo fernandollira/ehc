@@ -1,12 +1,8 @@
 package aiec.br.ehc;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.View;
@@ -21,13 +17,11 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import aiec.br.ehc.adapter.PlaceAdapter;
-import aiec.br.ehc.converter.DateUtils;
 import aiec.br.ehc.dao.PlaceDAO;
 import aiec.br.ehc.model.Place;
 
@@ -51,6 +45,8 @@ public class MainActivity extends AppCompatActivity
         listViewPlaces = (ListView) this.findViewById(R.id.place_list_items);
         this.fillPlaces();
         registerForContextMenu(listViewPlaces);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     /**
@@ -98,7 +94,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 activity.showAlertEditBox("Editar nome", "Entre com o nome desejado", "name", place);
-               return false;
+                return false;
             }
         });
 
@@ -210,6 +206,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_manage:
                 break;
             case R.id.nav_about:
+                Intent it = new Intent(this, AboutActivity.class);
+                startActivity(it);
                 break;
         }
 
