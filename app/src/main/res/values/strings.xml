@@ -20,4 +20,13 @@
     <string name="version">Versão</string>
     <string name="name">Nome</string>
     <string name="description">Descrição</string>
+    <string name="dialog_add_place_info">Adicionar novo local</string>
+    <string name="edit_place_name_hint">Nome do local. Ex: Minha Casa</string>
+    <string name="edit_place_description_hint">Descrição. Ex: São Paulo</string>
+    <string name="edit_place_host_hint">Host. Ex: 192.168.1.100</string>
+    <string name="edit_place_port_hint">Porta para conexão. Ex: 80</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="cancel">Cancelar</string>
+    <string name="save">Salvar</string>
 </resources>

@@ -1,8 +1,10 @@
 package aiec.br.ehc;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.View;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import aiec.br.ehc.adapter.PlaceAdapter;
 import aiec.br.ehc.dao.PlaceDAO;
+import aiec.br.ehc.dialog.PlaceEditDialog;
 import aiec.br.ehc.model.Place;
 
 public class MainActivity extends AppCompatActivity
@@ -47,6 +50,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         this.fillPlaces();
+        this.addCreateEvent();
     }
 
     /**
@@ -60,6 +64,21 @@ public class MainActivity extends AppCompatActivity
         PlaceAdapter adapter = new PlaceAdapter(this, places);
         listViewPlaces.setAdapter(adapter);
         dao.close();
+    }
+
+    /**
+     * Adiciona o envento ao botão para adicionar novos itens
+     */
+    private void addCreateEvent() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Place place = new Place();
+                PlaceEditDialog placeEditor = new PlaceEditDialog(MainActivity.this, place);
+                placeEditor.show();
+            }
+        });
     }
 
     @Override
