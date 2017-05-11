@@ -49,14 +49,13 @@ public class MainActivity extends AppCompatActivity
         registerForContextMenu(listViewPlaces);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        this.fillPlaces();
         this.addCreateEvent();
     }
 
     /**
      * Preenche todos os items de locais na lista
      */
-    private void fillPlaces()
+    public void fillPlaces()
     {
         PlaceDAO dao = new PlaceDAO(this);
         List<Place> places = dao.getAll();
@@ -79,6 +78,12 @@ public class MainActivity extends AppCompatActivity
                 placeEditor.show();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.fillPlaces();
     }
 
     @Override

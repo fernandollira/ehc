@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:hint="@string/edit_place_name_hint"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGrey"
         android:layout_margin="10dp"/>
 
@@ -35,24 +36,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGrey"
         android:hint="@string/edit_place_description_hint"
         android:layout_margin="10dp"/>
 
     <EditText
         android:id="@+id/place_edit_host"
+        android:inputType="textWebEditText|text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGrey"
         android:hint="@string/edit_place_host_hint"
         android:layout_margin="10dp"/>
 
     <EditText
         android:id="@+id/place_edit_port"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGrey"
         android:hint="@string/edit_place_port_hint"
         android:layout_margin="10dp"/>

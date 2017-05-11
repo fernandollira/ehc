@@ -111,8 +111,9 @@ public class PlaceAdapter extends BaseAdapter {
         txtDescription.setText(place.getDescription());
         txtHost.setText(place.getHost() + ": " + port);
 
+        String icon = place.getIcon() == null ? context.getString(R.string.default_place_icon) : place.getIcon();
         Resources resources = context.getResources();
-        int resourceId = resources.getIdentifier(place.getIcon(), "drawable", context.getPackageName());
+        int resourceId = resources.getIdentifier(icon, "drawable", context.getPackageName());
         imgIcon.setImageResource(resourceId);
         imgIcon.setColorFilter(new ColorMatrixColorFilter(NEGATIVE));
 
