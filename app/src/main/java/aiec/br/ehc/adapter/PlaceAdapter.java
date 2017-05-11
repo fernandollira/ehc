@@ -1,6 +1,8 @@
 package aiec.br.ehc.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,16 +89,23 @@ public class PlaceAdapter extends BaseAdapter {
         // se a view já foi instanciada, logo não precisamos instanciá-la novamente
         if (view == null) {
             LayoutInflater inflater = LayoutInflater.from(this.context);
-            view = inflater.inflate(R.layout.list_places, parent, false);
+            view = inflater.inflate(R.layout.list_place_item, parent, false);
         }
 
         TextView txtName = (TextView) view.findViewById(R.id.place_item_name);
         TextView txtDescription = (TextView) view.findViewById(R.id.place_item_description);
+        TextView txtHost = (TextView) view.findViewById(R.id.place_item_host);
         ImageView imgIcon = (ImageView) view.findViewById(R.id.place_item_icon);
         Place place = this.listPlaces.get(position);
 
+        String port = place.getPort() != null ? place.getPort().toString() : "";
         txtName.setText(place.getName());
         txtDescription.setText(place.getDescription());
+        txtHost.setText(place.getHost() + ": " + port);
+
+        Resources resources = context.getResources();
+        int resourceId = resources.getIdentifier(place.getIcon(), "drawable", context.getPackageName());
+        imgIcon.setImageResource(resourceId);
 
         return view;
     }

@@ -43,10 +43,21 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
 
         listViewPlaces = (ListView) this.findViewById(R.id.place_list_items);
-        this.fillPlaces();
         registerForContextMenu(listViewPlaces);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //criar um novo local (teste)
+        Place place = new Place();
+        place.setName("Minha casa");
+        place.setDescription("São Paulo");
+        place.setIcon("home");
+        place.setHost("192.168.1.500");
+        place.setPort(8080);
+        place.save(this);
+
+
+        this.fillPlaces();
     }
 
     /**

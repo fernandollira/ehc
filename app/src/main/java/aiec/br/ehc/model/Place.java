@@ -1,6 +1,10 @@
 package aiec.br.ehc.model;
 
+import android.content.Context;
+
 import java.util.Date;
+
+import aiec.br.ehc.dao.PlaceDAO;
 
 /**
  * Modelo locais
@@ -113,5 +117,11 @@ public class Place {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public void save(Context context) {
+        PlaceDAO dao = new PlaceDAO(context);
+        dao.save(this);
+        dao.close();
     }
 }

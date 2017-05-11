@@ -18,7 +18,8 @@ public class AboutActivity extends AppCompatActivity {
             pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             String version = pInfo.versionName;
             TextView lblVersion = (TextView) findViewById(R.id.app_version);
-            lblVersion.setText("Versão " + version.toString());
+            String versionPhrase = getResources().getString(R.string.version);
+            lblVersion.setText(String.format("%s %s", versionPhrase, version.toString()));
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
