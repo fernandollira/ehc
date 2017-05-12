@@ -31,6 +31,7 @@
     <string name="save">Salvar</string>
 
     <string-array name="object_place_icons">
+        <item>geolocation</item>
         <item>house</item>
         <item>apartment_prices</item>
         <item>office</item>
@@ -39,25 +40,70 @@
         <item>beach</item>
         <item>home_page</item>
         <item>home_map_location</item>
+        <item>placeholder1</item>
         <item>house3</item>
         <item>house5</item>
+        <item>shop.png</item>
         <item>summer</item>
     </string-array>
 
     <string-array name="object_environment_icons">
-            <item>armchair</item>
-            <item>car_with_roof</item>
-            <item>car_garage1</item>
-            <item>car_garage</item>
-            <item>bathtub</item>
-            <item>ambient</item>
-            <item>coffee_machine</item>
-            <item>long_sofa</item>
-            <item>placeholder</item>
-            <item>placeholder1</item>
-            <item>lamp1</item>
-            <item>house2</item>
-            <item>house4</item>
-        </string-array>
+        <item>armchair</item>
+        <item>car_with_roof</item>
+        <item>car_garage1</item>
+        <item>car_garage</item>
+        <item>bathtub</item>
+        <item>ambient</item>
+        <item>coffee_machine</item>
+        <item>long_sofa</item>
+        <item>placeholder</item>
+        <item>lamp1</item>
+        <item>house2</item>
+        <item>house4</item>
+    </string-array>
+
+    <string-array name="object_resource_icons">
+        <item>battery</item>
+        <item>cctv</item>
+        <item>cctv_security_camera</item>
+        <item>cd</item>
+        <item>fan</item>
+        <item>flammable</item>
+        <item>gamepad</item>
+        <item>gas</item>
+        <item>key</item>
+        <item>keyhole</item>
+        <item>info</item>
+        <item>lamp1</item>
+        <item>lamp2</item>
+        <item>lamp</item>
+        <item>laptop</item>
+        <item>light_bulb</item>
+        <item>microwave_oven</item>
+        <item>monitor</item>
+        <item>plug</item>
+        <item>printer</item>
+        <item>radio</item>
+        <item>refrigerator</item>
+        <item>remote_control</item>
+        <item>router</item>
+        <item>scale_measurement</item>
+        <item>security_camera</item>
+        <item>shower_water_running</item>
+        <item>sms_message</item>
+        <item>socket</item>
+        <item>sound</item>
+        <item>speed_indicator</item>
+        <item>stove</item>
+        <item>technology</item>
+        <item>television1</item>
+        <item>television</item>
+        <item>thermometer</item>
+        <item>thermometers</item>
+        <item>usb_connector</item>
+        <item>washing_machine</item>
+        <item>webcam</item>
+        <item>window</item>
+    </string-array>
 
 </resources>
