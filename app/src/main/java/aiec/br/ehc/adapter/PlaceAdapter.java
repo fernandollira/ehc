@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import aiec.br.ehc.R;
+import aiec.br.ehc.converter.ImageConverter;
 import aiec.br.ehc.model.Place;
 
 /**
@@ -26,13 +27,6 @@ import aiec.br.ehc.model.Place;
 public class PlaceAdapter extends BaseAdapter {
     private Context context;
     private List<Place> listPlaces;
-
-    private static final float[] NEGATIVE = {
-       -1.0f,     0,     0,    0, 255, // red
-           0, -1.0f,     0,    0, 255, // green
-           0,     0, -1.0f,    0, 255, // blue
-           0,     0,     0, 1.0f,   0  // alpha
-     };
 
     public PlaceAdapter(Context context, List<Place> listPlaces) {
         this.listPlaces = listPlaces;
@@ -115,7 +109,7 @@ public class PlaceAdapter extends BaseAdapter {
         Resources resources = context.getResources();
         int resourceId = resources.getIdentifier(icon, "drawable", context.getPackageName());
         imgIcon.setImageResource(resourceId);
-        imgIcon.setColorFilter(new ColorMatrixColorFilter(NEGATIVE));
+        ImageConverter.toNegativeColor(imgIcon);
 
         return view;
     }

@@ -2,16 +2,17 @@ package aiec.br.ehc.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
-
 import aiec.br.ehc.MainActivity;
 import aiec.br.ehc.R;
+import aiec.br.ehc.adapter.ImageArrayAdapter;
 import aiec.br.ehc.model.Place;
 
 /**
@@ -36,6 +37,16 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         Button btnNo = (Button) findViewById(R.id.btn_no);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
+
+        String[] images = getContext().getResources().getStringArray(R.array.object_place_icons);
+        final Spinner spinner = (Spinner) findViewById(R.id.place_edit_icon);
+        ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(getContext(), images);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setBackgroundResource(R.color.colorPrimaryDark);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) spinner.getLayoutParams();
+        params.height = 256;
+        spinner.setLayoutParams(params);
     }
 
     @Override
@@ -46,27 +57,35 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
                 EditText txtDescription = (EditText) findViewById(R.id.place_edit_description);
                 EditText txtHost = (EditText) findViewById(R.id.place_edit_host);
                 EditText txtPort = (EditText) findViewById(R.id.place_edit_port);
+                Spinner spinner = (Spinner)findViewById(R.id.place_edit_icon);
 
-                if (txtName.getText() == null || txtName.getText().toString().isEmpty()) {
+                String port = txtPort.getText().toString();
+                if (port.isEmpty() ) {
+                    port = getContext().getString(R.string.default_place_port);
+                }
+
+                if (txtName.getText().toString().isEmpty()) {
                     Toast.makeText(getContext(), "O campo 'Nome' é obrigatório!", Toast.LENGTH_LONG).show();
                     txtName.requestFocus();
                     return;
                 }
 
-                if (txtHost.getText() == null || txtHost.getText().toString().isEmpty()) {
+                if (txtHost.getText().toString().isEmpty()) {
                     Toast.makeText(getContext(), "O campo 'Host' é obrigatório!", Toast.LENGTH_LONG).show();
                     txtHost.requestFocus();
                     return;
                 }
 
+                this.place.setIcon(spinner.getSelectedItem().toString());
                 this.place.setName(txtName.getText().toString());
                 this.place.setDescription(txtDescription.getText().toString());
                 this.place.setHost(txtHost.getText().toString());
-                this.place.setPort(Integer.parseInt(txtPort.getText().toString()));
+                this.place.setPort(Integer.parseInt(port));
                 this.place.save(getContext());
-                Toast.makeText(getContext(), "Local criado com sucesso!", Toast.LENGTH_LONG).show();
+
+                // Invocamos aqui o método da activity para atualizar a lista
                 MainActivity activity = (MainActivity) this.activity;
-                activity.onResume();
+                activity.fillPlaces();
                 break;
 
             case R.id.btn_no:

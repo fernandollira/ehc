@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity
                         dao.delete(place);
                         dao.close();
                         fillPlaces();
-                        Toast.makeText(MainActivity.this, "Local removido com sucesso", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Removido", Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 }
