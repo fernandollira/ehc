@@ -7,6 +7,7 @@
     <string name="developer2_email">ricardoboreto@gmail.com</string>
     <string name="ehc_description">Easy Home Control</string>
     <string name="environments">Ambientes</string>
+    <string name="empty_environments">0 ambientes</string>
     <string name="host">Host</string>
     <string name="my_account">Minha conta</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -29,6 +30,8 @@
     <string name="no">Não</string>
     <string name="cancel">Cancelar</string>
     <string name="save">Salvar</string>
+    <string name="place_name_required_message">O campo \'Nome\' é obrigatório!</string>
+    <string name="place_host_required_message">O campo \'Host\' é obrigatório!</string>
 
     <string-array name="object_place_icons">
         <item>geolocation</item>
@@ -105,5 +108,6 @@
         <item>webcam</item>
         <item>window</item>
     </string-array>
+    <string name="title_activity_environment">Ambientes</string>
 
 </resources>

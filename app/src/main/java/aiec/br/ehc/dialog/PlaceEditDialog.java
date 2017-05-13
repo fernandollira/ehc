@@ -65,13 +65,15 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
                 }
 
                 if (txtName.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "O campo 'Nome' é obrigatório!", Toast.LENGTH_LONG).show();
+                    String message = getContext().getString(R.string.place_name_required_message);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     txtName.requestFocus();
                     return;
                 }
 
                 if (txtHost.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "O campo 'Host' é obrigatório!", Toast.LENGTH_LONG).show();
+                    String message = getContext().getString(R.string.place_host_required_message);
+                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
                     txtHost.requestFocus();
                     return;
                 }
@@ -85,7 +87,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
 
                 // Invocamos aqui o método da activity para atualizar a lista
                 MainActivity activity = (MainActivity) this.activity;
-                activity.fillPlaces();
+                activity.fillPlaces(true);
                 break;
 
             case R.id.btn_no:

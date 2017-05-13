@@ -48,7 +48,7 @@
                 android:drawablePadding="6dp"
                 android:drawableStart="@drawable/flag_map_marker"
                 android:paddingTop="4dp"
-                android:text="@string/environments"
+                android:text="@string/empty_environments"
                 android:layout_gravity="right"
                 android:layout_marginRight="4dp"
                 android:textColor="@color/colorGrey"

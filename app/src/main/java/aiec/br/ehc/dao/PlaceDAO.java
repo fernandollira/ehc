@@ -43,7 +43,6 @@ public class PlaceDAO extends SQLiteOpenHelper {
                         "modification_date TEXT," +
                         "created_by TEXT," +
                         "modified_by TEXT," +
-                        "active VARCHAR(3) default 'yes'" +
                         ")",
                 TABLE_NAME
         );
@@ -110,7 +109,6 @@ public class PlaceDAO extends SQLiteOpenHelper {
             data.put("id", place.getId());
         }
 
-        String active = place.getActive() ? "yes" : "no";
         data.put("name", place.getName());
         data.put("description", place.getDescription());
         data.put("host", place.getHost());
@@ -120,7 +118,6 @@ public class PlaceDAO extends SQLiteOpenHelper {
         data.put("modification_date", DateUtils.asIsoDateTime(place.getModificationAt()));
         data.put("created_by", place.getCreatedBy());
         data.put("modified_by", place.getModifiedBy());
-        data.put("active", active);
         return data;
     }
 
@@ -172,7 +169,6 @@ public class PlaceDAO extends SQLiteOpenHelper {
             place.setHost(c.getString(c.getColumnIndex("host")));
             place.setPort(c.getInt(c.getColumnIndex("port")));
             place.setIcon(c.getString(c.getColumnIndex("icon")));
-            place.setActive(this.getActiveFromYesNo(c));
             place.setCreatedBy(c.getString(c.getColumnIndex("created_by")));
             place.setModifiedBy(c.getString(c.getColumnIndex("modified_by")));
             place.setCreatedAt(DateUtils.asDate(c.getString(c.getColumnIndex("creation_date"))));
@@ -180,16 +176,6 @@ public class PlaceDAO extends SQLiteOpenHelper {
         }
 
         return place;
-    }
-
-    /**
-     * Dado um valor 'yes' ou 'no', retorna um booleano
-     *
-     * @param c cursor do registro a ser verificado
-     * @return bool
-     */
-    private boolean getActiveFromYesNo(Cursor c) {
-        return c.getString(c.getColumnIndex("active")) == "yes";
     }
 
     /**

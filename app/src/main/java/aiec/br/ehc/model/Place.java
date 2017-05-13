@@ -1,6 +1,8 @@
 package aiec.br.ehc.model;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.Date;
 
@@ -13,7 +15,7 @@ import aiec.br.ehc.dao.PlaceDAO;
  * @author  Ricardo Boreto <ricardoboreto@gmail.com>
  * @since   2017-05-07
  */
-public class Place {
+public class Place implements Parcelable {
     private Integer id;
     private String name;
     private String description;
@@ -24,7 +26,49 @@ public class Place {
     private Date modificationAt;
     private String createdBy;
     private String modifiedBy;
-    private Boolean active;
+
+    /**
+     * Construtor público da classe
+     */
+    public Place() {
+
+    }
+
+    /**
+     * Permite instanciar o objeto a partir de outro serializado
+     * Este construtor é invocado pelo método createFromParcel do objeto CREATOR
+     *
+     * @param in
+     */
+    protected Place(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.description = in.readString();
+        this.host = in.readString();
+        this.port = in.readInt();
+        this.icon = in.readString();
+
+        Long tmpDate = in.readLong();
+        this.createdAt = tmpDate == -1 ? null : new Date(tmpDate);
+
+        tmpDate = in.readLong();
+        this.modificationAt = tmpDate == -1 ? null : new Date(tmpDate);
+
+        this.createdBy = in.readString();
+        this.modifiedBy = in.readString();
+    }
+
+    public static final Creator<Place> CREATOR = new Creator<Place>() {
+        @Override
+        public Place createFromParcel(Parcel in) {
+            return new Place(in);
+        }
+
+        @Override
+        public Place[] newArray(int size) {
+            return new Place[size];
+        }
+    };
 
     @Override
     public String toString() {
@@ -111,17 +155,28 @@ public class Place {
         this.modifiedBy = modifiedBy;
     }
 
-    public Boolean getActive() {
-        return active == null ? true : active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     public void save(Context context) {
         PlaceDAO dao = new PlaceDAO(context);
         dao.save(this);
         dao.close();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(description);
+        parcel.writeString(host);
+        parcel.writeInt(port);
+        parcel.writeString(icon);
+        parcel.writeLong(createdAt != null ? createdAt.getTime() : -1);
+        parcel.writeLong(modificationAt != null ? modificationAt.getTime() : -1);
+        parcel.writeString(createdBy);
+        parcel.writeString(modifiedBy);
     }
 }

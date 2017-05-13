@@ -1,6 +1,5 @@
 package aiec.br.ehc;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,26 +49,54 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         this.addCreateEvent();
+        this.addEventPlaceList();
     }
 
     /**
      * Preenche todos os items de locais na lista
      */
-    public void fillPlaces()
+    public void fillPlaces() {
+        fillPlaces(false);
+    }
+
+    /**
+     * Preenche todos os items de locais na lista
+     *
+     * @param  scrollToBottom   Rolar para o final da lista?
+     */
+    public void fillPlaces(boolean scrollToBottom)
     {
         PlaceDAO dao = new PlaceDAO(this);
         List<Place> places = dao.getAll();
 
         PlaceAdapter adapter = new PlaceAdapter(this, places);
         listViewPlaces.setAdapter(adapter);
+        listViewPlaces.setTranscriptMode(ListView.TRANSCRIPT_MODE_ALWAYS_SCROLL);
+        listViewPlaces.setStackFromBottom(scrollToBottom);
         dao.close();
+    }
+
+    /**
+     * Adiciona as ações para o evento de click no item da lista de locais
+     */
+    private void addEventPlaceList()
+    {
+        listViewPlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Place place = (Place) listViewPlaces.getItemAtPosition(position);
+                Intent it = new Intent(MainActivity.this, EnvironmentActivity.class);
+                it.putExtra("EXTRA_PLACE", place);
+                startActivity(it);
+            }
+        });
     }
 
     /**
      * Adiciona o envento ao botão para adicionar novos itens
      */
     private void addCreateEvent() {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_place_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
