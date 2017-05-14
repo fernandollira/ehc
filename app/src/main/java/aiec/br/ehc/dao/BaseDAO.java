@@ -167,9 +167,7 @@ abstract class BaseDAO extends SQLiteOpenHelper {
     public Cursor fetchAll() {
         String sql = String.format("SELECT * FROM %s", this.tableName);
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(sql, null);
-        cursor.moveToFirst();
-        return cursor;
+        return db.rawQuery(sql, null);
     }
 
     /**

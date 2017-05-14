@@ -13,6 +13,7 @@ import java.util.List;
 
 import aiec.br.ehc.helper.DateHelper;
 import aiec.br.ehc.model.Environment;
+import aiec.br.ehc.model.Place;
 
 /**
  * Provém a persistência de dados para os ambientes de locais
@@ -90,12 +91,31 @@ public class EnvironmentDAO extends BaseDAO {
     }
 
     /**
-     * Retorna todos os registros dos locais contidos na tabela
+     * Retorna todos os registros dos ambientes contidos na tabela
      *
      * @return List<Environment>
      */
     public List<Environment> getAll() {
         Cursor c = this.fetchAll();
+        List<Environment> environments = new ArrayList<>();
+        while (c.moveToNext()) {
+            environments.add(this.fillByCursor(c));
+        }
+
+        c.close();
+        return environments;
+    }
+
+    /**
+     * Retorna todos os registros dos ambientes para o local informado
+     *
+     * @return List<Environment>
+     */
+    public List<Environment> getAllFromPlace(Place place) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {place.getId().toString()};
+        String sql = String.format("SELECT * FROM %s WHERE place_id = ?", TABLE_NAME);
+        Cursor c = db.rawQuery(sql, params);
         List<Environment> environments = new ArrayList<>();
         while (c.moveToNext()) {
             environments.add(this.fillByCursor(c));

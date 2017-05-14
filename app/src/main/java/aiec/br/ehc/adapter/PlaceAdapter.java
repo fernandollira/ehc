@@ -105,7 +105,9 @@ public class PlaceAdapter extends BaseAdapter {
         txtName.setText(place.getName());
         txtDescription.setText(place.getDescription());
         txtHost.setText(place.getHost() + ": " + port);
-        txtItemCount.setText(place.getRelatedEnvironmentCount(context).toString());
+
+        String itemCount = place.getRelatedEnvironmentCount(context).toString();
+        txtItemCount.setText(itemCount + " " + context.getString(R.string.environments).toLowerCase());
 
         String icon = place.getIcon() == null ? context.getString(R.string.default_place_icon) : place.getIcon();
         Resources resources = context.getResources();

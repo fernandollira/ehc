@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import aiec.br.ehc.helper.DateHelper;
+import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
 import aiec.br.ehc.helper.ManifestHelper;
 
@@ -96,6 +97,25 @@ public class ResourceDAO extends BaseDAO {
      */
     public List<Resource> getAll() {
         Cursor c = this.fetchAll();
+        List<Resource> resources = new ArrayList<>();
+        while (c.moveToNext()) {
+            resources.add(this.fillByCursor(c));
+        }
+
+        c.close();
+        return resources;
+    }
+
+    /**
+     * Retorna todos os recursos disponíveis para o ambiente informado
+     *
+     * @return List<Resource>
+     */
+    public List<Resource> getAllFromEnvironment(Environment environment) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {environment.getId().toString()};
+        String sql = String.format("SELECT * FROM %s WHERE environment_id = ?", TABLE_NAME);
+        Cursor c = db.rawQuery(sql, params);
         List<Resource> resources = new ArrayList<>();
         while (c.moveToNext()) {
             resources.add(this.fillByCursor(c));

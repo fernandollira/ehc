@@ -1,5 +1,6 @@
 package aiec.br.ehc.adapter;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,9 +10,8 @@ import android.widget.Toast;
 import aiec.br.ehc.R;
 
 /**
- * Created by gilmar on 12/05/17.
+ * View Holder para cada item de ambiente
  */
-
 public class EnvironmentViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
     public TextView name;
@@ -20,12 +20,13 @@ public class EnvironmentViewHolder extends RecyclerView.ViewHolder implements Vi
     public EnvironmentViewHolder(View itemView) {
         super(itemView);
         itemView.setOnClickListener(this);
-        name = (TextView)itemView.findViewById(R.id.country_name);
-        icon = (ImageView)itemView.findViewById(R.id.country_photo);
+        name = (TextView)itemView.findViewById(R.id.environment_item_name);
+        icon = (ImageView)itemView.findViewById(R.id.environment_item_icon);
     }
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), "Clicked Country Position = " + getPosition(), Toast.LENGTH_SHORT).show();
+        Snackbar.make(view, "Em desenvolvimento", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
     }
 }

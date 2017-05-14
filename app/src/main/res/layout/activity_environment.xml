@@ -27,6 +27,7 @@
         android:text="@string/environments"
         android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"
+        android:layout_marginBottom="16dp"
         android:layout_height="wrap_content" />
 
     <include layout="@layout/content_environment" />

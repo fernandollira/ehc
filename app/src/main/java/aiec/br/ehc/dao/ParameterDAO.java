@@ -12,7 +12,7 @@ import java.util.List;
 
 import aiec.br.ehc.helper.DateHelper;
 import aiec.br.ehc.model.Parameter;
-import aiec.br.ehc.helper.ManifestHelper;
+import aiec.br.ehc.model.Resource;
 
 /**
  * Provém a persistência de dados para os parâmetros de parâmetros
@@ -96,6 +96,25 @@ public class ParameterDAO extends BaseDAO {
      */
     public List<Parameter> getAll() {
         Cursor c = this.fetchAll();
+        List<Parameter> parameters = new ArrayList<>();
+        while (c.moveToNext()) {
+            parameters.add(this.fillByCursor(c));
+        }
+
+        c.close();
+        return parameters;
+    }
+
+    /**
+     * Retorna todos os parâmetros para o recurso informado
+     *
+     * @return List<Parameter>
+     */
+    public List<Parameter> getAllFromResource(Resource resource) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] params = {resource.getId().toString()};
+        String sql = String.format("SELECT * FROM %s WHERE resource_id = ?", TABLE_NAME);
+        Cursor c = db.rawQuery(sql, params);
         List<Parameter> parameters = new ArrayList<>();
         while (c.moveToNext()) {
             parameters.add(this.fillByCursor(c));
