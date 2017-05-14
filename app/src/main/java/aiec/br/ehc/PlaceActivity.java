@@ -166,7 +166,7 @@ public class PlaceActivity extends AppCompatActivity
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         PlaceDAO dao = new PlaceDAO(PlaceActivity.this);
-                        dao.delete(place);
+                        dao.delete(place.getId());
                         dao.close();
                         fillPlaces();
                         Toast.makeText(PlaceActivity.this, "Removido", Toast.LENGTH_SHORT).show();

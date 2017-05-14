@@ -21,43 +21,11 @@ import aiec.br.ehc.helper.ManifestHelper;
  * @author Ricardo Boreto <ricardoboreto@gmail.com>
  * @since 2017-05-07
  */
-public class PlaceDAO extends SQLiteOpenHelper {
-    static final private String TABLE_NAME = "places";
+public class PlaceDAO extends BaseDAO {
+    static final protected String TABLE_NAME = "places";
 
     public PlaceDAO(Context context) {
-        super(
-                context,
-                ManifestHelper.from(context).getMetadata("DATABASE").toString(),
-                null,
-                (int) ManifestHelper.from(context).getMetadata("VERSION")
-        );
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = String.format(
-                "CREATE TABLE %s(" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                        "host VARCHAR(50)," +
-                        "port INTEGER default 80," +
-                        "name VARCHAR(100)," +
-                        "description TEXT," +
-                        "icon TEXT," +
-                        "creation_date TEXT," +
-                        "modification_date TEXT," +
-                        "created_by TEXT," +
-                        "modified_by TEXT" +
-                        ")",
-                TABLE_NAME
-        );
-
-        sqLiteDatabase.execSQL(sql);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        this.onCreate(sqLiteDatabase);
+        super(context, TABLE_NAME);
     }
 
     /**
@@ -128,9 +96,7 @@ public class PlaceDAO extends SQLiteOpenHelper {
      * @return List<Place>
      */
     public List<Place> getAll() {
-        String sql = String.format("SELECT * FROM %s", TABLE_NAME);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(sql, null);
+        Cursor c = this.fetchAll();
         List<Place> places = new ArrayList<>();
         while (c.moveToNext()) {
             places.add(this.fillByCursor(c));
@@ -146,10 +112,7 @@ public class PlaceDAO extends SQLiteOpenHelper {
      * @return Place
      */
     public Place getById(Integer id) {
-        String[] params = {id.toString()};
-        String sql = String.format("SELECT * FROM %s WHERE id = ?", TABLE_NAME);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(sql, params);
+        Cursor c = this.fetchById(id);
         Place place = this.fillByCursor(c);
         c.close();
         return place;
@@ -177,16 +140,5 @@ public class PlaceDAO extends SQLiteOpenHelper {
         }
 
         return place;
-    }
-
-    /**
-     * Permite excluir um local com base na instância do mesmo
-     *
-     * @param place instância do Local
-     */
-    public void delete(Place place) {
-        SQLiteDatabase db = getWritableDatabase();
-        String[] params = {place.getId().toString()};
-        db.delete(TABLE_NAME, "id = ?", params);
     }
 }

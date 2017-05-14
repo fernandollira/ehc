@@ -21,46 +21,11 @@ import aiec.br.ehc.helper.ManifestHelper;
  * @author Ricardo Boreto <ricardoboreto@gmail.com>
  * @since 2017-05-07
  */
-public class ResourceDAO extends SQLiteOpenHelper {
-    static final private String TABLE_NAME = "resources";
-    static final private Integer TABLE_VERSION = 1;
-    static final private String DB_NAME = "ehc.db";
+public class ResourceDAO extends BaseDAO {
+    static final protected String TABLE_NAME = "resources";
 
     public ResourceDAO(Context context) {
-        super(
-                context,
-                ManifestHelper.from(context).getMetadata("DATABASE").toString(),
-                null,
-                (int) ManifestHelper.from(context).getMetadata("VERSION")
-        );
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = String.format(
-                "CREATE TABLE %s(" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                        "environment_id INTEGER NOT NULL," +
-                        "icon TEXT," +
-                        "name VARCHAR(100)," +
-                        "description TEXT," +
-                        "type VARCHAR(100)," +
-                        "creation_date TEXT," +
-                        "modification_date TEXT," +
-                        "created_by TEXT," +
-                        "modified_by TEXT" +
-                        ")",
-                TABLE_NAME
-        );
-
-        sqLiteDatabase.execSQL(sql);
-        sqLiteDatabase.execSQL("CREATE INDEX idx_environment_id ON resources (environment_id);");
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        this.onCreate(sqLiteDatabase);
+        super(context, TABLE_NAME);
     }
 
     /**
@@ -130,9 +95,7 @@ public class ResourceDAO extends SQLiteOpenHelper {
      * @return List<Resource>
      */
     public List<Resource> getAll() {
-        String sql = String.format("SELECT * FROM %s", TABLE_NAME);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(sql, null);
+        Cursor c = this.fetchAll();
         List<Resource> resources = new ArrayList<>();
         while (c.moveToNext()) {
             resources.add(this.fillByCursor(c));
@@ -148,10 +111,7 @@ public class ResourceDAO extends SQLiteOpenHelper {
      * @return Resource
      */
     public Resource getById(Integer id) {
-        String[] params = {id.toString()};
-        String sql = String.format("SELECT * FROM %s WHERE id = ?", TABLE_NAME);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(sql, params);
+        Cursor c = this.fetchById(id);
         Resource resource = this.fillByCursor(c);
         c.close();
         return resource;
@@ -181,17 +141,6 @@ public class ResourceDAO extends SQLiteOpenHelper {
     }
 
     /**
-     * Permite excluir um recurso com base na instância do mesmo
-     *
-     * @param resource instância do recurso
-     */
-    public void delete(Resource resource) {
-        SQLiteDatabase db = getWritableDatabase();
-        String[] params = {resource.getId().toString()};
-        db.delete(TABLE_NAME, "id = ?", params);
-    }
-
-    /**
      * Dado o ambiente, retorna a quantidade de recursos cadastrado
      *
      * @param environmentId  Código do local
@@ -203,7 +152,9 @@ public class ResourceDAO extends SQLiteOpenHelper {
         String sql = String.format("SELECT COUNT(0) as total FROM %s WHERE environment_id = ?", TABLE_NAME);
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.rawQuery(sql, params);
-        int total = c.getInt(c.getColumnIndex("total"));
+        c.moveToFirst();
+
+        int total = c.getCount() > 0 ? c.getInt(c.getColumnIndex("total")) : 0;
         c.close();
 
         return total;

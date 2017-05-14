@@ -13,7 +13,6 @@ import java.util.List;
 
 import aiec.br.ehc.helper.DateHelper;
 import aiec.br.ehc.model.Environment;
-import aiec.br.ehc.helper.ManifestHelper;
 
 /**
  * Provém a persistência de dados para os ambientes de locais
@@ -22,44 +21,11 @@ import aiec.br.ehc.helper.ManifestHelper;
  * @author Ricardo Boreto <ricardoboreto@gmail.com>
  * @since 2017-05-07
  */
-public class EnvironmentDAO extends SQLiteOpenHelper {
-    static final private String TABLE_NAME = "environments";
+public class EnvironmentDAO extends BaseDAO {
+    static final protected String TABLE_NAME = "environments";
 
     public EnvironmentDAO(Context context) {
-        super(
-                context,
-                ManifestHelper.from(context).getMetadata("DATABASE").toString(),
-                null,
-                (int) ManifestHelper.from(context).getMetadata("VERSION")
-        );
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = String.format(
-                "CREATE TABLE %s(" +
-                        "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                        "place_id INTEGER NOT NULL," +
-                        "name VARCHAR(100)," +
-                        "description TEXT," +
-                        "icon TEXT," +
-                        "creation_date TEXT," +
-                        "modification_date TEXT," +
-                        "created_by TEXT," +
-                        "modified_by TEXT" +
-                        ")",
-                TABLE_NAME
-        );
-
-        sqLiteDatabase.execSQL(sql);
-        sqLiteDatabase.execSQL("CREATE INDEX idx_place_id ON environments (place_id)");
-        Log.e("Path 4000", this.getReadableDatabase().getPath());
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        this.onCreate(sqLiteDatabase);
+        super(context, TABLE_NAME);
     }
 
     /**
@@ -129,9 +95,7 @@ public class EnvironmentDAO extends SQLiteOpenHelper {
      * @return List<Environment>
      */
     public List<Environment> getAll() {
-        String sql = String.format("SELECT * FROM %s", TABLE_NAME);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(sql, null);
+        Cursor c = this.fetchAll();
         List<Environment> environments = new ArrayList<>();
         while (c.moveToNext()) {
             environments.add(this.fillByCursor(c));
@@ -147,10 +111,7 @@ public class EnvironmentDAO extends SQLiteOpenHelper {
      * @return Environment
      */
     public Environment getById(Integer id) {
-        String[] params = {id.toString()};
-        String sql = String.format("SELECT * FROM %s WHERE id = ?", TABLE_NAME);
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.rawQuery(sql, params);
+        Cursor c = this.fetchById(id);
         Environment environment = this.fillByCursor(c);
         c.close();
         return environment;
@@ -180,17 +141,6 @@ public class EnvironmentDAO extends SQLiteOpenHelper {
     }
 
     /**
-     * Permite excluir um ambiente com base na instância do mesmo
-     *
-     * @param environment instância do ambiente
-     */
-    public void delete(Environment environment) {
-        SQLiteDatabase db = getWritableDatabase();
-        String[] params = {environment.getId().toString()};
-        db.delete(TABLE_NAME, "id = ?", params);
-    }
-
-    /**
      * Dado o local, retorna a quantidade de ambientes cadastrado
      *
      * @param place_id  Código do local
@@ -199,14 +149,14 @@ public class EnvironmentDAO extends SQLiteOpenHelper {
     public int getEnvironmentCountFromPlaceId(Integer place_id)
     {
         String[] params = {place_id.toString()};
-        Log.e("Path 2", this.getReadableDatabase().getPath());
         String sql = String.format("SELECT COUNT(*) as total FROM %s WHERE place_id = ?", TABLE_NAME);
         SQLiteDatabase db = getReadableDatabase();
-        return 0;
-//        Cursor c = db.rawQuery(sql, params);
-//        int total = c.getInt(c.getColumnIndex("total"));
-//        c.close();
-//
-//        return total;
+        Cursor c = db.rawQuery(sql, params);
+
+        c.moveToFirst();
+        int total = c.getCount() > 0 ? c.getInt(c.getColumnIndex("total")) : 0;
+        c.close();
+
+        return total;
     }
 }
