@@ -1,11 +1,19 @@
 package aiec.br.ehc.model;
 
+import android.content.Context;
+
 import java.util.Date;
 
-/**
- * Created by gilmar on 12/05/17.
- */
+import aiec.br.ehc.dao.EnvironmentDAO;
+import aiec.br.ehc.dao.ResourceDAO;
 
+/**
+ * Modelo ambiente de local
+ *
+ * @author  Gilmar Soares <professorgilmagro@gmail.com>
+ * @author  Ricardo Boreto <ricardoboreto@gmail.com>
+ * @since   2017-05-12
+ */
 public class Environment {
     private Integer id;
     private Integer placeId;
@@ -87,5 +95,28 @@ public class Environment {
 
     public void setModifiedBy(String modifiedBy) {
         this.modifiedBy = modifiedBy;
+    }
+
+    /**
+     * Facilitador para prover a persistência do objeto
+     *
+     * @param context
+     */
+    public void save(Context context)
+    {
+        EnvironmentDAO dao = new EnvironmentDAO(context);
+        dao.save(this);
+        dao.close();
+    }
+
+    /**
+     * Retorna a quantidade de recursos de relação com este objeto
+     *
+     * @return  total de recursos
+     */
+    public Integer getRelatedResourceCount(Context context)
+    {
+        ResourceDAO dao = new ResourceDAO(context);
+        return Integer.valueOf(dao.getResourceCountFromEnvironmentId(this.id));
     }
 }

@@ -109,5 +109,9 @@
         <item>window</item>
     </string-array>
     <string name="title_activity_environment">Ambientes</string>
+    <string name="dialog_add_environment_info">Adicionar ambiente</string>
+    <string name="edit_environment_name_hint">Ambiente. Ex: Sala, garagem</string>
+    <string name="edit_environment_description_hint">Informações adicionais</string>
+    <string name="environment_name_required_message">O campo \'nome\' é obrigatório</string>
 
 </resources>

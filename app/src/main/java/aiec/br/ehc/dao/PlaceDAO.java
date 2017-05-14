@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import aiec.br.ehc.converter.DateUtils;
+import aiec.br.ehc.helper.DateHelper;
 import aiec.br.ehc.model.Place;
+import aiec.br.ehc.helper.ManifestHelper;
 
 /**
  * Provém a persistência de dados para os locais
@@ -22,11 +23,14 @@ import aiec.br.ehc.model.Place;
  */
 public class PlaceDAO extends SQLiteOpenHelper {
     static final private String TABLE_NAME = "places";
-    static final private Integer TABLE_VERSION = 1;
-    static final private String DB_NAME = "ehc";
 
     public PlaceDAO(Context context) {
-        super(context, DB_NAME, null, TABLE_VERSION);
+        super(
+                context,
+                ManifestHelper.from(context).getMetadata("DATABASE").toString(),
+                null,
+                (int) ManifestHelper.from(context).getMetadata("VERSION")
+        );
     }
 
     @Override
@@ -42,7 +46,7 @@ public class PlaceDAO extends SQLiteOpenHelper {
                         "creation_date TEXT," +
                         "modification_date TEXT," +
                         "created_by TEXT," +
-                        "modified_by TEXT," +
+                        "modified_by TEXT" +
                         ")",
                 TABLE_NAME
         );
@@ -52,15 +56,12 @@ public class PlaceDAO extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        switch (oldVersion) {
-            case 0:
-                this.onCreate(sqLiteDatabase);
-                break;
-        }
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        this.onCreate(sqLiteDatabase);
     }
 
     /**
-     * Permite gravar os dados do aluno com base na instância do mesmo
+     * Permite gravar os dados do local com base na instância do mesmo
      * Este método decide se deve atualizar ou inserir de maneira transparente
      *
      * @param place instancia do local
@@ -74,9 +75,9 @@ public class PlaceDAO extends SQLiteOpenHelper {
     }
 
     /**
-     * Insere um novo aluno
+     * Insere um novo local
      *
-     * @param place instância do aluno a ser gravada
+     * @param place instância do local a ser gravada
      */
     public void insert(Place place) {
         place.setCreatedAt(new Date());
@@ -85,9 +86,9 @@ public class PlaceDAO extends SQLiteOpenHelper {
     }
 
     /**
-     * Atualiza o aluno
+     * Atualiza o local
      *
-     * @param place Instância do aluno
+     * @param place Instância do local
      */
     public void update(Place place) {
         place.setModificationAt(new Date());
@@ -97,7 +98,7 @@ public class PlaceDAO extends SQLiteOpenHelper {
     }
 
     /**
-     * Retorna o conteúdo com base na instância do aluno
+     * Retorna o conteúdo com base na instância do local
      *
      * @param place instância do local
      * @return ContentValues
@@ -114,8 +115,8 @@ public class PlaceDAO extends SQLiteOpenHelper {
         data.put("host", place.getHost());
         data.put("port", place.getPort());
         data.put("icon", place.getIcon());
-        data.put("creation_date", DateUtils.asIsoDateTime(place.getCreatedAt()));
-        data.put("modification_date", DateUtils.asIsoDateTime(place.getModificationAt()));
+        data.put("creation_date", DateHelper.asIsoDateTime(place.getCreatedAt()));
+        data.put("modification_date", DateHelper.asIsoDateTime(place.getModificationAt()));
         data.put("created_by", place.getCreatedBy());
         data.put("modified_by", place.getModifiedBy());
         return data;
@@ -140,7 +141,7 @@ public class PlaceDAO extends SQLiteOpenHelper {
     }
 
     /**
-     * Retorna todos os registros de alunos contidos na tabela
+     * Retorna todos os registros de locals contidos na tabela
      *
      * @return Place
      */
@@ -155,10 +156,10 @@ public class PlaceDAO extends SQLiteOpenHelper {
     }
 
     /**
-     * Cria uma instância de Student com base nos dados oriundos de um cursor do recordset
+     * Cria uma instância de Place com base nos dados oriundos de um cursor do recordset
      *
      * @param c Cursor
-     * @return Student
+     * @return Place
      */
     private Place fillByCursor(Cursor c) {
         Place place = new Place();
@@ -171,15 +172,15 @@ public class PlaceDAO extends SQLiteOpenHelper {
             place.setIcon(c.getString(c.getColumnIndex("icon")));
             place.setCreatedBy(c.getString(c.getColumnIndex("created_by")));
             place.setModifiedBy(c.getString(c.getColumnIndex("modified_by")));
-            place.setCreatedAt(DateUtils.asDate(c.getString(c.getColumnIndex("creation_date"))));
-            place.setModificationAt(DateUtils.asDate(c.getString(c.getColumnIndex("modification_date"))));
+            place.setCreatedAt(DateHelper.asDate(c.getString(c.getColumnIndex("creation_date"))));
+            place.setModificationAt(DateHelper.asDate(c.getString(c.getColumnIndex("modification_date"))));
         }
 
         return place;
     }
 
     /**
-     * Permite excluir um aluno com base na instância do mesmo
+     * Permite excluir um local com base na instância do mesmo
      *
      * @param place instância do Local
      */

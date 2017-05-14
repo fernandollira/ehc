@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-import aiec.br.ehc.MainActivity;
+import aiec.br.ehc.PlaceActivity;
 import aiec.br.ehc.R;
 import aiec.br.ehc.adapter.ImageArrayAdapter;
 import aiec.br.ehc.model.Place;
@@ -32,7 +32,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.place_edit_dialog);
+        setContentView(R.layout.dialog_edit_place);
         Button btnYes = (Button) findViewById(R.id.btn_yes);
         Button btnNo = (Button) findViewById(R.id.btn_no);
         btnYes.setOnClickListener(this);
@@ -86,7 +86,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
                 this.place.save(getContext());
 
                 // Invocamos aqui o método da activity para atualizar a lista
-                MainActivity activity = (MainActivity) this.activity;
+                PlaceActivity activity = (PlaceActivity) this.activity;
                 activity.fillPlaces(true);
                 break;
 

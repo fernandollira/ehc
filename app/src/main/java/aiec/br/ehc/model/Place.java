@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+import aiec.br.ehc.dao.EnvironmentDAO;
 import aiec.br.ehc.dao.PlaceDAO;
 
 /**
@@ -178,5 +179,16 @@ public class Place implements Parcelable {
         parcel.writeLong(modificationAt != null ? modificationAt.getTime() : -1);
         parcel.writeString(createdBy);
         parcel.writeString(modifiedBy);
+    }
+
+    /**
+     * Retorna a quantidade de ambientes de relação com este objeto
+     *
+     * @return  total de ambientes
+     */
+    public Integer getRelatedEnvironmentCount(Context context)
+    {
+        EnvironmentDAO dao = new EnvironmentDAO(context);
+        return Integer.valueOf(dao.getEnvironmentCountFromPlaceId(this.id));
     }
 }

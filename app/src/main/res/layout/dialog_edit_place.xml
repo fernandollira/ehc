@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="300dp"
+    android:minHeight="400dp"
+    android:background="@drawable/body_background"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtInfo"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:text="@string/dialog_add_place_info"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        android:drawableLeft="@drawable/flag_map_marker"
+        android:drawablePadding="3dp"
+        android:textSize="@dimen/text_big"
+        android:textStyle="bold"/>
+
+    <Spinner
+        android:id="@+id/place_edit_icon"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:background="@color/colorDark"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp" />
+
+    <EditText
+        android:id="@+id/place_edit_name"
+        android:layout_width="match_parent"
+        android:inputType="text"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="@string/edit_place_name_hint"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGrey"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/place_edit_description"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGrey"
+        android:hint="@string/edit_place_description_hint"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/place_edit_host"
+        android:inputType="textWebEditText|text|"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGrey"
+        android:hint="@string/edit_place_host_hint"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/place_edit_port"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGrey"
+        android:hint="@string/edit_place_port_hint"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:text="@string/save"
+            android:layout_gravity="left|bottom"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:layout_width="0dp" />
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="right|bottom"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:text="@string/cancel"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
