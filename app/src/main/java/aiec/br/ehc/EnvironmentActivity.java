@@ -59,7 +59,7 @@ public class EnvironmentActivity extends AppCompatActivity {
         rViewEnvironments.setHasFixedSize(true);
 
         // inclui o adapter
-        EnvironmentAdapter adapter = new EnvironmentAdapter(this, environments);
+        EnvironmentAdapter adapter = new EnvironmentAdapter(this, environments, this.place);
         rViewEnvironments.setAdapter(adapter);
     }
 

@@ -29,9 +29,11 @@ public class EnvironmentViewHolder
     public ImageView icon;
     public Environment environment;
     public CardView cardView;
+    private EnvironmentAdapter adapter;
 
-    public EnvironmentViewHolder(View itemView) {
+    public EnvironmentViewHolder(View itemView, EnvironmentAdapter adapter) {
         super(itemView);
+        this.adapter = adapter;
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
         name = (TextView)itemView.findViewById(R.id.environment_item_name);
@@ -46,16 +48,14 @@ public class EnvironmentViewHolder
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo contextMenuInfo) {
+    public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo contextMenuInfo) {
         final Context context = view.getContext();
         MenuItem menuEdit = menu.add("Editar");
         menuEdit.setOnMenuItemClickListener(
                 new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        PlaceDAO dao = new PlaceDAO(context);
-                        Place place = dao.getById(environment.getPlaceId());
-                        EnvironmentEditDialog dialog = new EnvironmentEditDialog((Activity) context, place, environment);
+                        EnvironmentEditDialog dialog = new EnvironmentEditDialog((Activity) context, adapter.place, environment);
                         dialog.show();
                         return false;
                     }
@@ -69,7 +69,8 @@ public class EnvironmentViewHolder
                     public boolean onMenuItemClick(MenuItem item) {
                         EnvironmentDAO dao = new EnvironmentDAO(context);
                         dao.delete(environment.getId());
-                        cardView.setVisibility(CardView.INVISIBLE);
+                        adapter.environments.remove(getAdapterPosition());
+                        adapter.notifyItemRemoved(getAdapterPosition());
                         return false;
                     }
                 }

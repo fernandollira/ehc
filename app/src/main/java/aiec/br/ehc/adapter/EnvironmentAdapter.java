@@ -12,23 +12,26 @@ import java.util.List;
 import aiec.br.ehc.R;
 import aiec.br.ehc.converter.ImageConverter;
 import aiec.br.ehc.model.Environment;
+import aiec.br.ehc.model.Place;
 
 /**
  * Created by gilmar on 12/05/17.
  */
 public class EnvironmentAdapter extends RecyclerView.Adapter<EnvironmentViewHolder> implements View.OnClickListener {
-    private List<Environment> environments;
     private Context context;
+    public final Place place;
+    public List<Environment> environments;
 
-    public EnvironmentAdapter(Context context, List<Environment> itemList) {
+    public EnvironmentAdapter(Context context, List<Environment> itemList, Place place) {
         this.environments = itemList;
         this.context = context;
+        this.place = place;
     }
 
     @Override
     public EnvironmentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_environment_item, null);
-        RecyclerView.ViewHolder viewHolder = new EnvironmentViewHolder(layoutView);
+        RecyclerView.ViewHolder viewHolder = new EnvironmentViewHolder(layoutView, this);
         return (EnvironmentViewHolder) viewHolder;
     }
 
