@@ -142,27 +142,17 @@ public class PlaceActivity extends AppCompatActivity
         final Place place = (Place) listViewPlaces.getItemAtPosition(info.position);
         final PlaceActivity activity = this;
 
-        MenuItem menuEditName = menu.add("Alterar nome");
-        menuEditName.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        MenuItem menuEdit = menu.add("Editar");
+        menuEdit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                activity.showAlertEditBox("Editar nome", "Entre com o nome desejado", "name", place);
+                PlaceEditDialog dialog = new PlaceEditDialog(PlaceActivity.this, place);
+                dialog.show();
                 return false;
             }
         });
 
-        MenuItem menuEditDescription = menu.add("Alterar descrição");
-        menuEditDescription.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                activity.showAlertEditBox("Editar descrição", "Entre com a descrição do local", "description", place);
-                return false;
-            }
-        });
-
-        MenuItem menuChangeIcon = menu.add("Alterar ícone");
-
-        MenuItem menuDelete = menu.add("Excluir local");
+        MenuItem menuDelete = menu.add("Excluir");
         menuDelete.setOnMenuItemClickListener(
                 new MenuItem.OnMenuItemClickListener() {
                     @Override
@@ -176,60 +166,6 @@ public class PlaceActivity extends AppCompatActivity
                     }
                 }
         );
-    }
-
-    /**
-     * Exibe uma caixa de dialogo com um input text para alteração de uma determinada propriedade
-     * @param title     Titulo
-     * @param message   Mensagem
-     * @param field     Campo a ser modificado
-     * @param place     Instância do ojeto local a ser alterado
-     */
-    public void showAlertEditBox(
-            String title,
-            String message,
-            final String field,
-            final Place place) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        final EditText editText = new EditText(this);
-        alert.setView(editText);
-        alert.setTitle(title);
-        alert.setMessage(message);
-        alert.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                PlaceDAO dao = new PlaceDAO(PlaceActivity.this);
-                String newValue = editText.getText().toString();
-                if (newValue == null || newValue.isEmpty()) {
-                    String message = "O campo não pode ficar vazio.";
-                    Toast.makeText(PlaceActivity.this, message, Toast.LENGTH_LONG);
-                    return;
-                }
-                switch (field){
-                    case "name":
-                        place.setName(newValue);
-                        break;
-                    case "description":
-                        place.setDescription(newValue);
-                        break;
-                    case "icon":
-                        place.setIcon(newValue);
-                        break;
-                }
-
-                dao.save(place);
-                dao.close();
-                fillPlaces();
-            }
-        });
-
-        alert.setCancelable(true);
-        alert.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                dialog.cancel();
-            }
-        });
-
-        alert.show();
     }
 
     @Override

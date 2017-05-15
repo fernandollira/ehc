@@ -35,6 +35,7 @@ public class EnvironmentAdapter extends RecyclerView.Adapter<EnvironmentViewHold
     @Override
     public void onBindViewHolder(EnvironmentViewHolder holder, int position) {
         Environment environment = environments.get(position);
+        holder.environment = environment;
         holder.name.setText(environment.getName());
         int resId = context.getResources().getIdentifier(environment.getIcon(), "drawable", context.getPackageName());
         holder.icon.setImageResource(resId);

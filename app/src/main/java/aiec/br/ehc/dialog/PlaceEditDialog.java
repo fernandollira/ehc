@@ -21,6 +21,11 @@ import aiec.br.ehc.model.Place;
 public class PlaceEditDialog extends Dialog implements View.OnClickListener {
     private final Place place;
     private final Activity activity;
+    private Spinner spinner;
+    private EditText txtName;
+    private EditText txtDescription;
+    private EditText txtHost;
+    private EditText txtPort;
 
     public PlaceEditDialog(Activity activity, Place place) {
         super(activity);
@@ -39,7 +44,12 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         btnNo.setOnClickListener(this);
 
         String[] images = getContext().getResources().getStringArray(R.array.object_place_icons);
-        final Spinner spinner = (Spinner) findViewById(R.id.place_edit_icon);
+        spinner = (Spinner) findViewById(R.id.place_edit_icon);
+        txtName = (EditText) findViewById(R.id.place_edit_name);
+        txtDescription = (EditText) findViewById(R.id.place_edit_description);
+        txtHost = (EditText) findViewById(R.id.place_edit_host);
+        txtPort = (EditText) findViewById(R.id.place_edit_port);
+
         ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(getContext(), images);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
@@ -47,18 +57,22 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) spinner.getLayoutParams();
         params.height = 256;
         spinner.setLayoutParams(params);
+
+        if (place.getId() != null) {
+            txtName.setText(place.getName());
+            txtDescription.setText(place.getDescription());
+            txtHost.setText(place.getHost());
+            String port = place.getPort() != null ? place.getPort().toString() : "";
+            txtPort.setText(port);
+            int pos = spinnerAdapter.getPosition(place.getIcon());
+            spinner.setSelection(pos);
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_yes:
-                EditText txtName = (EditText) findViewById(R.id.place_edit_name);
-                EditText txtDescription = (EditText) findViewById(R.id.place_edit_description);
-                EditText txtHost = (EditText) findViewById(R.id.place_edit_host);
-                EditText txtPort = (EditText) findViewById(R.id.place_edit_port);
-                Spinner spinner = (Spinner)findViewById(R.id.place_edit_icon);
-
                 String port = txtPort.getText().toString();
                 if (port.isEmpty() ) {
                     port = getContext().getString(R.string.default_place_port);

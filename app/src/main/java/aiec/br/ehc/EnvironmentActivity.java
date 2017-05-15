@@ -7,10 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,7 +21,6 @@ import aiec.br.ehc.model.Place;
 public class EnvironmentActivity extends AppCompatActivity {
     private Place place;
     private RecyclerView rViewEnvironments;
-    private List<Environment> environments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +37,6 @@ public class EnvironmentActivity extends AppCompatActivity {
         // recebe o objeto serializado do local
         this.place = (Place) getIntent().getParcelableExtra("EXTRA_PLACE");
 
-        // obtem todos os ambientes para do local
-        EnvironmentDAO dao = new EnvironmentDAO(this);
-        environments = dao.getAllFromPlace(this.place);
-
         // define o título (Nome do local)
         String title = String.format("%s / %s", place.getName(), place.getDescription());
         this.setTitle(title);
@@ -58,6 +50,9 @@ public class EnvironmentActivity extends AppCompatActivity {
      */
     public void fillEnvironmentList()
     {
+        EnvironmentDAO dao = new EnvironmentDAO(this);
+        List<Environment> environments = dao.getAllFromPlace(this.place);
+
         // determina o layout para utilização do tipo Grade
         GridLayoutManager lLayout = new GridLayoutManager(EnvironmentActivity.this, 2);
         rViewEnvironments.setLayoutManager(lLayout);
@@ -106,21 +101,5 @@ public class EnvironmentActivity extends AppCompatActivity {
         }
 
         super.onBackPressed();
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        MenuItem menuDelete = menu.add("Excluir");
-        menuDelete.setOnMenuItemClickListener(
-                new MenuItem.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        EnvironmentDAO dao = new EnvironmentDAO(EnvironmentActivity.this);
-                        Toast.makeText(EnvironmentActivity.this, "Em desenvolvimento", Toast.LENGTH_SHORT).show();
-                        return false;
-                    }
-                }
-        );
-        super.onCreateContextMenu(menu, v, menuInfo);
     }
 }
