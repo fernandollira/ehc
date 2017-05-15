@@ -8,6 +8,9 @@ import android.preference.PreferenceManager;
  * Gestor de preferências para facilitar a inclusão e recuperação de Shared Settings
  */
 public class SharedPreferenceHelper {
+    // constante com a chave para obtenção da preferência padrão de local
+    public static final String PLACE_PREFERENCE_DEFAULT = "place_default";
+
     private static SharedPreferenceHelper instance;
     private final Context context;
     private final SharedPreferences sharedPreferences;
@@ -150,5 +153,15 @@ public class SharedPreferenceHelper {
         SharedPreferences.Editor editor = this.sharedPreferences.edit();
         editor.putLong(key, value);
         editor.commit();
+    }
+
+    /**
+     * Retorna a peferência padrão para local
+     * @return int
+     */
+    public int getPreferenceForDefaultPlace()
+    {
+        int placeId = this.getIntegerOf(PLACE_PREFERENCE_DEFAULT);
+        return placeId;
     }
 }

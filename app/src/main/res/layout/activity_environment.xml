@@ -21,15 +21,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/environment_title"
-        android:background="@drawable/body_background"
-        android:text="@string/environments"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="16dp"
-        android:layout_height="wrap_content" />
-
     <include layout="@layout/content_environment" />
 
     <android.support.design.widget.FloatingActionButton

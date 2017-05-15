@@ -25,7 +25,6 @@ import java.util.List;
 import aiec.br.ehc.adapter.PlaceAdapter;
 import aiec.br.ehc.dao.PlaceDAO;
 import aiec.br.ehc.dialog.PlaceEditDialog;
-import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Place;
 
 public class PlaceActivity extends AppCompatActivity
@@ -44,6 +43,9 @@ public class PlaceActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        getWindow().getDecorView().setSystemUiVisibility(uiOptions);
 
         listViewPlaces = (ListView) this.findViewById(R.id.place_list_items);
         registerForContextMenu(listViewPlaces);
