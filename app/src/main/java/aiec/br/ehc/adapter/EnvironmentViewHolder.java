@@ -13,10 +13,8 @@ import android.widget.TextView;
 
 import aiec.br.ehc.R;
 import aiec.br.ehc.dao.EnvironmentDAO;
-import aiec.br.ehc.dao.PlaceDAO;
 import aiec.br.ehc.dialog.EnvironmentEditDialog;
 import aiec.br.ehc.model.Environment;
-import aiec.br.ehc.model.Place;
 
 /**
  * View Holder para cada item de ambiente

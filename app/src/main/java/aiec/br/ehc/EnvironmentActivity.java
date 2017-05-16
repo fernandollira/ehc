@@ -81,19 +81,6 @@ public class EnvironmentActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        // se há itens cadastrados, salva o local como preferência do usuário
-        if (rViewEnvironments.getChildCount() > 0) {
-            SharedPreferenceHelper.from(this).savePreference(
-                    SharedPreferenceHelper.PLACE_PREFERENCE_DEFAULT,
-                    this.place.getId()
-            );
-        }
-
-        super.onDestroy();
-    }
-
-    @Override
     public void onBackPressed() {
         if (getIntent().getFlags() == Intent.FLAG_ACTIVITY_NO_HISTORY) {
             Intent it = new Intent(EnvironmentActivity.this, PlaceActivity.class);

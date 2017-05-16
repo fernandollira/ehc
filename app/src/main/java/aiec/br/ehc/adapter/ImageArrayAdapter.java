@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import aiec.br.ehc.R;
-import aiec.br.ehc.converter.ImageConverter;
+import aiec.br.ehc.helper.ImageHelper;
 
 /**
  * Adapter simples para listagem de images
@@ -41,7 +41,7 @@ public class ImageArrayAdapter extends ArrayAdapter<String> {
         imageView.setBackgroundResource(R.color.colorPrimaryDark);
         int resId = getContext().getResources().getIdentifier(images[position], "drawable", getContext().getPackageName());
         imageView.setImageResource(resId);
-        ImageConverter.toNegativeColor(imageView);
+        ImageHelper.toNegativeColor(imageView);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 256);
         imageView.setLayoutParams(params);
         return imageView;

@@ -2,8 +2,7 @@ package aiec.br.ehc.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.drawable.Drawable;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import aiec.br.ehc.R;
-import aiec.br.ehc.converter.ImageConverter;
+import aiec.br.ehc.helper.ImageHelper;
+import aiec.br.ehc.helper.SharedPreferenceHelper;
 import aiec.br.ehc.model.Place;
 
 /**
@@ -113,7 +113,16 @@ public class PlaceAdapter extends BaseAdapter {
         Resources resources = context.getResources();
         int resourceId = resources.getIdentifier(icon, "drawable", context.getPackageName());
         imgIcon.setImageResource(resourceId);
-        ImageConverter.toNegativeColor(imgIcon);
+
+        int place_id = SharedPreferenceHelper.from(context).getPreferenceForDefaultPlace();
+        int color = Color.rgb(255, 255, 255);
+        if (place.getId() == place_id) {
+            color = Color.rgb(157, 249, 242);
+            imgIcon.setColorFilter(Color.rgb(0, 203, 255));
+        }
+
+        // aplica uma filtro de color na imagem
+        imgIcon.setColorFilter(color);
 
         return view;
     }

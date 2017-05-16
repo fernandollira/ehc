@@ -1,10 +1,8 @@
 package aiec.br.ehc;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.view.ContextMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,7 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +22,7 @@ import java.util.List;
 import aiec.br.ehc.adapter.PlaceAdapter;
 import aiec.br.ehc.dao.PlaceDAO;
 import aiec.br.ehc.dialog.PlaceEditDialog;
+import aiec.br.ehc.helper.SharedPreferenceHelper;
 import aiec.br.ehc.model.Place;
 
 public class PlaceActivity extends AppCompatActivity
@@ -140,7 +138,25 @@ public class PlaceActivity extends AppCompatActivity
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         final Place place = (Place) listViewPlaces.getItemAtPosition(info.position);
-        final PlaceActivity activity = this;
+        final SharedPreferenceHelper preferenceHelper = SharedPreferenceHelper.from(PlaceActivity.this);
+        final Integer placeDefault = preferenceHelper.getIntegerOf(SharedPreferenceHelper.PLACE_PREFERENCE_DEFAULT);
+
+        // verifica se o local fora definido como padrão
+        final Boolean isPlaceDefault = placeDefault.equals(place.getId());
+        String menuDefultTitle = isPlaceDefault ? getString(R.string.unmark_default) : getString(R.string.mark_default);
+        MenuItem menuDefault = menu.add(menuDefultTitle);
+        menuDefault.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                int newDefaultPlaceId = isPlaceDefault ? 0 : place.getId();
+                preferenceHelper.savePreference(
+                        SharedPreferenceHelper.PLACE_PREFERENCE_DEFAULT,
+                        newDefaultPlaceId
+                );
+                fillPlaces();
+                return false;
+            }
+        });
 
         MenuItem menuEdit = menu.add("Editar");
         menuEdit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

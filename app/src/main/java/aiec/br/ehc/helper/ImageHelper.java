@@ -1,4 +1,4 @@
-package aiec.br.ehc.converter;
+package aiec.br.ehc.helper;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,7 +12,7 @@ import android.widget.ImageView;
  * Funcionalidades para utilização de images
  */
 
-public class ImageConverter {
+public class ImageHelper {
     private final Context context;
 
     private static final float[] NEGATIVE = {
@@ -22,7 +22,7 @@ public class ImageConverter {
             0,     0,     0, 1.0f,   0  // alpha
     };
 
-    public ImageConverter(Context context) {
+    public ImageHelper(Context context) {
         this.context = context;
     }
 
@@ -39,8 +39,8 @@ public class ImageConverter {
         return res;
     }
 
-    public static ImageConverter create(Context context) {
-        return new ImageConverter(context);
+    public static ImageHelper create(Context context) {
+        return new ImageHelper(context);
     }
 
     public static Bitmap resizeBitmap(final Bitmap temp, final int size) {

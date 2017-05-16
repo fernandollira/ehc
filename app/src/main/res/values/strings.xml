@@ -30,6 +30,8 @@
     <string name="no">Não</string>
     <string name="cancel">Cancelar</string>
     <string name="save">Salvar</string>
+    <string name="mark_default">Marcar como padrão</string>
+    <string name="unmark_default">Desmarcar padrão</string>
     <string name="place_name_required_message">O campo \'Nome\' é obrigatório!</string>
     <string name="place_host_required_message">O campo \'Host\' é obrigatório!</string>
 
