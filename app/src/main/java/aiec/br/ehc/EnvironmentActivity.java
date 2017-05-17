@@ -32,7 +32,7 @@ public class EnvironmentActivity extends AppCompatActivity {
         registerForContextMenu(rViewEnvironments);
 
         // define a visibilidade de barra de navegação
-        SystemUiHelper.from(this).hideNavegationBar();
+        SystemUiHelper.from(this).fullScreenMode();
 
         // recebe o objeto serializado do local
         this.place = (Place) getIntent().getParcelableExtra("EXTRA_PLACE");
