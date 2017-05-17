@@ -8,6 +8,7 @@ import android.view.View;
 
 import aiec.br.ehc.dao.PlaceDAO;
 import aiec.br.ehc.helper.SharedPreferenceHelper;
+import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Place;
 
 public class SplashActivity extends AppCompatActivity {
@@ -18,10 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+        SystemUiHelper.from(this).fullScreenMode();
 
         new Handler().postDelayed(new Runnable() {
               @Override

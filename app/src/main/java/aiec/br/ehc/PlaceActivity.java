@@ -23,6 +23,7 @@ import aiec.br.ehc.adapter.PlaceAdapter;
 import aiec.br.ehc.dao.PlaceDAO;
 import aiec.br.ehc.dialog.PlaceEditDialog;
 import aiec.br.ehc.helper.SharedPreferenceHelper;
+import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Place;
 
 public class PlaceActivity extends AppCompatActivity
@@ -35,6 +36,9 @@ public class PlaceActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // define a visibilidade de barra de navegação
+        SystemUiHelper.from(this).hideNavegationBar();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -189,7 +193,8 @@ public class PlaceActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_close) {
+            finish();
             return true;
         }
 

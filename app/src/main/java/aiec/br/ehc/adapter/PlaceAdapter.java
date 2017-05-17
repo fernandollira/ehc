@@ -117,7 +117,7 @@ public class PlaceAdapter extends BaseAdapter {
         int place_id = SharedPreferenceHelper.from(context).getPreferenceForDefaultPlace();
         int color = Color.rgb(255, 255, 255);
         if (place.getId() == place_id) {
-            color = Color.rgb(157, 249, 242);
+            color = Color.rgb(64, 195, 255);
             imgIcon.setColorFilter(Color.rgb(0, 203, 255));
         }
 

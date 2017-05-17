@@ -14,7 +14,7 @@ import java.util.List;
 import aiec.br.ehc.adapter.EnvironmentAdapter;
 import aiec.br.ehc.dao.EnvironmentDAO;
 import aiec.br.ehc.dialog.EnvironmentEditDialog;
-import aiec.br.ehc.helper.SharedPreferenceHelper;
+import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Place;
 
@@ -31,13 +31,8 @@ public class EnvironmentActivity extends AppCompatActivity {
         this.rViewEnvironments = (RecyclerView) findViewById(R.id.environment_list);
         registerForContextMenu(rViewEnvironments);
 
-        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-        getWindow().getDecorView().setSystemUiVisibility(uiOptions);
+        // define a visibilidade de barra de navegação
+        SystemUiHelper.from(this).hideNavegationBar();
 
         // recebe o objeto serializado do local
         this.place = (Place) getIntent().getParcelableExtra("EXTRA_PLACE");
@@ -85,6 +80,12 @@ public class EnvironmentActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        this.onBackPressed();
+        return true;
     }
 
     @Override

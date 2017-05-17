@@ -29,6 +29,7 @@
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="cancel">Cancelar</string>
+    <string name="close_app">Fechar App</string>
     <string name="save">Salvar</string>
     <string name="mark_default">Marcar como padrão</string>
     <string name="unmark_default">Desmarcar padrão</string>
@@ -107,13 +108,19 @@
         <item>living_room_books</item>
         <item>living_room_black_lamp</item>
         <item>king_size_bed</item>
+        <item>berth_with_stairs</item>
+        <item>big_bed_with_one_pillow</item>
+        <item>double_bed_with_pillow</item>
+        <item>double_bed_with-pillow</item>
         <item>bedroom_circular_alarm</item>
         <item>car_with_roof</item>
         <item>car_garage1</item>
         <item>car_garage</item>
         <item>summer4</item>
         <item>ambient</item>
+        <item>eating</item>
         <item>coffee_machine</item>
+        <item>washing_machine</item>
         <item>long_sofa</item>
         <item>placeholder</item>
         <item>monitor</item>
