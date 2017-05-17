@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="object_resource_icons">
+        <item>battery</item>
+        <item>cctv</item>
+        <item>cctv_security_camera</item>
+        <item>cd</item>
+        <item>fan</item>
+        <item>flammable</item>
+        <item>gamepad</item>
+        <item>gas</item>
+        <item>key</item>
+        <item>keyhole</item>
+        <item>info</item>
+        <item>lamp1</item>
+        <item>lamp_on</item>
+        <item>lamp_off</item>
+        <item>lamp_remote</item>
+        <item>led_light_lamp</item>
+        <item>laptop</item>
+        <item>light_bulb</item>
+        <item>microwave_oven</item>
+        <item>monitor</item>
+        <item>printer</item>
+        <item>radio</item>
+        <item>refrigerator</item>
+        <item>remote_control</item>
+        <item>router</item>
+        <item>scale_measurement</item>
+        <item>security_camera</item>
+        <item>shower_water_running</item>
+        <item>sms_message</item>
+        <item>socket</item>
+        <item>walkie_talkie</item>
+        <item>sound</item>
+        <item>speed_indicator</item>
+        <item>stove</item>
+        <item>technology</item>
+        <item>telephone_vintage_design</item>
+        <item>television1</item>
+        <item>television</item>
+        <item>thermometer</item>
+        <item>thermometer1</item>
+        <item>thermometers</item>
+        <item>usb_connector</item>
+        <item>washing_machine</item>
+        <item>webcam</item>
+        <item>window2</item>
+        <item>window1</item>
+        <item>window_two</item>
+        <item>window</item>
+    </string-array>
+</resources>

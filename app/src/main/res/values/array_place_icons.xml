@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="object_place_icons">
+        <item>geolocation</item>
+        <item>placeholder</item>
+        <item>placeholder1</item>
+        <item>placeholder2</item>
+        <item>house</item>
+        <item>house2</item>
+        <item>house3</item>
+        <item>house4</item>
+        <item>house5</item>
+        <item>apartment2</item>
+        <item>apartment3</item>
+        <item>pizzeria</item>
+        <item>hospital_buildings</item>
+        <item>hotel2</item>
+        <item>office</item>
+        <item>apartment1</item>
+        <item>building_land</item>
+        <item>cabin</item>
+        <item>beach</item>
+        <item>home_page</item>
+        <item>home_map_location</item>
+        <item>placeholder1</item>
+        <item>house3</item>
+        <item>house5</item>
+        <item>shop</item>
+        <item>summer</item>
+    </string-array>
+</resources>

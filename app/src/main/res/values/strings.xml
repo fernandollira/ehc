@@ -1,188 +1,43 @@
 <resources>
-    <string name="about">Sobre</string>
-    <string name="action_settings">Configurações</string>
-    <string name="app_full_name">EHC - Easy Home Control</string>
-    <string name="app_name">EHC</string>
-    <string name="developer1_email">professorgilmagro@gmail.com</string>
-    <string name="developer2_email">ricardoboreto@gmail.com</string>
-    <string name="ehc_description">Easy Home Control</string>
-    <string name="environments">Ambientes</string>
-    <string name="empty_environments">0 ambientes</string>
+    <string name="about">About</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_full_name" translatable="false">EHC - Easy Home Control</string>
+    <string name="app_name" translatable="false">EHC</string>
+    <string name="developer1_email" translatable="false">professorgilmagro@gmail.com</string>
+    <string name="developer2_email" translatable="false">ricardoboreto@gmail.com</string>
+    <string name="ehc_description" translatable="false">Easy Home Control</string>
+    <string name="environments">Environments</string>
+    <string name="empty_environments">0 environments</string>
     <string name="host">Host</string>
-    <string name="my_account">Minha conta</string>
+    <string name="my_account">My account</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="parameters">Parâmetros</string>
-    <string name="places">Locais</string>
-    <string name="port">Porta</string>
-    <string name="profile">Perfil</string>
-    <string name="resources">Recursos</string>
-    <string name="users">Usuários</string>
-    <string name="version">Versão</string>
-    <string name="name">Nome</string>
-    <string name="description">Descrição</string>
-    <string name="dialog_add_place_info">Adicionar novo local</string>
-    <string name="edit_place_name_hint">Nome do local. Ex: Minha Casa</string>
-    <string name="edit_place_description_hint">Descrição. Ex: São Paulo</string>
+    <string name="parameters">Parameters</string>
+    <string name="places">Places</string>
+    <string name="port">Port</string>
+    <string name="profile">Profile</string>
+    <string name="resources">Resources</string>
+    <string name="users">Users</string>
+    <string name="version">Version</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="dialog_add_place_info">Add new place</string>
+    <string name="edit_place_name_hint">Local name. Ex: My House</string>
+    <string name="edit_place_description_hint">Description. Ex: New York</string>
     <string name="edit_place_host_hint">Host. Ex: 192.168.1.100</string>
-    <string name="edit_place_port_hint">Porta para conexão. Ex: 80</string>
-    <string name="yes">Sim</string>
-    <string name="no">Não</string>
-    <string name="cancel">Cancelar</string>
-    <string name="close_app">Fechar App</string>
-    <string name="save">Salvar</string>
-    <string name="mark_default">Marcar como padrão</string>
-    <string name="unmark_default">Desmarcar padrão</string>
-    <string name="place_name_required_message">O campo \'Nome\' é obrigatório!</string>
-    <string name="place_host_required_message">O campo \'Host\' é obrigatório!</string>
-
-    <string-array name="object_place_icons">
-        <item>geolocation</item>
-        <item>placeholder</item>
-        <item>placeholder1</item>
-        <item>placeholder2</item>
-        <item>house</item>
-        <item>house2</item>
-        <item>house3</item>
-        <item>house4</item>
-        <item>house5</item>
-        <item>apartment2</item>
-        <item>apartment3</item>
-        <item>pizzeria</item>
-        <item>hospital_buildings</item>
-        <item>hotel2</item>
-        <item>office</item>
-        <item>apartment1</item>
-        <item>building_land</item>
-        <item>cabin</item>
-        <item>beach</item>
-        <item>home_page</item>
-        <item>home_map_location</item>
-        <item>placeholder1</item>
-        <item>house3</item>
-        <item>house5</item>
-        <item>shop</item>
-        <item>summer</item>
-    </string-array>
-
-    <string-array name="object_environment_icons">
-        <item>livingroom_sofa</item>
-        <item>long_sofa</item>
-        <item>tool</item>
-        <item>vehicle</item>
-        <item>networking</item>
-        <item>game6</item>
-        <item>game4</item>
-        <item>game7</item>
-        <item>game8</item>
-        <item>game3</item>
-        <item>bedroom_black_closed_closet</item>
-        <item>business</item>
-        <item>cinema</item>
-        <item>gym</item>
-        <item>pin_pong2</item>
-        <item>physical_exercise</item>
-        <item>sport3</item>
-        <item>conference_hall</item>
-        <item>spool</item>
-        <item>ball</item>
-        <item>crib</item>
-        <item>crib_security</item>
-        <item>shapes</item>
-        <item>dining_room_cutlery_set_pieces</item>
-        <item>dining_room_furniture</item>
-        <item>double_king_size_bed</item>
-        <item>fireplace</item>
-        <item>kitchen</item>
-        <item>food</item>
-        <item>light</item>
-        <item>storage</item>
-        <item>table22</item>
-        <item>football</item>
-        <item>jacuzzi</item>
-        <item>park</item>
-        <item>pet_house</item>
-        <item>wc_sign</item>
-        <item>flowers_pot_yard</item>
-        <item>garden_barbecue</item>
-        <item>living_room_books</item>
-        <item>living_room_black_lamp</item>
-        <item>king_size_bed</item>
-        <item>berth_with_stairs</item>
-        <item>big_bed_with_one_pillow</item>
-        <item>double_bed_with_pillow</item>
-        <item>double_bed_with-pillow</item>
-        <item>bedroom_circular_alarm</item>
-        <item>car_with_roof</item>
-        <item>car_garage1</item>
-        <item>car_garage</item>
-        <item>summer4</item>
-        <item>ambient</item>
-        <item>eating</item>
-        <item>coffee_machine</item>
-        <item>washing_machine</item>
-        <item>long_sofa</item>
-        <item>placeholder</item>
-        <item>monitor</item>
-        <item>transport</item>
-        <item>lamp1</item>
-        <item>table</item>
-    </string-array>
-
-    <string-array name="object_resource_icons">
-        <item>battery</item>
-        <item>cctv</item>
-        <item>cctv_security_camera</item>
-        <item>cd</item>
-        <item>fan</item>
-        <item>flammable</item>
-        <item>gamepad</item>
-        <item>gas</item>
-        <item>key</item>
-        <item>keyhole</item>
-        <item>info</item>
-        <item>lamp1</item>
-        <item>lamp_on</item>
-        <item>lamp_off</item>
-        <item>lamp_remote</item>
-        <item>led_light_lamp</item>
-        <item>laptop</item>
-        <item>light_bulb</item>
-        <item>microwave_oven</item>
-        <item>monitor</item>
-        <item>printer</item>
-        <item>radio</item>
-        <item>refrigerator</item>
-        <item>remote_control</item>
-        <item>router</item>
-        <item>scale_measurement</item>
-        <item>security_camera</item>
-        <item>shower_water_running</item>
-        <item>sms_message</item>
-        <item>socket</item>
-        <item>walkie_talkie</item>
-        <item>sound</item>
-        <item>speed_indicator</item>
-        <item>stove</item>
-        <item>technology</item>
-        <item>telephone_vintage_design</item>
-        <item>television1</item>
-        <item>television</item>
-        <item>thermometer</item>
-        <item>thermometer1</item>
-        <item>thermometers</item>
-        <item>usb_connector</item>
-        <item>washing_machine</item>
-        <item>webcam</item>
-        <item>window2</item>
-        <item>window1</item>
-        <item>window_two</item>
-        <item>window</item>
-    </string-array>
-    <string name="title_activity_environment">Ambientes</string>
-    <string name="dialog_add_environment_info">Adicionar ambiente</string>
-    <string name="edit_environment_name_hint">Ambiente. Ex: Sala, garagem</string>
-    <string name="edit_environment_description_hint">Informações adicionais</string>
-    <string name="environment_name_required_message">O campo \'nome\' é obrigatório</string>
-
+    <string name="edit_place_port_hint">Connection port. Ex: 80</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+    <string name="close_app">Close Application</string>
+    <string name="save">Save</string>
+    <string name="mark_default">Mark as default</string>
+    <string name="unmark_default">Unmark default</string>
+    <string name="place_name_required_message">The field \'Name\' is required!</string>
+    <string name="place_host_required_message">The field \'Host\' is required!</string>
+    <string name="environment_name_required_message">The field \'name\' is required</string>
+    <string name="title_activity_environment">Environments</string>
+    <string name="dialog_add_environment_info">Add environment</string>
+    <string name="edit_environment_name_hint">Environment. Ex: Room, garage</string>
+    <string name="edit_environment_description_hint">Additional Information</string>
 </resources>

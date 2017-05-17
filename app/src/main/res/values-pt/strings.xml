@@ -1,0 +1,43 @@
+<resources>
+    <string name="about">Sobre</string>
+    <string name="action_settings">Configurações</string>
+    <string name="app_full_name" translatable="false">EHC - Easy Home Control</string>
+    <string name="app_name" translatable="false">EHC</string>
+    <string name="developer1_email" translatable="false">professorgilmagro@gmail.com</string>
+    <string name="developer2_email" translatable="false">ricardoboreto@gmail.com</string>
+    <string name="ehc_description" translatable="false">Easy Home Control</string>
+    <string name="environments">Ambientes</string>
+    <string name="empty_environments">0 ambientes</string>
+    <string name="host">Host</string>
+    <string name="my_account">Minha conta</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="parameters">Parâmetros</string>
+    <string name="places">Locais</string>
+    <string name="port">Porta</string>
+    <string name="profile">Perfil</string>
+    <string name="resources">Recursos</string>
+    <string name="users">Usuários</string>
+    <string name="version">Versão</string>
+    <string name="name">Nome</string>
+    <string name="description">Descrição</string>
+    <string name="dialog_add_place_info">Adicionar novo local</string>
+    <string name="edit_place_name_hint">Nome do local. Ex: Minha Casa</string>
+    <string name="edit_place_description_hint">Descrição. Ex: São Paulo</string>
+    <string name="edit_place_host_hint">Host. Ex: 192.168.1.100</string>
+    <string name="edit_place_port_hint">Porta para conexão. Ex: 80</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close_app">Fechar App</string>
+    <string name="save">Salvar</string>
+    <string name="mark_default">Marcar como padrão</string>
+    <string name="unmark_default">Desmarcar padrão</string>
+    <string name="place_name_required_message">O campo \'Nome\' é obrigatório!</string>
+    <string name="place_host_required_message">O campo \'Host\' é obrigatório!</string>
+    <string name="title_activity_environment">Ambientes</string>
+    <string name="dialog_add_environment_info">Adicionar ambiente</string>
+    <string name="edit_environment_name_hint">Ambiente. Ex: Sala, garagem</string>
+    <string name="edit_environment_description_hint">Informações adicionais</string>
+    <string name="environment_name_required_message">O campo \'nome\' é obrigatório</string>
+</resources>
