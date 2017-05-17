@@ -31,7 +31,12 @@ public class EnvironmentActivity extends AppCompatActivity {
         this.rViewEnvironments = (RecyclerView) findViewById(R.id.environment_list);
         registerForContextMenu(rViewEnvironments);
 
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(uiOptions);
 
         // recebe o objeto serializado do local
@@ -43,6 +48,8 @@ public class EnvironmentActivity extends AppCompatActivity {
 
         this.addEventForCreateEnvironment();
         this.fillEnvironmentList();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /**

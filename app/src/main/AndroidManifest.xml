@@ -56,8 +56,10 @@
             android:name=".EnvironmentActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_environment"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".PlaceActivity">
         </activity>
+
     </application>
 
 </manifest>

@@ -42,9 +42,6 @@ public class PlaceActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        getWindow().getDecorView().setSystemUiVisibility(uiOptions);
-
         listViewPlaces = (ListView) this.findViewById(R.id.place_list_items);
         registerForContextMenu(listViewPlaces);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
