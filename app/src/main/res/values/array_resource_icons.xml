@@ -6,16 +6,22 @@
         <item>cctv_security_camera</item>
         <item>cd</item>
         <item>fan</item>
+        <item>fan2</item>
+        <item>fan_ac</item>
         <item>flammable</item>
         <item>gamepad</item>
         <item>gas</item>
+        <item>sprinkler</item>
+        <item>fire_alarm</item>
         <item>key</item>
         <item>keyhole</item>
         <item>info</item>
         <item>lamp1</item>
         <item>lamp_on</item>
         <item>lamp_off</item>
-        <item>lamp_remote</item>
+        <item>lamp_off</item>
+        <item>kitchen_ceiling_lamp</item>
+        <item>ceiling_lamp</item>
         <item>led_light_lamp</item>
         <item>laptop</item>
         <item>light_bulb</item>
@@ -35,6 +41,10 @@
         <item>sound</item>
         <item>speed_indicator</item>
         <item>stove</item>
+        <item>house_door</item>
+        <item>door</item>
+        <item>humidity</item>
+        <item>filled_speaker_with_white_details</item>
         <item>technology</item>
         <item>telephone_vintage_design</item>
         <item>television1</item>
@@ -42,9 +52,16 @@
         <item>thermometer</item>
         <item>thermometer1</item>
         <item>thermometers</item>
+        <item>temperature</item>
+        <item>air_conditioner1</item>
+        <item>air_conditioner2</item>
+        <item>air_conditioner3</item>
+        <item>minisplit</item>
         <item>usb_connector</item>
+        <item>three_lockers_key</item>
         <item>washing_machine</item>
         <item>webcam</item>
+        <item>computer_1</item>
         <item>window2</item>
         <item>window1</item>
         <item>window_two</item>
