@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="6dp"
-                android:drawableStart="@drawable/flag_map_marker"
+                android:drawableStart="@drawable/white_cube"
                 android:paddingTop="4dp"
                 android:text="@string/empty_environments"
                 android:layout_gravity="right"

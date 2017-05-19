@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 import aiec.br.ehc.adapter.EnvironmentAdapter;
 import aiec.br.ehc.dao.EnvironmentDAO;
 import aiec.br.ehc.dialog.EnvironmentEditDialog;
+import aiec.br.ehc.gesture.EnvironmentGestureDetector;
 import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Place;
@@ -21,6 +24,7 @@ import aiec.br.ehc.model.Place;
 public class EnvironmentActivity extends AppCompatActivity {
     private Place place;
     private RecyclerView rViewEnvironments;
+    private GestureDetector mGestureDetector ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +45,19 @@ public class EnvironmentActivity extends AppCompatActivity {
         String title = String.format("%s / %s", place.getName(), place.getDescription());
         this.setTitle(title);
 
+        mGestureDetector = new GestureDetector(this, new EnvironmentGestureDetector(this));
+
         this.addEventForCreateEnvironment();
         this.fillEnvironmentList();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        rViewEnvironments.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                mGestureDetector.onTouchEvent(event);
+                return true;
+            }
+        });
     }
 
     /**
