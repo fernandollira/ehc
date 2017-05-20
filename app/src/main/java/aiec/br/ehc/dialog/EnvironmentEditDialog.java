@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import aiec.br.ehc.EnvironmentActivity;
@@ -27,6 +28,7 @@ public class EnvironmentEditDialog extends Dialog implements View.OnClickListene
     private EditText txtName;
     private EditText txtDescription;
     private Spinner spinner;
+    private TextView txtTitle;
 
     public EnvironmentEditDialog(Activity activity, Place place, Environment environment) {
         super(activity);
@@ -47,6 +49,7 @@ public class EnvironmentEditDialog extends Dialog implements View.OnClickListene
 
         String[] images = getContext().getResources().getStringArray(R.array.object_environment_icons);
 
+        txtTitle = (TextView) findViewById(R.id.environment_dialog_title);
         txtName = (EditText) findViewById(R.id.environment_edit_name);
         txtDescription = (EditText) findViewById(R.id.environment_edit_description);
         spinner = (Spinner) findViewById(R.id.environment_edit_icon);
@@ -60,6 +63,7 @@ public class EnvironmentEditDialog extends Dialog implements View.OnClickListene
         spinner.setLayoutParams(params);
 
         if (environment.getId() != null) {
+            txtTitle.setText(this.activity.getString(R.string.edit_environment));
             txtName.setText(environment.getName());
             txtDescription.setText(environment.getDescription());
             int pos = spinnerAdapter.getPosition(environment.getIcon());

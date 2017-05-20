@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import aiec.br.ehc.PlaceActivity;
 import aiec.br.ehc.R;
@@ -26,6 +27,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
     private EditText txtDescription;
     private EditText txtHost;
     private EditText txtPort;
+    private TextView txtTitle;
 
     public PlaceEditDialog(Activity activity, Place place) {
         super(activity);
@@ -49,6 +51,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         txtDescription = (EditText) findViewById(R.id.place_edit_description);
         txtHost = (EditText) findViewById(R.id.place_edit_host);
         txtPort = (EditText) findViewById(R.id.place_edit_port);
+        txtTitle = (TextView) findViewById(R.id.place_dialog_title);
 
         ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(getContext(), images);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -59,6 +62,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         spinner.setLayoutParams(params);
 
         if (place.getId() != null) {
+            txtTitle.setText(this.activity.getString(R.string.edit_place));
             txtName.setText(place.getName());
             txtDescription.setText(place.getDescription());
             txtHost.setText(place.getHost());

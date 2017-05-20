@@ -40,4 +40,11 @@
     <string name="dialog_add_environment_info">Add environment</string>
     <string name="edit_environment_name_hint">Environment. Ex: Room, garage</string>
     <string name="edit_environment_description_hint">Additional Information</string>
+    <string name="edit_place">Edit place</string>
+    <string name="edit_environment">Edit environment</string>
+    <string name="edit_resource">Edit resource</string>
+    <string name="edit_parameter">Edit parameter</string>
+    <string name="add_place">New place</string>
+    <string name="add_environment">New environment</string>
+    <string name="add_parameter">New parameter</string>
 </resources>

@@ -40,4 +40,11 @@
     <string name="edit_environment_name_hint">Ambiente. Ex: Sala, garagem</string>
     <string name="edit_environment_description_hint">Informações adicionais</string>
     <string name="environment_name_required_message">O campo \'nome\' é obrigatório</string>
+    <string name="edit_place">Editar local</string>
+    <string name="edit_environment">Editar ambiente</string>
+    <string name="edit_resource">Editar recurso</string>
+    <string name="edit_parameter">Editar parâmetro</string>
+    <string name="add_place">Adiconar local</string>
+    <string name="add_environment">Adiconar ambiente</string>
+    <string name="add_parameter">Adiconar parâmetro</string>
 </resources>
