@@ -11,22 +11,24 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-    android:allowBackup="true"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/AppTheme">
-
-        <meta-data android:name="DATABASE" android:value="ehc.db" />
-        <meta-data android:name="VERSION" android:value="1" />
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="DATABASE"
+            android:value="ehc.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="1" />
 
         <activity
             android:name=".PlaceActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <receiver android:name=".receiver.SMSReceiver">
             <intent-filter>
@@ -45,21 +47,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".AboutActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
             android:name=".EnvironmentActivity"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_environment"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".PlaceActivity">
-        </activity>
+            android:parentActivityName=".PlaceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
+        <activity
+            android:name=".ResourceActivity"
+            android:label="@string/resources"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

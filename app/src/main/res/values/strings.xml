@@ -46,5 +46,6 @@
     <string name="edit_parameter">Edit parameter</string>
     <string name="add_place">New place</string>
     <string name="add_environment">New environment</string>
+    <string name="add_resource">New resource</string>
     <string name="add_parameter">New parameter</string>
 </resources>

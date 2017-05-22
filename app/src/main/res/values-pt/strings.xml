@@ -46,5 +46,6 @@
     <string name="edit_parameter">Editar parâmetro</string>
     <string name="add_place">Adiconar local</string>
     <string name="add_environment">Adiconar ambiente</string>
+    <string name="add_resource">Adicionar recurso</string>
     <string name="add_parameter">Adiconar parâmetro</string>
 </resources>

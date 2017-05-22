@@ -2,7 +2,7 @@ package aiec.br.ehc.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.Snackbar;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import aiec.br.ehc.R;
+import aiec.br.ehc.ResourceActivity;
 import aiec.br.ehc.dao.EnvironmentDAO;
 import aiec.br.ehc.dialog.EnvironmentEditDialog;
 import aiec.br.ehc.model.Environment;
@@ -41,8 +42,9 @@ public class EnvironmentViewHolder
 
     @Override
     public void onClick(View view) {
-        Snackbar.make(view, "Em desenvolvimento", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+        Intent it = new Intent(view.getContext(), ResourceActivity.class);
+        it.putExtra("EXTRA_ENVIRONMENT", this.environment);
+        view.getContext().startActivity(it);
     }
 
     @Override
@@ -73,5 +75,14 @@ public class EnvironmentViewHolder
                     }
                 }
         );
+    }
+
+    /**
+     * Setter para definir o ambiente
+     *
+     * @param environment
+     */
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

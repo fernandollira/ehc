@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_place_icon">home</string>
-    <string name="default_place_port">80</string>
+    <string name="default_place_icon" translatable="false">home</string>
+    <string name="default_place_port" translatable="false">80</string>
 </resources>

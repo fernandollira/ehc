@@ -1,6 +1,8 @@
 package aiec.br.ehc.model;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.Date;
 
@@ -14,7 +16,7 @@ import aiec.br.ehc.dao.ResourceDAO;
  * @author  Ricardo Boreto <ricardoboreto@gmail.com>
  * @since   2017-05-12
  */
-public class Environment {
+public class Environment implements Parcelable {
     private Integer id;
     private Integer placeId;
     private String name;
@@ -24,6 +26,40 @@ public class Environment {
     private Date modificationAt;
     private String createdBy;
     private String modifiedBy;
+
+    public Environment() {}
+
+    /**
+     * Construtor para possibilitar a criação via parcel
+     * @param in
+     */
+    protected Environment(Parcel in) {
+        id = in.readInt();
+        placeId = in.readInt();
+        name = in.readString();
+        description = in.readString();
+        icon = in.readString();
+        createdBy = in.readString();
+        modifiedBy = in.readString();
+
+        Long tmpDate = in.readLong();
+        this.createdAt = tmpDate == -1 ? null : new Date(tmpDate);
+
+        tmpDate = in.readLong();
+        this.modificationAt = tmpDate == -1 ? null : new Date(tmpDate);
+    }
+
+    public static final Creator<Environment> CREATOR = new Creator<Environment>() {
+        @Override
+        public Environment createFromParcel(Parcel in) {
+            return new Environment(in);
+        }
+
+        @Override
+        public Environment[] newArray(int size) {
+            return new Environment[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -118,5 +154,41 @@ public class Environment {
     {
         ResourceDAO dao = new ResourceDAO(context);
         return Integer.valueOf(dao.getResourceCountFromEnvironmentId(this.id));
+    }
+
+    /**
+     * Describe the kinds of special objects contained in this Parcelable
+     * instance's marshaled representation. For example, if the object will
+     * include a file descriptor in the output of {@link #writeToParcel(Parcel, int)},
+     * the return value of this method must include the
+     * {@link #CONTENTS_FILE_DESCRIPTOR} bit.
+     *
+     * @return a bitmask indicating the set of special object types marshaled
+     * by this Parcelable object instance.
+     * @see #CONTENTS_FILE_DESCRIPTOR
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * Flatten this object in to a Parcel.
+     *
+     * @param dest  The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(placeId);
+        dest.writeString(name);
+        dest.writeString(description);
+        dest.writeString(icon);
+        dest.writeString(createdBy);
+        dest.writeString(modifiedBy);
+        dest.writeLong(createdAt != null ? createdAt.getTime() : -1);
+        dest.writeLong(modificationAt != null ? modificationAt.getTime() : -1);
     }
 }

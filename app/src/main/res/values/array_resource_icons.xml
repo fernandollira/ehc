@@ -19,13 +19,11 @@
         <item>lamp1</item>
         <item>lamp_on</item>
         <item>lamp_off</item>
-        <item>lamp_off</item>
+        <item>light_bulb</item>
+        <item>led_light_lamp</item>
+        <item>led_light_lamp2</item>
         <item>kitchen_ceiling_lamp</item>
         <item>ceiling_lamp</item>
-        <item>led_light_lamp</item>
-        <item>laptop</item>
-        <item>light_bulb</item>
-        <item>microwave_oven</item>
         <item>monitor</item>
         <item>printer</item>
         <item>radio</item>
@@ -45,7 +43,6 @@
         <item>door</item>
         <item>humidity</item>
         <item>filled_speaker_with_white_details</item>
-        <item>technology</item>
         <item>telephone_vintage_design</item>
         <item>television1</item>
         <item>television</item>

@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,7 +16,9 @@ import aiec.br.ehc.model.Place;
 /**
  * Adapter para exibição dos ambientes por local
  */
-public class EnvironmentAdapter extends RecyclerView.Adapter<EnvironmentViewHolder> implements View.OnClickListener {
+public class EnvironmentAdapter
+        extends RecyclerView.Adapter<EnvironmentViewHolder>
+        implements View.OnClickListener {
     private Context context;
     public final Place place;
     public List<Environment> environments;
@@ -38,7 +39,7 @@ public class EnvironmentAdapter extends RecyclerView.Adapter<EnvironmentViewHold
     @Override
     public void onBindViewHolder(EnvironmentViewHolder holder, int position) {
         Environment environment = environments.get(position);
-        holder.environment = environment;
+        holder.setEnvironment(environment);
         holder.name.setText(environment.getName());
         int resId = context.getResources().getIdentifier(environment.getIcon(), "drawable", context.getPackageName());
         holder.icon.setImageResource(resId);
@@ -57,6 +58,8 @@ public class EnvironmentAdapter extends RecyclerView.Adapter<EnvironmentViewHold
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), "Em desenvolvimento", Toast.LENGTH_SHORT).show();
+
     }
 }
+
+

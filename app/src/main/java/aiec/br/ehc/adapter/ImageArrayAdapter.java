@@ -38,12 +38,13 @@ public class ImageArrayAdapter extends ArrayAdapter<String> {
      */
     private View getImageForPosition(int position) {
         ImageView imageView = new ImageView(getContext());
-        imageView.setBackgroundResource(R.color.colorPrimaryDark);
+        imageView.setBackgroundResource(R.drawable.icon_item);
         int resId = getContext().getResources().getIdentifier(images[position], "drawable", getContext().getPackageName());
         imageView.setImageResource(resId);
         ImageHelper.toNegativeColor(imageView);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 256);
         imageView.setLayoutParams(params);
+        imageView.setPaddingRelative(10,10,10,10);
         return imageView;
     }
 }

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:minWidth="300dp"
     android:minHeight="400dp"
-    android:background="@drawable/body_background"
+    android:background="@color/colorDark"
     android:orientation="vertical">
 
     <TextView
@@ -18,6 +18,7 @@
         android:textColor="@android:color/white"
         android:drawableLeft="@drawable/flag_map_marker"
         android:drawablePadding="3dp"
+        android:layout_marginBottom="10dp"
         android:textSize="@dimen/text_big"
         android:textStyle="bold"/>
 
@@ -28,7 +29,7 @@
         android:gravity="center"
         android:background="@color/colorDark"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="0dp" />
 
     <EditText
         android:id="@+id/place_edit_name"
