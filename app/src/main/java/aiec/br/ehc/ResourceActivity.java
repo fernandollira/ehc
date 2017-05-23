@@ -37,15 +37,6 @@ public class ResourceActivity extends AppCompatActivity {
 
         this.rViewResources = (RecyclerView) findViewById(R.id.resource_list);
 
-        mGestureDetector = new GestureDetector(this, new ResourceGestureDetector(this));
-        rViewResources.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mGestureDetector.onTouchEvent(event);
-                return true;
-            }
-        });
-
         this.setTitle(getString(R.string.resources));
         this.addEventForCreateResource();
         this.fillResourceList();

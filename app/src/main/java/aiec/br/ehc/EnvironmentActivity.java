@@ -45,19 +45,10 @@ public class EnvironmentActivity extends AppCompatActivity {
         String title = String.format("%s / %s", place.getName(), place.getDescription());
         this.setTitle(title);
 
-        mGestureDetector = new GestureDetector(this, new EnvironmentGestureDetector(this));
-
         this.addEventForCreateEnvironment();
         this.fillEnvironmentList();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        rViewEnvironments.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                mGestureDetector.onTouchEvent(event);
-                return true;
-            }
-        });
     }
 
     /**
