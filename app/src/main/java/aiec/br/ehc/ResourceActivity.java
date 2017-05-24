@@ -2,6 +2,8 @@ package aiec.br.ehc;
 
 import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +19,7 @@ import aiec.br.ehc.gesture.OnSwipeTouchListener;
 import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
+import aiec.br.ehc.parameter.TurnOnOffFragment;
 
 public class ResourceActivity extends AppCompatActivity {
     private Environment environment;

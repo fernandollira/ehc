@@ -3,22 +3,24 @@ package aiec.br.ehc.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import aiec.br.ehc.EnvironmentActivity;
 import aiec.br.ehc.R;
 import aiec.br.ehc.ResourceActivity;
 import aiec.br.ehc.adapter.ImageArrayAdapter;
 import aiec.br.ehc.model.Environment;
-import aiec.br.ehc.model.Place;
 import aiec.br.ehc.model.Resource;
+import aiec.br.ehc.parameter.TurnOnOffFragment;
 
 /**
  * Cria uma dialog em forma de um formulário que permite a edição de um local
@@ -26,15 +28,16 @@ import aiec.br.ehc.model.Resource;
 public class ResourceEditDialog extends Dialog implements View.OnClickListener {
     private final Resource resource;
     private final Environment environment;
-    private final Activity activity;
+    private final ResourceActivity activity;
     private EditText txtName;
-    private EditText txtDescription;
+    private TextView txtDescription;
     private Spinner spinner;
     private TextView txtTitle;
+    private FrameLayout frameParameter;
 
     public ResourceEditDialog(Activity activity, Environment environment, Resource resource) {
         super(activity);
-        this.activity = activity;
+        this.activity = (ResourceActivity) activity;
         this.environment = environment;
         this.resource = resource;
     }
@@ -53,7 +56,7 @@ public class ResourceEditDialog extends Dialog implements View.OnClickListener {
 
         txtTitle = (TextView) findViewById(R.id.resource_dialog_title);
         txtName = (EditText) findViewById(R.id.resource_edit_name);
-        txtDescription = (EditText) findViewById(R.id.resource_edit_description);
+        txtDescription = (TextView) findViewById(R.id.resource_view_description);
         spinner = (Spinner) findViewById(R.id.resource_edit_icon);
 
         ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(getContext(), images);
