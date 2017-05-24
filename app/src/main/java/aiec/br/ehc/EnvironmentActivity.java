@@ -1,5 +1,6 @@
 package aiec.br.ehc;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,13 +11,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.List;
 
 import aiec.br.ehc.adapter.EnvironmentAdapter;
 import aiec.br.ehc.dao.EnvironmentDAO;
 import aiec.br.ehc.dialog.EnvironmentEditDialog;
-import aiec.br.ehc.gesture.EnvironmentGestureDetector;
+import aiec.br.ehc.gesture.OnSwipeTouchListener;
 import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Place;
@@ -24,7 +27,6 @@ import aiec.br.ehc.model.Place;
 public class EnvironmentActivity extends AppCompatActivity {
     private Place place;
     private RecyclerView rViewEnvironments;
-    private GestureDetector mGestureDetector ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class EnvironmentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         this.rViewEnvironments = (RecyclerView) findViewById(R.id.environment_list);
         registerForContextMenu(rViewEnvironments);
+
+
 
         // define a visibilidade de barra de navegação
         SystemUiHelper.from(this).fullScreenMode();
@@ -45,10 +49,25 @@ public class EnvironmentActivity extends AppCompatActivity {
         String title = String.format("%s / %s", place.getName(), place.getDescription());
         this.setTitle(title);
 
+        this.addEventSwipeTouch();
         this.addEventForCreateEnvironment();
         this.fillEnvironmentList();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    /**
+     * Adiciona os eventos de movimento (gestos) na tela
+     */
+    private void addEventSwipeTouch() {
+        final Activity activity = this;
+        rViewEnvironments.isDuplicateParentStateEnabled();
+        rViewEnvironments.setClipChildren(true);
+        rViewEnvironments.setOnTouchListener(new OnSwipeTouchListener(EnvironmentActivity.this) {
+            public void onSwipeRight() {
+                activity.onBackPressed();
+            }
+        });
     }
 
     /**

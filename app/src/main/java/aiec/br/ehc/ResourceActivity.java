@@ -1,13 +1,11 @@
 package aiec.br.ehc;
 
+import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.List;
@@ -15,7 +13,7 @@ import java.util.List;
 import aiec.br.ehc.adapter.ResourceAdapter;
 import aiec.br.ehc.dao.ResourceDAO;
 import aiec.br.ehc.dialog.ResourceEditDialog;
-import aiec.br.ehc.gesture.ResourceGestureDetector;
+import aiec.br.ehc.gesture.OnSwipeTouchListener;
 import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
@@ -23,7 +21,6 @@ import aiec.br.ehc.model.Resource;
 public class ResourceActivity extends AppCompatActivity {
     private Environment environment;
     private RecyclerView rViewResources;
-    private GestureDetector mGestureDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +35,7 @@ public class ResourceActivity extends AppCompatActivity {
         this.rViewResources = (RecyclerView) findViewById(R.id.resource_list);
 
         this.setTitle(getString(R.string.resources));
+        this.addEventSwipeTouch();
         this.addEventForCreateResource();
         this.fillResourceList();
     }
@@ -72,6 +70,19 @@ public class ResourceActivity extends AppCompatActivity {
                 Resource resource = new Resource();
                 ResourceEditDialog dialog = new ResourceEditDialog(ResourceActivity.this, environment, resource);
                 dialog.show();
+            }
+        });
+    }
+
+    /**
+     * Adiciona os eventos de movimento (gestos) na tela
+     */
+    private void addEventSwipeTouch() {
+        final Activity activity = this;
+        rViewResources.setClipChildren(true);
+        rViewResources.setOnTouchListener(new OnSwipeTouchListener(ResourceActivity.this) {
+            public void onSwipeRight() {
+                activity.onBackPressed();
             }
         });
     }
