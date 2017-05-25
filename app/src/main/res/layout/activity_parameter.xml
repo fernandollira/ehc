@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content_environment"
+    android:background="@color/colorDark"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Spinner
+            android:id="@+id/resource_edit_icon"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:gravity="center"
+            android:background="@color/colorDark"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp" />
+
+        <EditText
+            android:id="@+id/resource_edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
+            android:layout_gravity="center"
+            android:hint="@string/edit_environment_name_hint"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorGrey"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/resource_view_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorGrey"
+            android:hint="@string/edit_environment_description_hint"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_resource_parameter"
+        android:background="@color/colorPrimaryDark"
+        android:paddingBottom="10dp"
+        android:paddingTop="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:text="@string/save"
+            android:layout_gravity="left|bottom"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:layout_width="0dp" />
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="right|bottom"
+            android:background="@color/colorAccent"
+            android:clickable="true"
+            android:text="@string/cancel"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

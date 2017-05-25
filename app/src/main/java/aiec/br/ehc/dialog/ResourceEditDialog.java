@@ -20,7 +20,6 @@ import aiec.br.ehc.ResourceActivity;
 import aiec.br.ehc.adapter.ImageArrayAdapter;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
-import aiec.br.ehc.parameter.TurnOnOffFragment;
 
 /**
  * Cria uma dialog em forma de um formulário que permite a edição de um local
@@ -47,17 +46,17 @@ public class ResourceEditDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_edit_resource);
-        Button btnYes = (Button) findViewById(R.id.btn_yes);
-        Button btnNo = (Button) findViewById(R.id.btn_no);
+        Button btnYes = (Button) findViewById(R.id.dialog_btn_yes);
+        Button btnNo = (Button) findViewById(R.id.dialog_btn_no);
         btnYes.setOnClickListener(this);
         btnNo.setOnClickListener(this);
 
         String[] images = getContext().getResources().getStringArray(R.array.object_resource_icons);
 
-        txtTitle = (TextView) findViewById(R.id.resource_dialog_title);
-        txtName = (EditText) findViewById(R.id.resource_edit_name);
-        txtDescription = (TextView) findViewById(R.id.resource_view_description);
-        spinner = (Spinner) findViewById(R.id.resource_edit_icon);
+        txtTitle = (TextView) findViewById(R.id.dialog_resource_dialog_title);
+        txtName = (EditText) findViewById(R.id.dialog_resource_edit_name);
+        txtDescription = (TextView) findViewById(R.id.dialog_resource_view_description);
+        spinner = (Spinner) findViewById(R.id.dialog_resource_edit_icon);
 
         ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(getContext(), images);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
