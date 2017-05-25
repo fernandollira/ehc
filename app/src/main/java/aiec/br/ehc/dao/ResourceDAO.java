@@ -39,7 +39,8 @@ public class ResourceDAO extends BaseDAO {
         if (resource.getId() != null) {
             this.update(resource);
         } else {
-            this.insert(resource);
+            Long id = this.insert(resource);
+            resource.setId(id.intValue());
         }
     }
 
@@ -48,10 +49,10 @@ public class ResourceDAO extends BaseDAO {
      *
      * @param resource instância do recurso a ser gravada
      */
-    public void insert(Resource resource) {
+    public Long insert(Resource resource) {
         resource.setCreatedAt(new Date());
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_NAME, null, this.getContentValues(resource));
+        return db.insert(TABLE_NAME, null, this.getContentValues(resource));
     }
 
     /**

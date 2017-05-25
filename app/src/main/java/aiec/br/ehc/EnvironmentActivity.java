@@ -51,9 +51,14 @@ public class EnvironmentActivity extends AppCompatActivity {
 
         this.addEventSwipeTouch();
         this.addEventForCreateEnvironment();
-        this.fillEnvironmentList();
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillEnvironmentList();
     }
 
     /**

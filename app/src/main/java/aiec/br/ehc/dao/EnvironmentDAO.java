@@ -39,7 +39,8 @@ public class EnvironmentDAO extends BaseDAO {
         if (environment.getId() != null) {
             this.update(environment);
         } else {
-            this.insert(environment);
+            Long id = this.insert(environment);
+            environment.setId(id.intValue());
         }
     }
 
@@ -48,10 +49,10 @@ public class EnvironmentDAO extends BaseDAO {
      *
      * @param environment instância do ambiente a ser gravada
      */
-    public void insert(Environment environment) {
+    public Long insert(Environment environment) {
         environment.setCreatedAt(new Date());
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_NAME, null, this.getContentValues(environment));
+        return db.insert(TABLE_NAME, null, this.getContentValues(environment));
     }
 
     /**

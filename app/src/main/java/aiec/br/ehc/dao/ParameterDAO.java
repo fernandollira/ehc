@@ -38,7 +38,8 @@ public class ParameterDAO extends BaseDAO {
         if (parameter.getId() != null) {
             this.update(parameter);
         } else {
-            this.insert(parameter);
+            Long id = this.insert(parameter);
+            parameter.setId(id.intValue());
         }
     }
 
@@ -47,10 +48,10 @@ public class ParameterDAO extends BaseDAO {
      *
      * @param parameter instância do parâmetro a ser gravada
      */
-    public void insert(Parameter parameter) {
+    public Long insert(Parameter parameter) {
         parameter.setCreatedAt(new Date());
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_NAME, null, this.getContentValues(parameter));
+        return db.insert(TABLE_NAME, null, this.getContentValues(parameter));
     }
 
     /**
@@ -111,16 +112,19 @@ public class ParameterDAO extends BaseDAO {
      * @return List<Parameter>
      */
     public List<Parameter> getAllFromResource(Resource resource) {
-        SQLiteDatabase db = getWritableDatabase();
-        String[] params = {resource.getId().toString()};
-        String sql = String.format("SELECT * FROM %s WHERE resource_id = ?", TABLE_NAME);
-        Cursor c = db.rawQuery(sql, params);
         List<Parameter> parameters = new ArrayList<>();
-        while (c.moveToNext()) {
-            parameters.add(this.fillByCursor(c));
+        if (resource.getId() != null) {
+            SQLiteDatabase db = getWritableDatabase();
+            String[] params = {resource.getId().toString()};
+            String sql = String.format("SELECT * FROM %s WHERE resource_id = ?", TABLE_NAME);
+            Cursor c = db.rawQuery(sql, params);
+            while (c.moveToNext()) {
+                parameters.add(this.fillByCursor(c));
+            }
+
+            c.close();
         }
 
-        c.close();
         return parameters;
     }
 

@@ -2,13 +2,11 @@ package aiec.br.ehc;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,6 +21,7 @@ public class ParameterActivity extends AppCompatActivity {
     private EditText txtName;
     private TextView txtDescription;
     private Spinner spinner;
+    private TurnOnOffFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +33,43 @@ public class ParameterActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.resource_edit_icon);
 
         // recebe os objetos serializados
-        this.environment = (Environment) getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
-        this.resource = (Resource) getIntent().getParcelableExtra("EXTRA_RESOURCE");
+        this.environment = getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
+        this.resource = getIntent().getParcelableExtra("EXTRA_RESOURCE");
         this.fillParameters();
+        this.addButtonEvents();
     }
 
+    /**
+     * Adiciona os eventos para os botões Salvar e Cancelar
+     */
+    private void addButtonEvents()
+    {
+        final ParameterActivity self = this;
+        Button btnSave = (Button) findViewById(R.id.resource_btn_yes);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resource.setIcon(spinner.getSelectedItem().toString());
+                resource.setName(txtName.getText().toString());
+                resource.setEnvironmentId(environment.getId());
+                resource.save(view.getContext());
+                self.fragment.saveParameters();
+                self.finish();
+            }
+        });
+
+        Button btnCancel = (Button) findViewById(R.id.resource_btn_no);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                self.finish();
+            }
+        });
+    }
+
+    /**
+     * Preenche os parâmetros com base no recurso
+     */
     private void fillParameters()
     {
         String[] images = getResources().getStringArray(R.array.object_resource_icons);
@@ -58,7 +89,11 @@ public class ParameterActivity extends AppCompatActivity {
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction tx = manager.beginTransaction();
-        tx.replace(R.id.frame_resource_parameter, new TurnOnOffFragment());
+        this.fragment = new TurnOnOffFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("resource", resource);
+        fragment.setArguments(args);
+        tx.replace(R.id.frame_resource_parameter, fragment);
         tx.commit();
     }
 }

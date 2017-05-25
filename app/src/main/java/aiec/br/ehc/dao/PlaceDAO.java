@@ -38,7 +38,8 @@ public class PlaceDAO extends BaseDAO {
         if (place.getId() != null) {
             this.update(place);
         } else {
-            this.insert(place);
+            Long id = this.insert(place);
+            place.setId(id.intValue());
         }
     }
 
@@ -47,10 +48,10 @@ public class PlaceDAO extends BaseDAO {
      *
      * @param place instância do local a ser gravada
      */
-    public void insert(Place place) {
+    public Long insert(Place place) {
         place.setCreatedAt(new Date());
         SQLiteDatabase db = getWritableDatabase();
-        db.insert(TABLE_NAME, null, this.getContentValues(place));
+        return db.insert(TABLE_NAME, null, this.getContentValues(place));
     }
 
     /**

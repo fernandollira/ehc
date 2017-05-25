@@ -59,7 +59,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btn_yes"
+            android:id="@+id/resource_btn_yes"
             android:layout_weight="1"
             android:layout_height="30dp"
             android:background="@color/colorAccent"
@@ -71,7 +71,7 @@
             android:layout_width="0dp" />
 
         <Button
-            android:id="@+id/btn_no"
+            android:id="@+id/resource_btn_no"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="30dp"
