@@ -11,12 +11,11 @@ import aiec.br.ehc.dao.ParameterDAO;
  * @author  Ricardo Boreto <ricardoboreto@gmail.com>
  * @since   2017-05-13
  */
-public class Parameter {
-    private Integer id;
+public class Parameter extends BaseModel {
     private Integer resourceId;
     private String name;
     private String value;
-    private String uiType;
+    private String action;
     private String icon;
     private Date createdAt;
     private Date modificationAt;
@@ -26,14 +25,6 @@ public class Parameter {
     @Override
     public String toString() {
         return name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getResourceId() {
@@ -60,12 +51,12 @@ public class Parameter {
         this.value = value;
     }
 
-    public String getUiType() {
-        return uiType;
+    public String getAction() {
+        return action;
     }
 
-    public void setUiType(String ui_type) {
-        this.uiType = ui_type;
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public String getIcon() {
@@ -108,15 +99,17 @@ public class Parameter {
         this.modifiedBy = modifiedBy;
     }
 
-    /**
-     * Facilitador para prover a persistência do objeto
-     *
-     * @param context
-     */
     public void save(Context context)
     {
         ParameterDAO dao = new ParameterDAO(context);
         dao.save(this);
+        dao.close();
+    }
+
+    @Override
+    public void delete(Context context) {
+        ParameterDAO dao = new ParameterDAO(context);
+        dao.delete(this.id);
         dao.close();
     }
 }

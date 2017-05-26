@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,7 +81,7 @@ public class ParameterDAO extends BaseDAO {
         data.put("resource_id", parameter.getResourceId());
         data.put("name", parameter.getName());
         data.put("value", parameter.getValue());
-        data.put("ui_type", parameter.getUiType());
+        data.put("action", parameter.getAction());
         data.put("creation_date", DateHelper.asIsoDateTime(parameter.getCreatedAt()));
         data.put("modification_date", DateHelper.asIsoDateTime(parameter.getModificationAt()));
         data.put("created_by", parameter.getCreatedBy());
@@ -153,7 +152,7 @@ public class ParameterDAO extends BaseDAO {
             parameter.setResourceId(c.getInt(c.getColumnIndex("resource_id")));
             parameter.setName(c.getString(c.getColumnIndex("name")));
             parameter.setValue(c.getString(c.getColumnIndex("value")));
-            parameter.setUiType(c.getString(c.getColumnIndex("ui_type")));
+            parameter.setAction(c.getString(c.getColumnIndex("action")));
             parameter.setCreatedBy(c.getString(c.getColumnIndex("created_by")));
             parameter.setModifiedBy(c.getString(c.getColumnIndex("modified_by")));
             parameter.setCreatedAt(DateHelper.asDate(c.getString(c.getColumnIndex("creation_date"))));

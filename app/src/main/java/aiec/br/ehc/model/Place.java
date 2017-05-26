@@ -16,8 +16,7 @@ import aiec.br.ehc.dao.PlaceDAO;
  * @author  Ricardo Boreto <ricardoboreto@gmail.com>
  * @since   2017-05-07
  */
-public class Place implements Parcelable {
-    private Integer id;
+public class Place extends BaseModel implements Parcelable {
     private String name;
     private String description;
     private String host;
@@ -74,14 +73,6 @@ public class Place implements Parcelable {
     @Override
     public String toString() {
         return String.format("%s %s", this.name, this.description);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -156,9 +147,17 @@ public class Place implements Parcelable {
         this.modifiedBy = modifiedBy;
     }
 
+    @Override
     public void save(Context context) {
         PlaceDAO dao = new PlaceDAO(context);
         dao.save(this);
+        dao.close();
+    }
+
+    @Override
+    public void delete(Context context) {
+        PlaceDAO dao = new PlaceDAO(context);
+        dao.delete(this.id);
         dao.close();
     }
 

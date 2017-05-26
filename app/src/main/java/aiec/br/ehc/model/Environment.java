@@ -16,11 +16,11 @@ import aiec.br.ehc.dao.ResourceDAO;
  * @author  Ricardo Boreto <ricardoboreto@gmail.com>
  * @since   2017-05-12
  */
-public class Environment implements Parcelable {
-    private Integer id;
+public class Environment extends BaseModel implements Parcelable {
     private Integer placeId;
     private String name;
     private String description;
+    private String parameter;
     private String icon;
     private Date createdAt;
     private Date modificationAt;
@@ -38,6 +38,7 @@ public class Environment implements Parcelable {
         placeId = in.readInt();
         name = in.readString();
         description = in.readString();
+        parameter = in.readString();
         icon = in.readString();
         createdBy = in.readString();
         modifiedBy = in.readString();
@@ -61,14 +62,6 @@ public class Environment implements Parcelable {
         }
     };
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Integer getPlaceId() {
         return placeId;
     }
@@ -91,6 +84,14 @@ public class Environment implements Parcelable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getParameter() {
+        return parameter;
+    }
+
+    public void setParameter(String parameter) {
+        this.parameter = parameter;
     }
 
     public String getIcon() {
@@ -133,15 +134,18 @@ public class Environment implements Parcelable {
         this.modifiedBy = modifiedBy;
     }
 
-    /**
-     * Facilitador para prover a persistência do objeto
-     *
-     * @param context
-     */
+    @Override
     public void save(Context context)
     {
         EnvironmentDAO dao = new EnvironmentDAO(context);
         dao.save(this);
+        dao.close();
+    }
+
+    @Override
+    public void delete(Context context) {
+        EnvironmentDAO dao = new EnvironmentDAO(context);
+        dao.delete(this.id);
         dao.close();
     }
 
@@ -185,6 +189,7 @@ public class Environment implements Parcelable {
         dest.writeInt(placeId);
         dest.writeString(name);
         dest.writeString(description);
+        dest.writeString(parameter);
         dest.writeString(icon);
         dest.writeString(createdBy);
         dest.writeString(modifiedBy);

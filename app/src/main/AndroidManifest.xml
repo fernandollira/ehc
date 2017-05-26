@@ -22,7 +22,7 @@
             android:value="ehc.db" />
         <meta-data
             android:name="VERSION"
-            android:value="1" />
+            android:value="2" />
 
         <activity
             android:name=".PlaceActivity"
@@ -63,7 +63,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ParameterActivity"
+            android:name=".ResourceEditorActivity"
             android:label="@string/resources"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.CustomDialog"/>

@@ -43,7 +43,7 @@ public class EnvironmentActivity extends AppCompatActivity {
         SystemUiHelper.from(this).fullScreenMode();
 
         // recebe o objeto serializado do local
-        this.place = (Place) getIntent().getParcelableExtra("EXTRA_PLACE");
+        this.place = getIntent().getParcelableExtra("EXTRA_PLACE");
 
         // define o título (Nome do local)
         String title = String.format("%s / %s", place.getName(), place.getDescription());

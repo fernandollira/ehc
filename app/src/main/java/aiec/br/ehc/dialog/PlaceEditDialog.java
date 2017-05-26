@@ -82,16 +82,15 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
                     port = getContext().getString(R.string.default_place_port);
                 }
 
+                String requiredMessage = getContext().getString(R.string.required_field_message);
                 if (txtName.getText().toString().isEmpty()) {
-                    String message = getContext().getString(R.string.place_name_required_message);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                    txtName.setError(requiredMessage);
                     txtName.requestFocus();
                     return;
                 }
 
                 if (txtHost.getText().toString().isEmpty()) {
-                    String message = getContext().getString(R.string.place_host_required_message);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                    txtHost.setError(requiredMessage);
                     txtHost.requestFocus();
                     return;
                 }

@@ -16,13 +16,17 @@ import aiec.br.ehc.dao.ResourceDAO;
  * @author  Ricardo Boreto <ricardoboreto@gmail.com>
  * @since   2017-05-13
  */
-public class Resource implements Parcelable {
-    private Integer id;
+public class Resource extends BaseModel implements Parcelable {
     private Integer environmentId;
     private String name;
     private String description;
     private String type;
     private String icon;
+    private String method;
+    private String state;
+    private Integer minValue;
+    private Integer maxValue;
+    private Integer stepValue;
     private Date createdAt;
     private Date modificationAt;
     private String createdBy;
@@ -31,12 +35,17 @@ public class Resource implements Parcelable {
     public Resource() {}
 
     protected Resource(Parcel in) {
-        id = in.readInt();
+        this.id = in.readInt();
         environmentId = in.readInt();
         name = in.readString();
         description = in.readString();
         icon = in.readString();
         type = in.readString();
+        state = in.readString();
+        method = in.readString();
+        minValue = in.readInt();
+        maxValue = in.readInt();
+        stepValue = in.readInt();
         createdBy = in.readString();
         modifiedBy = in.readString();
 
@@ -96,12 +105,52 @@ public class Resource implements Parcelable {
         this.description = description;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public Integer getMinValue() {
+        return minValue;
+    }
+
+    public void setMinValue(Integer minValue) {
+        this.minValue = minValue;
+    }
+
+    public Integer getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(Integer maxValue) {
+        this.maxValue = maxValue;
+    }
+
+    public Integer getStepValue() {
+        return stepValue;
+    }
+
+    public void setStepValue(Integer stepValue) {
+        this.stepValue = stepValue;
     }
 
     public String getIcon() {
@@ -144,15 +193,19 @@ public class Resource implements Parcelable {
         this.modifiedBy = modifiedBy;
     }
 
-    /**
-     * Facilitador para prover a persistência do objeto
-     *
-     * @param context
-     */
+    @Override
     public void save(Context context)
     {
         ResourceDAO dao = new ResourceDAO(context);
         dao.save(this);
+        dao.close();
+    }
+
+    @Override
+    public void delete(Context context)
+    {
+        ResourceDAO dao = new ResourceDAO(context);
+        dao.delete(this.id);
         dao.close();
     }
 
@@ -180,6 +233,11 @@ public class Resource implements Parcelable {
         parcel.writeString(description);
         parcel.writeString(icon);
         parcel.writeString(type);
+        parcel.writeString(state);
+        parcel.writeString(method);
+        parcel.writeInt(minValue);
+        parcel.writeInt(maxValue);
+        parcel.writeInt(stepValue);
         parcel.writeString(createdBy);
         parcel.writeString(modifiedBy);
         parcel.writeLong(createdAt != null ? createdAt.getTime() : -1);

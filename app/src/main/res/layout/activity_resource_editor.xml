@@ -9,6 +9,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:paddingBottom="10dp"
         android:layout_height="wrap_content">
 
         <Spinner
@@ -25,21 +26,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords|textAutoComplete|textAutoCorrect"
-            android:layout_gravity="center"
-            android:hint="@string/edit_environment_name_hint"
+            android:hint="@string/edit_resource_name_hint"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorGrey"
             android:layout_marginLeft="10dp"/>
+
+        <Spinner
+            android:id="@+id/resource_edit_method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/array_http_methods"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="0dp" />
 
         <TextView
             android:id="@+id/resource_view_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorGrey"
             android:hint="@string/edit_environment_description_hint"
-            android:layout_margin="10dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="12dp"/>
     </LinearLayout>
 
     <FrameLayout

@@ -1,9 +1,8 @@
 package aiec.br.ehc;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,12 +13,10 @@ import java.util.List;
 
 import aiec.br.ehc.adapter.ResourceAdapter;
 import aiec.br.ehc.dao.ResourceDAO;
-import aiec.br.ehc.dialog.ResourceEditDialog;
 import aiec.br.ehc.gesture.OnSwipeTouchListener;
 import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
-import aiec.br.ehc.parameter.TurnOnOffFragment;
 
 public class ResourceActivity extends AppCompatActivity {
     private Environment environment;
@@ -33,14 +30,19 @@ public class ResourceActivity extends AppCompatActivity {
         SystemUiHelper.from(this).fullScreenMode();
 
         // recebe o objeto serializado do local
-        this.environment = (Environment) getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
+        this.environment = getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
 
         this.rViewResources = (RecyclerView) findViewById(R.id.resource_list);
 
         this.setTitle(getString(R.string.resources));
         this.addEventSwipeTouch();
         this.addEventForCreateResource();
-        this.fillResourceList();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fillResourceList();
     }
 
     /**
@@ -65,14 +67,13 @@ public class ResourceActivity extends AppCompatActivity {
      */
     public void addEventForCreateResource()
     {
-        final Environment environment = this.environment;
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_add_resource);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Resource resource = new Resource();
-                ResourceEditDialog dialog = new ResourceEditDialog(ResourceActivity.this, environment, resource);
-                dialog.show();
+                Intent it = new Intent(ResourceActivity.this, ResourceEditorActivity.class);
+                it.putExtra("EXTRA_ENVIRONMENT", environment);
+                startActivity(it);
             }
         });
     }

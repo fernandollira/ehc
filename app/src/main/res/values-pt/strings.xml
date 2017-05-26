@@ -48,4 +48,8 @@
     <string name="add_environment">Adiconar ambiente</string>
     <string name="add_resource">Adicionar recurso</string>
     <string name="add_parameter">Adiconar parâmetro</string>
+    <string name="required_field_message">Campo obrigatório</string>
+    <string name="edit_environment_parameter_hint">Parâmetro de ambiente. Ex: ambiente=sala</string>
+    <string name="dialog_add_resource_info">Novo recurso</string>
+    <string name="edit_resource_name_hint">Recurso. Ex: Lâmpada, Ventilador</string>
 </resources>

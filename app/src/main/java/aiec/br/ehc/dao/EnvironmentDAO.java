@@ -83,6 +83,7 @@ public class EnvironmentDAO extends BaseDAO {
         data.put("place_id", environment.getPlaceId());
         data.put("name", environment.getName());
         data.put("description", environment.getDescription());
+        data.put("parameter", environment.getParameter());
         data.put("icon", environment.getIcon());
         data.put("creation_date", DateHelper.asIsoDateTime(environment.getCreatedAt()));
         data.put("modification_date", DateHelper.asIsoDateTime(environment.getModificationAt()));
@@ -151,6 +152,7 @@ public class EnvironmentDAO extends BaseDAO {
             environment.setPlaceId(c.getInt(c.getColumnIndex("place_id")));
             environment.setName(c.getString(c.getColumnIndex("name")));
             environment.setDescription(c.getString(c.getColumnIndex("description")));
+            environment.setParameter(c.getString(c.getColumnIndex("parameter")));
             environment.setIcon(c.getString(c.getColumnIndex("icon")));
             environment.setCreatedBy(c.getString(c.getColumnIndex("created_by")));
             environment.setModifiedBy(c.getString(c.getColumnIndex("modified_by")));

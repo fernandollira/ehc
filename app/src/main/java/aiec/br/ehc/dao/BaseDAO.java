@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import aiec.br.ehc.helper.ManifestHelper;
+import aiec.br.ehc.model.Place;
 
 /**
  * Centraliza os metodos e recursos comuns da parte de persistência de dados
@@ -38,7 +39,7 @@ abstract class BaseDAO extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ParameterDAO.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PlaceDAO.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + EnvironmentDAO.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ResourceDAO.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + ParameterDAO.TABLE_NAME);
@@ -84,6 +85,7 @@ abstract class BaseDAO extends SQLiteOpenHelper {
                     "place_id INTEGER NOT NULL," +
                     "name VARCHAR(100)," +
                     "description TEXT," +
+                    "parameter TEXT," +
                     "icon TEXT," +
                     "creation_date TEXT," +
                     "modification_date TEXT," +
@@ -110,7 +112,12 @@ abstract class BaseDAO extends SQLiteOpenHelper {
                     "icon TEXT," +
                     "name VARCHAR(100)," +
                     "description TEXT," +
-                    "type VARCHAR(100)," +
+                    "type VARCHAR(50) NOT NULL DEFAULT 'switch'," +
+                    "state VARCHAR(50) NOT NULL DEFAULT 'off'," +
+                    "method TEXT NOT NULL DEFAULT 'GET'," +
+                    "min_value INTEGER," +
+                    "max_value INTEGER," +
+                    "step_value INTEGER," +
                     "creation_date TEXT," +
                     "modification_date TEXT," +
                     "created_by TEXT," +
@@ -133,7 +140,7 @@ abstract class BaseDAO extends SQLiteOpenHelper {
                 "CREATE TABLE %s(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                     "resource_id INTEGER NOT NULL," +
-                    "ui_type TEXT," +
+                    "action TEXT," +
                     "name VARCHAR(100)," +
                     "value TEXT," +
                     "creation_date TEXT," +

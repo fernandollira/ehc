@@ -48,4 +48,8 @@
     <string name="add_environment">New environment</string>
     <string name="add_resource">New resource</string>
     <string name="add_parameter">New parameter</string>
+    <string name="required_field_message">It\'s required field</string>
+    <string name="edit_environment_parameter_hint">Environment parameter. Ex: environment=room</string>
+    <string name="dialog_add_resource_info">Add resource</string>
+    <string name="edit_resource_name_hint">Resource. Ex: Lamp, Ceiling fan</string>
 </resources>

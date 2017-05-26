@@ -18,10 +18,13 @@ import aiec.br.ehc.model.Parameter;
 import aiec.br.ehc.model.Resource;
 
 /**
- * Created by gilmar on 24/05/17.
+ * Fragmento para configuração de recursos do tipo On/Off
  */
+public class TurnOnOffFragment extends Fragment implements IParameterFragment {
+    static final String TYPE = "switch";
+    static final String STATE_OFF = "of";
+    static final String STATE_ON = "on";
 
-public class TurnOnOffFragment extends Fragment {
     private EditText txt_parameter_name;
     private EditText txt_parameter_on_value;
     private EditText txt_parameter_off_value;
@@ -51,18 +54,23 @@ public class TurnOnOffFragment extends Fragment {
      */
     public void fillFields() {
         resource = getArguments().getParcelable("resource");
+        resource.setType(TYPE);
+        if (resource.isNew()) {
+            resource.setState("off");
+        }
+
         ParameterDAO dao = new ParameterDAO(getContext());
         parameters = dao.getAllFromResource(resource);
         dao.close();
 
         for (Parameter parameter : parameters) {
-            if (parameter.getUiType().equals("off")) {
+            if (parameter.getAction().equals("off")) {
                 txt_parameter_name.setText(parameter.getName());
                 txt_parameter_off_value.setText(parameter.getValue());
                 continue;
             }
 
-            if (parameter.getUiType().equals("on")) {
+            if (parameter.getAction().equals("on")) {
                 txt_parameter_on_value.setText(parameter.getValue());
             }
         }
@@ -82,12 +90,17 @@ public class TurnOnOffFragment extends Fragment {
         param.setResourceId(resource.getId());
         param.setName(txt_parameter_name.getText().toString());
         param.setValue(txt_parameter_off_value.getText().toString());
-        param.setUiType("off");
+        param.setAction("off");
         param.save(getContext());
 
         param.setId(null);
         param.setValue(txt_parameter_on_value.getText().toString());
-        param.setUiType("on");
+        param.setAction("on");
         param.save(getContext());
+    }
+
+    @Override
+    public String getType() {
+        return TYPE;
     }
 }

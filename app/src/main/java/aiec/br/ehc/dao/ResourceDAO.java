@@ -36,11 +36,11 @@ public class ResourceDAO extends BaseDAO {
      * @param resource instancia do local
      */
     public void save(Resource resource) {
-        if (resource.getId() != null) {
-            this.update(resource);
-        } else {
+        if (resource.isNew()) {
             Long id = this.insert(resource);
             resource.setId(id.intValue());
+        } else {
+            this.update(resource);
         }
     }
 
@@ -84,6 +84,12 @@ public class ResourceDAO extends BaseDAO {
         data.put("name", resource.getName());
         data.put("description", resource.getDescription());
         data.put("icon", resource.getIcon());
+        data.put("type", resource.getType());
+        data.put("method", resource.getMethod());
+        data.put("state", resource.getState());
+        data.put("min_value", resource.getMinValue());
+        data.put("max_value", resource.getMaxValue());
+        data.put("step_value", resource.getStepValue());
         data.put("creation_date", DateHelper.asIsoDateTime(resource.getCreatedAt()));
         data.put("modification_date", DateHelper.asIsoDateTime(resource.getModificationAt()));
         data.put("created_by", resource.getCreatedBy());
@@ -152,6 +158,12 @@ public class ResourceDAO extends BaseDAO {
             resource.setName(c.getString(c.getColumnIndex("name")));
             resource.setDescription(c.getString(c.getColumnIndex("description")));
             resource.setIcon(c.getString(c.getColumnIndex("icon")));
+            resource.setType(c.getString(c.getColumnIndex("type")));
+            resource.setState(c.getString(c.getColumnIndex("state")));
+            resource.setMethod(c.getString(c.getColumnIndex("method")));
+            resource.setMinValue(c.getInt(c.getColumnIndex("min_value")));
+            resource.setMaxValue(c.getInt(c.getColumnIndex("max_value")));
+            resource.setStepValue(c.getInt(c.getColumnIndex("step_value")));
             resource.setCreatedBy(c.getString(c.getColumnIndex("created_by")));
             resource.setModifiedBy(c.getString(c.getColumnIndex("modified_by")));
             resource.setCreatedAt(DateHelper.asDate(c.getString(c.getColumnIndex("creation_date"))));

@@ -53,6 +53,17 @@
         android:hint="@string/edit_environment_description_hint"
         android:layout_margin="10dp"/>
 
+    <EditText
+        android:id="@+id/environment_edit_parameter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:inputType="text"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorGrey"
+        android:hint="@string/edit_environment_parameter_hint"
+        android:layout_margin="10dp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="2"

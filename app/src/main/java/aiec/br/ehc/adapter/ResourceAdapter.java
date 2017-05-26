@@ -1,10 +1,8 @@
 package aiec.br.ehc.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -18,11 +16,9 @@ import android.widget.Toast;
 
 import java.util.List;
 
-import aiec.br.ehc.ParameterActivity;
+import aiec.br.ehc.ResourceEditorActivity;
 import aiec.br.ehc.R;
-import aiec.br.ehc.ResourceActivity;
 import aiec.br.ehc.dao.ResourceDAO;
-import aiec.br.ehc.dialog.ResourceEditDialog;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
 
@@ -111,7 +107,7 @@ class ResourceViewHolder
                 new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Intent it = new Intent(context, ParameterActivity.class);
+                        Intent it = new Intent(context, ResourceEditorActivity.class);
                         it.putExtra("EXTRA_ENVIRONMENT", environment);
                         it.putExtra("EXTRA_RESOURCE", resource);
                         context.startActivity(it);

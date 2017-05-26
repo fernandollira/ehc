@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="object_resource_icons">
-        <item>battery</item>
+        <item value="test" color="FFF">battery</item>
         <item>cctv</item>
         <item>cctv_security_camera</item>
         <item>cd</item>
@@ -64,4 +64,23 @@
         <item>window_two</item>
         <item>window</item>
     </string-array>
+
+    <string-array name="object_resource_categories_0">
+        <item>lamp_on</item>
+        <item>lamp_off</item>
+        <item></item>
+    </string-array>
+
+    <array name="categories_0">
+        <item>1</item>
+        <item>Food</item>
+    </array>
+    <array name="categories_1">
+        <item>2</item>
+        <item>Health</item>
+    </array>
+    <array name="categories_2">
+        <item>3</item>
+        <item>Garden</item>
+    </array>
 </resources>
