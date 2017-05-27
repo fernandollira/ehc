@@ -11,4 +11,5 @@ public interface IParameterFragment {
     public void saveParameters();
     public void setArguments(Bundle args);
     public String getType();
+    public void applyEffects();
 }

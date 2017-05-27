@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
     private Spinner spinner_http_method;
 
     private IParameterFragment fragment;
+    private String[] images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
         txtDescription = (TextView) findViewById(R.id.resource_view_description);
         spinner_icon = (Spinner) findViewById(R.id.resource_edit_icon);
         spinner_http_method = (Spinner) findViewById(R.id.resource_edit_method);
+        images = getResources().getStringArray(R.array.object_resource_icons);
 
         // recebe os objetos serializados
         this.environment = getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
@@ -46,6 +49,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
         }
         this.fillParameters();
         this.addButtonEvents();
+        this.addSpinnerEvents();
     }
 
     /**
@@ -82,8 +86,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
      */
     private void fillParameters()
     {
-        String[] images = getResources().getStringArray(R.array.object_resource_icons);
-        ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(ResourceEditorActivity.this, images);
+        ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(ResourceEditorActivity.this, this.images);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_icon.setAdapter(spinnerAdapter);
         spinner_icon.setBackgroundResource(R.color.colorPrimaryDark);
@@ -101,12 +104,38 @@ public class ResourceEditorActivity extends AppCompatActivity {
             pos = adapter.getPosition(resource.getMethod());
             spinner_http_method.setSelection(pos);
         }
+    }
 
+    private void addSpinnerEvents()
+    {
+        spinner_icon.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Bundle properties = (Bundle) parent.getSelectedView().getTag();
+                setFragmentFrom(properties);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public void setFragmentFrom(Bundle properties)
+    {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction tx = manager.beginTransaction();
-        this.fragment = new TurnOnOffFragment();
+        String type = properties.getString("type");
+        switch (type) {
+            case "switch":
+                fragment = new TurnOnOffFragment();
+                break;
+        }
+
         Bundle args = new Bundle();
         args.putParcelable("resource", resource);
+        args.putBundle("properties", properties);
         fragment.setArguments(args);
         tx.replace(R.id.frame_resource_parameter, (Fragment) fragment);
         tx.commit();

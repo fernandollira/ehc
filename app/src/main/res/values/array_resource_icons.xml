@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="object_resource_icons">
-        <item value="test" color="FFF">battery</item>
-        <item>cctv</item>
-        <item>cctv_security_camera</item>
-        <item>cd</item>
-        <item>fan</item>
-        <item>fan2</item>
+        <item>on:lamp_on;off:lamp_off;type:switch;color:#FFFF00</item>
+        <item>on:fan_ac;off:fan_ac;type:switch;animation:rotate;color:#77c3ef</item>
+        <item>on:cctv;off:cctv;type:switch;color:#FFFF00</item>
+        <item>on:cd;off:cd;type:switch;animation:rotate</item>
+        <item>on:fan2;off:fan2;type:switch;color:#FFFF00</item>
+        <item>on:gas;off:gas;type:switch;color:#77c3ef</item>
+        <item>on:window2;off:window_two;type:switch;color:#ac2ae0</item>
+        <item>on:led_light_lamp;off:led_light_lamp;type:switch;color:#00FF00</item>
+        <item>on:kitchen_ceiling_lamp;off:kitchen_ceiling_lamp;type:switch;color:#d8ff00</item>
+        <item>on:air_conditioner;off:air_conditioner_off;type:switch;color:#77c3ef;animation:alternate</item>
+    </string-array>
+
+    <string-array name="object_resource_icons2">
         <item>fan_ac</item>
         <item>flammable</item>
         <item>gamepad</item>
@@ -64,23 +71,4 @@
         <item>window_two</item>
         <item>window</item>
     </string-array>
-
-    <string-array name="object_resource_categories_0">
-        <item>lamp_on</item>
-        <item>lamp_off</item>
-        <item></item>
-    </string-array>
-
-    <array name="categories_0">
-        <item>1</item>
-        <item>Food</item>
-    </array>
-    <array name="categories_1">
-        <item>2</item>
-        <item>Health</item>
-    </array>
-    <array name="categories_2">
-        <item>3</item>
-        <item>Garden</item>
-    </array>
 </resources>
