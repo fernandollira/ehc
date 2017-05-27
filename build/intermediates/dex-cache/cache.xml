@@ -2,22 +2,31 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\gilma\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-lang3\3.5\6c6c702c89bfff3cd9e80b04d668c5e190d588c6\commons-lang3-3.5.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="f8cff52a3836ee32642cdf4a6706a63bce1eba0a">
-        <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ae40a044aa75397042f7bfe4d44a11cfbcb744fa\classes.dex" />
+        sha1="6c6c702c89bfff3cd9e80b04d668c5e190d588c6">
+        <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\pre-dexed\debug\commons-lang3-3.5_6476721b2e53331514d412dcbc608d2b326b262f.jar" />
     </item>
     <item
-        is-multidex="true"
-        jar="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="C:\Users\gilma\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-collections4\4.1\a4cf4688fe1c7e3a63aa636cc96d013af537768e\commons-collections4-4.1.jar"
+        jumboMode="false"
         optimize="true"
         revision="25.0.2"
-        sha1="12920f9016b8b05acbc2af7cdc13cef6946fe7d3">
-        <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a6e48d0c80fe90ffa25ee1b0e2dc1b5f0f3c7af3\classes.dex" />
+        sha1="a4cf4688fe1c7e3a63aa636cc96d013af537768e">
+        <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\pre-dexed\debug\commons-collections4-4.1_8e2a89f8fee69c41caef1ef55f1e1f6d8339599a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\gilma\.android\build-cache\f1d7384b70eb0ed590fd42c9568f37fa960b83a6\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
+        <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\pre-dexed\debug\classes_6a58c0241bf272104721f3dc871925ba48c7426b.jar" />
     </item>
 
 </items>
