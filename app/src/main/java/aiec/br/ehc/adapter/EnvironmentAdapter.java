@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import aiec.br.ehc.R;
+import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Place;
 
@@ -41,7 +42,7 @@ public class EnvironmentAdapter
         Environment environment = environments.get(position);
         holder.setEnvironment(environment);
         holder.name.setText(environment.getName());
-        int resId = context.getResources().getIdentifier(environment.getIcon(), "drawable", context.getPackageName());
+        int resId = ResourceHelper.from(context).getIdentifierFromDrawable(environment.getIcon());
         holder.icon.setImageResource(resId);
         holder.icon.setColorFilter(Color.rgb(255, 255, 255));
     }

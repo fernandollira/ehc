@@ -20,6 +20,15 @@
         <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\pre-dexed\debug\commons-collections4-4.1_8e2a89f8fee69c41caef1ef55f1e1f6d8339599a.jar" />
     </item>
     <item
+        is-multidex="true"
+        jar="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f8cff52a3836ee32642cdf4a6706a63bce1eba0a">
+        <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_ae40a044aa75397042f7bfe4d44a11cfbcb744fa\classes.dex" />
+    </item>
+    <item
         is-multidex="false"
         jar="C:\Users\gilma\.android\build-cache\f1d7384b70eb0ed590fd42c9568f37fa960b83a6\output\jars\classes.jar"
         jumboMode="false"
@@ -27,6 +36,15 @@
         revision="25.0.2"
         sha1="00b0b7233e1ec64acebfac40d4983d32d4712426">
         <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\pre-dexed\debug\classes_6a58c0241bf272104721f3dc871925ba48c7426b.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="12920f9016b8b05acbc2af7cdc13cef6946fe7d3">
+        <dex dex="C:\Users\gilma\AndroidStudioProjects\ehc\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_a6e48d0c80fe90ffa25ee1b0e2dc1b5f0f3c7af3\classes.dex" />
     </item>
 
 </items>

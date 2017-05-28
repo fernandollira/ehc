@@ -64,11 +64,19 @@ public class ResourceEditorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 resource.setIcon(spinner_icon.getSelectedItem().toString());
                 resource.setMethod(spinner_http_method.getSelectedItem().toString());
+                if (txtName.getText().toString().isEmpty()) {
+                    txtName.setError(getString(R.string.required_field_message));
+                    txtName.requestFocus();
+                    return;
+                }
+
                 resource.setName(txtName.getText().toString());
                 resource.setEnvironmentId(environment.getId());
                 resource.save(view.getContext());
-                self.fragment.saveParameters();
-                self.finish();
+                if (self.fragment.isValid()) {
+                    self.fragment.saveParameters();
+                    self.finish();
+                }
             }
         });
 

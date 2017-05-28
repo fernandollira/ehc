@@ -2,73 +2,17 @@
 <resources>
     <string-array name="object_resource_icons">
         <item>on:lamp_on;off:lamp_off;type:switch;color:#FFFF00</item>
-        <item>on:fan_ac;off:fan_ac;type:switch;animation:rotate;color:#77c3ef</item>
+        <item>on:fan_ac;off:fan_ac;type:switch;animation:rotate;color:#CCCCCC</item>
         <item>on:cctv;off:cctv;type:switch;color:#FFFF00</item>
         <item>on:cd;off:cd;type:switch;animation:rotate</item>
         <item>on:fan2;off:fan2;type:switch;color:#FFFF00</item>
-        <item>on:gas;off:gas;type:switch;color:#77c3ef</item>
-        <item>on:window2;off:window_two;type:switch;color:#ac2ae0</item>
-        <item>on:led_light_lamp;off:led_light_lamp;type:switch;color:#00FF00</item>
+        <item>on:gas;off:gas;type:switch;color:#CC99FF</item>
+        <item>on:window2;off:window_two;type:switch;color:#FFCC66</item>
+        <item>on:led_light_lamp;off:led_light_lamp;type:switch;color:#ADFF2F</item>
         <item>on:kitchen_ceiling_lamp;off:kitchen_ceiling_lamp;type:switch;color:#d8ff00</item>
         <item>on:air_conditioner;off:air_conditioner_off;type:switch;color:#77c3ef;animation:alternate</item>
-    </string-array>
-
-    <string-array name="object_resource_icons2">
-        <item>fan_ac</item>
-        <item>flammable</item>
-        <item>gamepad</item>
-        <item>gas</item>
-        <item>sprinkler</item>
-        <item>fire_alarm</item>
-        <item>key</item>
-        <item>keyhole</item>
-        <item>info</item>
-        <item>lamp1</item>
-        <item>lamp_on</item>
-        <item>lamp_off</item>
-        <item>light_bulb</item>
-        <item>led_light_lamp</item>
-        <item>led_light_lamp2</item>
-        <item>kitchen_ceiling_lamp</item>
-        <item>ceiling_lamp</item>
-        <item>monitor</item>
-        <item>printer</item>
-        <item>radio</item>
-        <item>refrigerator</item>
-        <item>remote_control</item>
-        <item>router</item>
-        <item>scale_measurement</item>
-        <item>security_camera</item>
-        <item>shower_water_running</item>
-        <item>sms_message</item>
-        <item>socket</item>
-        <item>walkie_talkie</item>
-        <item>sound</item>
-        <item>speed_indicator</item>
-        <item>stove</item>
-        <item>house_door</item>
-        <item>door</item>
-        <item>humidity</item>
-        <item>filled_speaker_with_white_details</item>
-        <item>telephone_vintage_design</item>
-        <item>television1</item>
-        <item>television</item>
-        <item>thermometer</item>
-        <item>thermometer1</item>
-        <item>thermometers</item>
-        <item>temperature</item>
-        <item>air_conditioner1</item>
-        <item>air_conditioner2</item>
-        <item>air_conditioner3</item>
-        <item>minisplit</item>
-        <item>usb_connector</item>
-        <item>three_lockers_key</item>
-        <item>washing_machine</item>
-        <item>webcam</item>
-        <item>computer_1</item>
-        <item>window2</item>
-        <item>window1</item>
-        <item>window_two</item>
-        <item>window</item>
+        <item>on:keyhole;off:keyhole;type:switch;color:#FFFAFA</item>
+        <item>on:ceiling_lamp;off:ceiling_lamp;type:switch;color:#FFD700</item>
+        <item>on:door;off:door;type:switch;color:#FFD700</item>
     </string-array>
 </resources>

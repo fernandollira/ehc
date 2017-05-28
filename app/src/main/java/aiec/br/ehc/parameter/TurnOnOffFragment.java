@@ -1,7 +1,5 @@
 package aiec.br.ehc.parameter;
 
-import android.content.pm.PackageManager;
-import android.graphics.ColorFilter;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,6 +17,8 @@ import java.util.List;
 
 import aiec.br.ehc.R;
 import aiec.br.ehc.dao.ParameterDAO;
+import aiec.br.ehc.helper.AnimationHelper;
+import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Parameter;
 import aiec.br.ehc.model.Resource;
 
@@ -66,7 +66,7 @@ public class TurnOnOffFragment extends Fragment implements IParameterFragment {
             resource.setState("off");
         }
         else {
-            int resID = getResources().getIdentifier(resource.getIcon(), "drawable", getContext().getPackageName());
+            int resID = ResourceHelper.from(getContext()).getIdentifierFromDrawable(resource.getIcon());
             icon_off.setImageResource(resID);
             icon_on.setImageResource(resID);
         }
@@ -112,6 +112,34 @@ public class TurnOnOffFragment extends Fragment implements IParameterFragment {
     }
 
     /**
+     * Verifica se os campos obrigatórios foram preenchidos corretamente
+     *
+     * @return valid
+     */
+    public boolean isValid()
+    {
+        if (txt_parameter_name.getText().toString().isEmpty()) {
+            txt_parameter_name.setError(getString(R.string.required_field_message));
+            txt_parameter_name.requestFocus();
+            return false;
+        }
+
+        if (txt_parameter_on_value.getText().toString().isEmpty()) {
+            txt_parameter_on_value.setError(getString(R.string.required_field_message));
+            txt_parameter_on_value.requestFocus();
+            return false;
+        }
+
+        if (txt_parameter_off_value.getText().toString().isEmpty()) {
+            txt_parameter_off_value.setError(getString(R.string.required_field_message));
+            txt_parameter_off_value.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Aplica os efeitos suportados, definidos no xml de images
      */
     public void applyEffects()
@@ -129,18 +157,15 @@ public class TurnOnOffFragment extends Fragment implements IParameterFragment {
             icon_on.setColorFilter(Color.parseColor(color));
         }
 
-        int resID = getResources().getIdentifier(iconOffImage, "drawable", getContext().getPackageName());
+        int resID = ResourceHelper.from(getContext()).getIdentifierFromDrawable(iconOffImage);
         icon_off.setImageResource(resID);
 
-        resID = getResources().getIdentifier(iconOnImage, "drawable", getContext().getPackageName());
+        resID = ResourceHelper.from(getContext()).getIdentifierFromDrawable(iconOnImage);
         icon_on.setImageResource(resID);
 
         String animate = properties.getString("animation");
         if (animate != null && animate.equals("rotate")) {
-            RotateAnimation anim = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setInterpolator(new LinearInterpolator());
-            anim.setRepeatCount(Animation.INFINITE);
-            anim.setDuration(700);
+            Animation anim = AnimationHelper.getRotateAroundSelfCenter(700);
             icon_on.setAnimation(anim);
         }
     }
