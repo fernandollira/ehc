@@ -33,8 +33,10 @@ public class PlaceCredentialFragment extends Fragment implements IPlaceFragment 
         place = getArguments().getParcelable("place");
         if (place.getUserCredentials() != null && place.getUserCredentials().contains(":")) {
             String[] credentials = place.getUserCredentials().split(":");
-            username.setText(credentials[0]);
-            password.setText(credentials[1]);
+            if (credentials.length == 2) {
+                username.setText(credentials[0]);
+                password.setText(credentials[1]);
+            }
         }
 
         return view;
@@ -64,7 +66,13 @@ public class PlaceCredentialFragment extends Fragment implements IPlaceFragment 
 
     public void fillPlace()
     {
-        String credentials = username.getText().toString().concat(":").concat(password.getText().toString());
+        String user = username.getText().toString().trim();
+        String credentials = "";
+        if (!user.isEmpty()) {
+            credentials = user.concat(":").concat(password.getText().toString().trim());
+        }
+
         place.setUserCredentials(credentials);
+
     }
 }

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,18 +72,17 @@ public class ResourceViewHolder
         String newIcon = properties.getString(state);
         icon.setImageResource(helper.getIdentifierFromDrawable(newIcon));
 
+        // verifica se deve aplicar alguma animação
+        if (TextUtils.equals(properties.getString("animation"), "rotate")) {
+            Animation anim = AnimationHelper.getRotateAroundSelfCenter(700);
+            icon.setAnimation(anim);
+        }
+
         // define as propriedades para o estado de ligado
         String color = "#FFFFFF";
         if (state.equals("on")) {
             String newColor = properties.getString("color");
             color = (newColor != null) ? newColor : color;
-
-            // verifica se deve aplicar alguma animação
-            String animateType = properties.getString("animation");
-            if (animateType != null && animateType.equals("rotate")) {
-                Animation anim = AnimationHelper.getRotateAroundSelfCenter(700);
-                icon.setAnimation(anim);
-            }
         }
         else if(icon.getAnimation() != null) {
             icon.getAnimation().cancel();

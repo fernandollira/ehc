@@ -14,7 +14,6 @@ public class AnimationHelper {
         anim.setInterpolator(new LinearInterpolator());
         anim.setRepeatCount(Animation.INFINITE);
         anim.setDuration(duration);
-        anim.start();
         return anim;
     }
 }

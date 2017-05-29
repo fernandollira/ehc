@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
     private Resource resource;
     private String error;
     private URL url;
-    private boolean use_authorization;
+    private boolean use_authorization = false;
 
     public ResourceRequestTask(ResourceViewHolder holder) {
         this.holder = holder;
@@ -105,8 +106,9 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         final Place place = resource.getPlace(context);
 
         // autenticação por login e senha
-        if (place.isAuthorizationByCredentials() && place.getUserCredentials() != null) {
-            byte[] encodedBytes = Base64.encode(place.getUserCredentials().getBytes(), 0);
+        String credentials = place.getUserCredentials();
+        if (place.isAuthorizationByCredentials() && !TextUtils.isEmpty(credentials)) {
+            byte[] encodedBytes = Base64.encode(credentials.getBytes(), 0);
             String authorization = "Basic " + encodedBytes;
             conn.setRequestProperty("Authorization", authorization);
             this.use_authorization = true;
@@ -114,9 +116,10 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         }
 
         // autenticação por token
-        if (place.isAuthorizationByToken() && place.getAccessToken() != null) {
+        String token = place.getAccessToken();
+        if (place.isAuthorizationByToken() && !TextUtils.isEmpty(token)) {
             this.use_authorization = true;
-            conn.setRequestProperty("Authorization", place.getAccessToken());
+            conn.setRequestProperty("Authorization", token);
         }
     }
 
