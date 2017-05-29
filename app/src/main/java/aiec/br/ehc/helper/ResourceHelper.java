@@ -87,8 +87,13 @@ public class ResourceHelper {
         if (rawProperties.contains(";")) {
             String[] items = rawProperties.split(";");
             for (String item : items) {
-                String[] params = item.split(":");
-                properties.putString(params[0], params[1]);
+                if (item.contains(":")) {
+                    String[] params = item.split(":");
+                    properties.putString(params[0], params[1]);
+                    continue;
+                }
+
+                properties.putString(item, "1");
             }
         }
 

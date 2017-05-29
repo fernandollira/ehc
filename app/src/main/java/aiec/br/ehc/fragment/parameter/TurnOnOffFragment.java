@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -15,7 +14,7 @@ import java.util.List;
 
 import aiec.br.ehc.R;
 import aiec.br.ehc.dao.ParameterDAO;
-import aiec.br.ehc.helper.AnimationHelper;
+import aiec.br.ehc.helper.AnimationEffectsHelper;
 import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Parameter;
 import aiec.br.ehc.model.Resource;
@@ -147,13 +146,8 @@ public class TurnOnOffFragment extends Fragment implements IParameterFragment {
             return;
         }
 
-        String color = properties.getString("color");
         String iconOnImage = properties.getString("on");
         String iconOffImage = properties.getString("off");
-
-        if (color != null) {
-            icon_on.setColorFilter(Color.parseColor(color));
-        }
 
         int resID = ResourceHelper.from(getContext()).getIdentifierFromDrawable(iconOffImage);
         icon_off.setImageResource(resID);
@@ -161,11 +155,10 @@ public class TurnOnOffFragment extends Fragment implements IParameterFragment {
         resID = ResourceHelper.from(getContext()).getIdentifierFromDrawable(iconOnImage);
         icon_on.setImageResource(resID);
 
-        String animate = properties.getString("animation");
-        if (animate != null && animate.equals("rotate")) {
-            Animation anim = AnimationHelper.getRotateAroundSelfCenter(700);
-            icon_on.setAnimation(anim);
-        }
+
+        AnimationEffectsHelper helper = new AnimationEffectsHelper(getContext(), properties);
+        helper.applyEffects(icon_on, "on");
+        helper.applyEffects(icon_off, "off");
     }
 
     @Override

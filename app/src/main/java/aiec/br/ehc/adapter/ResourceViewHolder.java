@@ -2,22 +2,19 @@ package aiec.br.ehc.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import aiec.br.ehc.R;
 import aiec.br.ehc.ResourceEditorActivity;
 import aiec.br.ehc.dao.ResourceDAO;
-import aiec.br.ehc.helper.AnimationHelper;
+import aiec.br.ehc.helper.AnimationEffectsHelper;
 import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
@@ -72,23 +69,9 @@ public class ResourceViewHolder
         String newIcon = properties.getString(state);
         icon.setImageResource(helper.getIdentifierFromDrawable(newIcon));
 
-        // verifica se deve aplicar alguma animação
-        if (TextUtils.equals(properties.getString("animation"), "rotate")) {
-            Animation anim = AnimationHelper.getRotateAroundSelfCenter(700);
-            icon.setAnimation(anim);
-        }
-
-        // define as propriedades para o estado de ligado
-        String color = "#FFFFFF";
-        if (state.equals("on")) {
-            String newColor = properties.getString("color");
-            color = (newColor != null) ? newColor : color;
-        }
-        else if(icon.getAnimation() != null) {
-            icon.getAnimation().cancel();
-        }
-
-        icon.setColorFilter(Color.parseColor(color));
+        // Aplica os efeitos visuais definidos nas propriedades da imagem
+        AnimationEffectsHelper helper = new AnimationEffectsHelper(itemView.getContext(), properties);
+        helper.applyEffects(icon, state);
     }
 
     /**

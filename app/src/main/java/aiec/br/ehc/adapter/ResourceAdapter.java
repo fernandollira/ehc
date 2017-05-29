@@ -1,30 +1,18 @@
 package aiec.br.ehc.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.List;
 
-import aiec.br.ehc.ResourceEditorActivity;
 import aiec.br.ehc.R;
-import aiec.br.ehc.dao.ResourceDAO;
-import aiec.br.ehc.helper.AnimationHelper;
 import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
-import aiec.br.ehc.task.ResourceRequestTask;
 
 /**
  * Adapter para exibição dos recursoss por ambiente
