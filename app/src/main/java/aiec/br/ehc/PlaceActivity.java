@@ -169,7 +169,7 @@ public class PlaceActivity extends AppCompatActivity
             }
         });
 
-        MenuItem menuCredentials = menu.add(R.string.credential_access);
+        MenuItem menuCredentials = menu.add(R.string.access_credentials);
         menuCredentials.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
