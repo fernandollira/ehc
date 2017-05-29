@@ -53,7 +53,7 @@
         android:layout_margin="10dp"/>
 
     <fragment
-        android:name="aiec.br.ehc.parameter.TurnOnOffFragment"
+        android:name="aiec.br.ehc.fragment.parameter.TurnOnOffFragment"
         android:id="@+id/frame_parameter"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

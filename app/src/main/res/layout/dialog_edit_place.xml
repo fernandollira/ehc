@@ -53,6 +53,29 @@
         android:hint="@string/edit_place_description_hint"
         android:layout_margin="10dp"/>
 
+    <RadioGroup
+        android:id="@+id/place_edit_protocol"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/place_protocol_http"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="@string/http"
+            android:checked="true" />
+
+        <RadioButton
+            android:id="@+id/place_protocol_https"
+            android:textColor="@color/colorWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/https" />
+    </RadioGroup>
+
     <EditText
         android:id="@+id/place_edit_host"
         android:inputType="textWebEditText|text|"

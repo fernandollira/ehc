@@ -67,6 +67,7 @@ public class EnvironmentEditDialog extends Dialog implements View.OnClickListene
             txtTitle.setText(this.activity.getString(R.string.edit_environment));
             txtName.setText(environment.getName());
             txtDescription.setText(environment.getDescription());
+            txtParameter.setText(environment.getParameter());
             int pos = spinnerAdapter.getPosition(environment.getIcon());
             spinner.setSelection(pos);
         }
@@ -87,8 +88,8 @@ public class EnvironmentEditDialog extends Dialog implements View.OnClickListene
                 this.environment.setIcon(spinner.getSelectedItem().toString());
                 this.environment.setName(txtName.getText().toString());
                 this.environment.setDescription(txtDescription.getText().toString());
-                this.environment.save(getContext());
                 this.environment.setParameter(txtParameter.getText().toString());
+                this.environment.save(getContext());
 
                 // Invocamos aqui o método da activity para atualizar a lista
                 EnvironmentActivity activity = (EnvironmentActivity) this.activity;

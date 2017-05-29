@@ -144,8 +144,8 @@ public class PlaceActivity extends AppCompatActivity
 
         // verifica se o local fora definido como padrão
         final Boolean isPlaceDefault = placeDefault.equals(place.getId());
-        String menuDefultTitle = isPlaceDefault ? getString(R.string.unmark_default) : getString(R.string.mark_default);
-        MenuItem menuDefault = menu.add(menuDefultTitle);
+        String menuDefaultTitle = isPlaceDefault ? getString(R.string.unmark_default) : getString(R.string.mark_default);
+        MenuItem menuDefault = menu.add(menuDefaultTitle);
         menuDefault.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -159,7 +159,7 @@ public class PlaceActivity extends AppCompatActivity
             }
         });
 
-        MenuItem menuEdit = menu.add("Editar");
+        MenuItem menuEdit = menu.add(R.string.edit);
         menuEdit.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -169,7 +169,18 @@ public class PlaceActivity extends AppCompatActivity
             }
         });
 
-        MenuItem menuDelete = menu.add("Excluir");
+        MenuItem menuCredentials = menu.add(R.string.credential_access);
+        menuCredentials.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent it = new Intent(PlaceActivity.this, CredentialActivity.class);
+                it.putExtra("EXTRA_PLACE", place);
+                startActivity(it);
+                return false;
+            }
+        });
+
+        MenuItem menuDelete = menu.add(R.string.delete);
         menuDelete.setOnMenuItemClickListener(
                 new MenuItem.OnMenuItemClickListener() {
                     @Override
@@ -178,7 +189,7 @@ public class PlaceActivity extends AppCompatActivity
                         dao.delete(place.getId());
                         dao.close();
                         fillPlaces();
-                        Toast.makeText(PlaceActivity.this, "Removido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(PlaceActivity.this, R.string.deleted, Toast.LENGTH_SHORT).show();
                         return false;
                     }
                 }

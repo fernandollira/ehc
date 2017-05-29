@@ -52,4 +52,24 @@
     <string name="edit_environment_parameter_hint">Environment parameter. Ex: environment=room</string>
     <string name="dialog_add_resource_info">Add resource</string>
     <string name="edit_resource_name_hint">Resource. Ex: Lamp, Ceiling fan</string>
+    <string name="wait">Wait...</string>
+    <string name="http_request_command_fail">Server not response.</string>
+    <string name="https">HTTPS</string>
+    <string name="http">HTTP</string>
+    <string name="error_protocol_send">Erro no envio, problemas de protocolo.</string>
+    <string name="error_data_encoding">Erro no encode de dados.</string>
+    <string name="error_io">Erro de I/O</string>
+    <string name="security_key">Chave de Segurança</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="security_key_config">Configurar chave de segurança</string>
+    <string name="token_edit_hint">Entre com a chave de segurança</string>
+    <string name="token_key">Chave de segurança (Token)</string>
+    <string name="user">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="access_credentials">Credenciais de acesso</string>
+    <string name="credential_access">Credenciais de acesso</string>
+    <string name="deleted">Removido</string>
+    <string name="login">Login</string>
+    <string name="auth_server">Autenticação com o servidor</string>
 </resources>

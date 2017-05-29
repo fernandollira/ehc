@@ -17,10 +17,17 @@ import aiec.br.ehc.dao.PlaceDAO;
  * @since   2017-05-07
  */
 public class Place extends BaseModel implements Parcelable {
+    private String AUTHORIZATION_TYPE_CREDENTIAL = "credentials";
+    private String AUTHORIZATION_TYPE_TOKEN = "token";
+
     private String name;
     private String description;
+    private String protocol;
     private String host;
     private Integer port;
+    private String authorizationType;
+    private String accessToken;
+    private String userCredentials;
     private String icon;
     private Date createdAt;
     private Date modificationAt;
@@ -44,8 +51,12 @@ public class Place extends BaseModel implements Parcelable {
         this.id = in.readInt();
         this.name = in.readString();
         this.description = in.readString();
+        this.protocol = in.readString();
         this.host = in.readString();
         this.port = in.readInt();
+        this.authorizationType = in.readString();
+        this.accessToken = in.readString();
+        this.userCredentials = in.readString();
         this.icon = in.readString();
 
         Long tmpDate = in.readLong();
@@ -89,6 +100,50 @@ public class Place extends BaseModel implements Parcelable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public String getAuthorizationType() {
+        if (authorizationType == null) {
+            return AUTHORIZATION_TYPE_TOKEN;
+        }
+
+        return authorizationType;
+    }
+
+    public void setAuthorizationType(String authorizationType) {
+        this.authorizationType = authorizationType;
+    }
+
+    public void setAuthorizationByCredentials() {
+        this.authorizationType = AUTHORIZATION_TYPE_CREDENTIAL;
+    }
+
+    public void setAuthorizationByToken() {
+        this.authorizationType = AUTHORIZATION_TYPE_TOKEN;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public String getUserCredentials() {
+        return userCredentials;
+    }
+
+    public void setUserCredentials(String userCredentials) {
+        this.userCredentials = userCredentials;
     }
 
     public String getHost() {
@@ -171,8 +226,12 @@ public class Place extends BaseModel implements Parcelable {
         parcel.writeInt(id);
         parcel.writeString(name);
         parcel.writeString(description);
+        parcel.writeString(protocol);
         parcel.writeString(host);
         parcel.writeInt(port);
+        parcel.writeString(authorizationType);
+        parcel.writeString(accessToken);
+        parcel.writeString(userCredentials);
         parcel.writeString(icon);
         parcel.writeLong(createdAt != null ? createdAt.getTime() : -1);
         parcel.writeLong(modificationAt != null ? modificationAt.getTime() : -1);
@@ -189,5 +248,30 @@ public class Place extends BaseModel implements Parcelable {
     {
         EnvironmentDAO dao = new EnvironmentDAO(context);
         return Integer.valueOf(dao.getEnvironmentCountFromPlaceId(this.id));
+    }
+
+    public boolean isSecurityProtocol()
+    {
+        return protocol != null && protocol.equalsIgnoreCase("https");
+    }
+
+    /**
+     * verifica se o tipo de autorização é por Token de acesso
+     *
+     * @return boolean
+     */
+    public boolean isAuthorizationByToken()
+    {
+        return this.getAuthorizationType().equals(AUTHORIZATION_TYPE_TOKEN);
+    }
+
+    /**
+     * verifica se o tipo de autorização é por Token de acesso
+     *
+     * @return boolean
+     */
+    public boolean isAuthorizationByCredentials()
+    {
+        return this.getAuthorizationType().equals(AUTHORIZATION_TYPE_CREDENTIAL);
     }
 }

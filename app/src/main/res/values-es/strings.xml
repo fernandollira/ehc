@@ -52,4 +52,5 @@
     <string name="edit_environment_parameter_hint">Parámetro de ambiente. Ex: ambiente=sala</string>
     <string name="dialog_add_resource_info">Nuevo recurso</string>
     <string name="edit_resource_name_hint">Recurso. Ex: Lámpara, Ventilador</string>
+    <string name="http_request_command_fail">Servidor no responde al comando</string>
 </resources>

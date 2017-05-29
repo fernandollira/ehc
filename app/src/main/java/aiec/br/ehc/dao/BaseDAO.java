@@ -56,8 +56,12 @@ abstract class BaseDAO extends SQLiteOpenHelper {
         String sql = String.format(
                 "CREATE TABLE %s(" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    "protocol VARCHAR(20)," +
                     "host VARCHAR(50)," +
                     "port INTEGER default 80," +
+                    "authorization_type VARCHAR(40)," +
+                    "access_token VARCHAR(200)," +
+                    "user_credentials VARCHAR(300)," +
                     "name VARCHAR(100)," +
                     "description TEXT," +
                     "icon TEXT," +

@@ -3,10 +3,21 @@ package aiec.br.ehc.model;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import aiec.br.ehc.dao.EnvironmentDAO;
 import aiec.br.ehc.dao.ParameterDAO;
+import aiec.br.ehc.dao.PlaceDAO;
 import aiec.br.ehc.dao.ResourceDAO;
 
 /**
@@ -31,6 +42,8 @@ public class Resource extends BaseModel implements Parcelable {
     private Date modificationAt;
     private String createdBy;
     private String modifiedBy;
+    private Environment environment;
+    private Place place;
 
     public Resource() {}
 
@@ -242,5 +255,106 @@ public class Resource extends BaseModel implements Parcelable {
         parcel.writeString(modifiedBy);
         parcel.writeLong(createdAt != null ? createdAt.getTime() : -1);
         parcel.writeLong(modificationAt != null ? modificationAt.getTime() : -1);
+    }
+
+    /**
+     * Retorna a URL de requisição para ativar/desativar o recurso
+     *
+     * @return URL de requisição
+     */
+    public URL getRequestURL(Context context) {
+        try {
+            String domain = this.getPlace(context).getHost().trim();
+            Integer port = this.getPlace(context).getPort();
+            String param = this.getEnvironment(context).getParameter().trim();
+            String path = "";
+            if (!param.isEmpty() && (param.contains("/") || !param.contains("="))) {
+                path = param.startsWith("/") ? param : "/".concat(param);
+            }
+
+            String protocol = this.getPlace(context).getProtocol().toLowerCase();
+            String requestUrl = String.format("%s://%s:%s%s", protocol, domain, port, path);
+            return new URL(requestUrl);
+        } catch (MalformedURLException e) {
+            return null;
+        }
+    }
+
+    public String getParamsQueryString(Context context)
+    {
+        List<String> params = this.getUrlParams(context);
+        return TextUtils.join("&", params);
+    }
+
+    /**
+     * Retorna os parâmetros de url com base nos parâmetros de ambiente e recurso
+     * @param context   Contexto
+     *
+     * @return  array
+     */
+    public List<String> getUrlParams(Context context)
+    {
+        List<String> urlParams = new ArrayList<>();
+        String param = this.getEnvironment(context).getParameter();
+        if (param != null && !param.trim().isEmpty() && param.contains("=")) {
+            try {
+                urlParams.add(URLEncoder.encode(param.trim(), "UTF-8"));
+            } catch (UnsupportedEncodingException e) {
+            }
+        }
+
+        for (Parameter parameter : getRelatedParameters(context)) {
+            if (this.getState().equalsIgnoreCase(parameter.getAction())){
+                try {
+                    String name = URLEncoder.encode(parameter.getName().trim(), "UTF-8");
+                    String value = URLEncoder.encode(parameter.getValue().trim(), "UTF-8");
+                    urlParams.add(name.concat("=").concat(value));
+                } catch (UnsupportedEncodingException e) {
+                    return null;
+                }
+            }
+        }
+
+        return urlParams;
+    }
+
+    /**
+     * Obtém todos os parâmetros relacionados ao recurso
+     *
+     * @param context   Contexto
+     * @return Lista de parâmetros
+     */
+    private List<Parameter> getRelatedParameters(Context context) {
+        ParameterDAO dao = new ParameterDAO(context);
+        return dao.getAllFromResource(this);
+    }
+
+    /**
+     * Retorna uma instância do ambiente de relação com este objeto
+     *
+     * @return ambiente
+     */
+    public Environment getEnvironment(Context context) {
+        if (this.environment == null || this.environmentId != environment.getId()) {
+            EnvironmentDAO dao = new EnvironmentDAO(context);
+            this.environment = dao.getById(this.environmentId);
+        }
+
+        return this.environment;
+    }
+
+    /**
+     * Retorna uma instância do local de relação com este objeto
+     *
+     * @return local
+     */
+    public Place getPlace(Context context) {
+        Environment environ = this.getEnvironment(context);
+        if (this.place == null || environ.getPlaceId() != place.getId()) {
+            PlaceDAO dao = new PlaceDAO(context);
+            this.place = dao.getById(environ.getPlaceId());
+        }
+
+        return this.place;
     }
 }

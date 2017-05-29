@@ -8,6 +8,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
     private EditText txtHost;
     private EditText txtPort;
     private TextView txtTitle;
+    private RadioGroup rgProtocol;
 
     public PlaceEditDialog(Activity activity, Place place) {
         super(activity);
@@ -52,6 +55,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         txtHost = (EditText) findViewById(R.id.place_edit_host);
         txtPort = (EditText) findViewById(R.id.place_edit_port);
         txtTitle = (TextView) findViewById(R.id.place_dialog_title);
+        rgProtocol = (RadioGroup) findViewById(R.id.place_edit_protocol);
 
         ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(getContext(), images);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,6 +70,8 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
             txtName.setText(place.getName());
             txtDescription.setText(place.getDescription());
             txtHost.setText(place.getHost());
+            int item = place.isSecurityProtocol() ? R.id.place_protocol_https : R.id.place_protocol_http;
+            rgProtocol.check(item);
             String port = place.getPort() != null ? place.getPort().toString() : "";
             txtPort.setText(port);
             int pos = spinnerAdapter.getPosition(place.getIcon());
@@ -95,9 +101,11 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
                     return;
                 }
 
+                RadioButton selProtocol = (RadioButton) findViewById(rgProtocol.getCheckedRadioButtonId());
                 this.place.setIcon(spinner.getSelectedItem().toString());
                 this.place.setName(txtName.getText().toString());
                 this.place.setDescription(txtDescription.getText().toString());
+                this.place.setProtocol(selProtocol.getText().toString());
                 this.place.setHost(txtHost.getText().toString());
                 this.place.setPort(Integer.parseInt(port));
                 this.place.save(getContext());

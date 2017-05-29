@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import aiec.br.ehc.helper.DateHelper;
 import aiec.br.ehc.model.Place;
-import aiec.br.ehc.helper.ManifestHelper;
 
 /**
  * Provém a persistência de dados para os locais
@@ -81,8 +79,12 @@ public class PlaceDAO extends BaseDAO {
 
         data.put("name", place.getName());
         data.put("description", place.getDescription());
+        data.put("protocol", place.getProtocol());
         data.put("host", place.getHost());
         data.put("port", place.getPort());
+        data.put("authorization_type", place.getAuthorizationType());
+        data.put("access_token", place.getAccessToken());
+        data.put("user_credentials", place.getUserCredentials());
         data.put("icon", place.getIcon());
         data.put("creation_date", DateHelper.asIsoDateTime(place.getCreatedAt()));
         data.put("modification_date", DateHelper.asIsoDateTime(place.getModificationAt()));
@@ -130,9 +132,13 @@ public class PlaceDAO extends BaseDAO {
         if (c.getCount() > 0) {
             place.setId(c.getInt(c.getColumnIndex("id")));
             place.setName(c.getString(c.getColumnIndex("name")));
+            place.setProtocol(c.getString(c.getColumnIndex("protocol")));
             place.setDescription(c.getString(c.getColumnIndex("description")));
             place.setHost(c.getString(c.getColumnIndex("host")));
             place.setPort(c.getInt(c.getColumnIndex("port")));
+            place.setAuthorizationType(c.getString(c.getColumnIndex("authorization_type")));
+            place.setAccessToken(c.getString(c.getColumnIndex("access_token")));
+            place.setUserCredentials(c.getString(c.getColumnIndex("user_credentials")));
             place.setIcon(c.getString(c.getColumnIndex("icon")));
             place.setCreatedBy(c.getString(c.getColumnIndex("created_by")));
             place.setModifiedBy(c.getString(c.getColumnIndex("modified_by")));

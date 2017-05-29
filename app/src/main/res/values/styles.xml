@@ -36,4 +36,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
     </style>
 
+    <style name="StyledDialog" parent="android:Theme.DeviceDefault.Light.Dialog.NoActionBar">
+        <item name="android:windowBackground">@color/colorDark</item>
+        <item name="android:elegantTextHeight">true</item>
+    </style>
 </resources>

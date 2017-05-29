@@ -16,8 +16,8 @@ import android.widget.TextView;
 import aiec.br.ehc.adapter.ImageArrayAdapter;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
-import aiec.br.ehc.parameter.IParameterFragment;
-import aiec.br.ehc.parameter.TurnOnOffFragment;
+import aiec.br.ehc.fragment.parameter.IParameterFragment;
+import aiec.br.ehc.fragment.parameter.TurnOnOffFragment;
 
 public class ResourceEditorActivity extends AppCompatActivity {
     private Resource resource;
