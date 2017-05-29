@@ -95,7 +95,7 @@ public class ResourceViewHolder
         final Context context = view.getContext();
         final Resource resource = this.resource;
         final Environment environment = this.adapter.environment;
-        MenuItem menuEdit = menu.add("Editar");
+        MenuItem menuEdit = menu.add(context.getString(R.string.edit));
         menuEdit.setOnMenuItemClickListener(
             new MenuItem.OnMenuItemClickListener() {
                 @Override
@@ -109,7 +109,7 @@ public class ResourceViewHolder
             }
         );
 
-        MenuItem menuDelete = menu.add("Excluir");
+        MenuItem menuDelete = menu.add(context.getString(R.string.delete));
         menuDelete.setOnMenuItemClickListener(
             new MenuItem.OnMenuItemClickListener() {
                 @Override

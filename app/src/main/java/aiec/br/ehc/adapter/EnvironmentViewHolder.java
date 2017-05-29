@@ -50,7 +50,7 @@ public class EnvironmentViewHolder
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo contextMenuInfo) {
         final Context context = view.getContext();
-        MenuItem menuEdit = menu.add("Editar");
+        MenuItem menuEdit = menu.add(context.getString(R.string.edit));
         menuEdit.setOnMenuItemClickListener(
                 new MenuItem.OnMenuItemClickListener() {
                     @Override
@@ -62,7 +62,7 @@ public class EnvironmentViewHolder
                 }
         );
 
-        MenuItem menuDelete = menu.add("Excluir");
+        MenuItem menuDelete = menu.add(context.getString(R.string.delete));
         menuDelete.setOnMenuItemClickListener(
                 new MenuItem.OnMenuItemClickListener() {
                     @Override
