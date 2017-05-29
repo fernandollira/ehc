@@ -10,9 +10,10 @@
         <item>on:window2;off:window_two;type:switch;color:#FFCC66</item>
         <item>on:led_light_lamp;off:led_light_lamp;type:switch;color:#ADFF2F</item>
         <item>on:kitchen_ceiling_lamp;off:kitchen_ceiling_lamp;type:switch;color:#d8ff00</item>
-        <item>on:air_conditioner;off:air_conditioner_off;type:switch;color:#77c3ef;animation:alternate</item>
-        <item>on:keyhole;off:keyhole;type:switch;color:#FFFAFA</item>
+        <item>on:minisplit_on;off:minisplit_off;type:switch;color:#77c3ef;animation:transition</item>
+        <item>on:lock;off:unlock;type:switch;color:#FFFAFA</item>
         <item>on:ceiling_lamp;off:ceiling_lamp;type:switch;color:#FFD700</item>
-        <item>on:door;off:door;type:switch;color:#FFD700</item>
+        <item>on:door_open;off:door_closed;type:switch</item>
+        <item>on:garage1;off:garage5;type:switch;animation:transition</item>
     </string-array>
 </resources>
