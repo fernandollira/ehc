@@ -119,6 +119,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         String token = place.getAccessToken();
         if (place.isAuthorizationByToken() && !TextUtils.isEmpty(token)) {
             this.use_authorization = true;
+            token = "Token " + token;
             conn.setRequestProperty("Authorization", token);
         }
     }

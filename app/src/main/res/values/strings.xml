@@ -54,22 +54,21 @@
     <string name="edit_resource_name_hint">Resource. Ex: Lamp, Ceiling fan</string>
     <string name="wait">Wait...</string>
     <string name="http_request_command_fail">Server not response.</string>
-    <string name="https">HTTPS</string>
-    <string name="http">HTTP</string>
-    <string name="error_protocol_send">Erro no envio, problemas de protocolo.</string>
-    <string name="error_data_encoding">Erro no encode de dados.</string>
-    <string name="error_io">Erro de I/O</string>
-    <string name="security_key">Chave de Segurança</string>
-    <string name="edit">Editar</string>
-    <string name="delete">Excluir</string>
-    <string name="security_key_config">Configurar chave de segurança</string>
-    <string name="token_edit_hint">Entre com a chave de segurança</string>
-    <string name="token_key">Chave de segurança (Token)</string>
-    <string name="user">Usuário</string>
-    <string name="password">Senha</string>
-    <string name="access_credentials">Credenciais de acesso</string>
-    <string name="credential_access">Credenciais de acesso</string>
-    <string name="deleted">Removido</string>
-    <string name="login">Login</string>
-    <string name="auth_server">Autenticação com o servidor</string>
+    <string name="https" translatable="false">HTTPS</string>
+    <string name="http" translatable="false">HTTP</string>
+    <string name="error_protocol_send">Error sending, protocol problems.</string>
+    <string name="error_data_encoding">Data Encode Error.</string>
+    <string name="error_io">I/O Error</string>
+    <string name="security_key">Token</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="security_key_config">Set up security key</string>
+    <string name="token_edit_hint">Enter the security key</string>
+    <string name="token_key">Security key (Token)</string>
+    <string name="user">Username</string>
+    <string name="password">Password</string>
+    <string name="access_credentials">Access credentials</string>
+    <string name="deleted">Removed</string>
+    <string name="login" translatable="false">Login</string>
+    <string name="auth_server">Authentication with the server</string>
 </resources>

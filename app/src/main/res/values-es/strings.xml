@@ -53,4 +53,19 @@
     <string name="dialog_add_resource_info">Nuevo recurso</string>
     <string name="edit_resource_name_hint">Recurso. Ex: Lámpara, Ventilador</string>
     <string name="http_request_command_fail">Servidor no responde al comando</string>
+    <string name="delete">Borrar</string>
+    <string name="deleted">Remoto</string>
+    <string name="auth_server">Autenticación con el servidor</string>
+    <string name="edit">Editar</string>
+    <string name="error_data_encoding">Error de codificación de datos.</string>
+    <string name="error_io">Error de E / S</string>
+    <string name="error_protocol_send">Error al enviar, problemas de protocolo.</string>
+    <string name="password">Contraseña</string>
+    <string name="security_key">Clave de acceso</string>
+    <string name="security_key_config">Configurar clave de seguridad</string>
+    <string name="token_edit_hint">Introduzca la clave de seguridad</string>
+    <string name="token_key">Clave de seguridad (Token)</string>
+    <string name="user">Nombre de usuario</string>
+    <string name="wait">Espere</string>
+    <string name="access_credentials">Credenciales de acceso</string>
 </resources>

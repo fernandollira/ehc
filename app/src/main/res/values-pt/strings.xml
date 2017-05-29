@@ -54,4 +54,18 @@
     <string name="edit_resource_name_hint">Recurso. Ex: Lâmpada, Ventilador</string>
     <string name="http_request_command_fail">Servidor não responde.</string>
     <string name="wait">Aguarde...</string>
+    <string name="auth_server">Autenticação com o servidor</string>
+    <string name="delete">Excluir</string>
+    <string name="deleted">Removido</string>
+    <string name="edit">Editar</string>
+    <string name="error_data_encoding">Erro no encode dos dados.</string>
+    <string name="error_io">Erro de E / S</string>
+    <string name="error_protocol_send">Erro de envio. Problema de protocolo.</string>
+    <string name="password">Senha</string>
+    <string name="security_key">Chave de acesso</string>
+    <string name="security_key_config">Configurar chave de acesso</string>
+    <string name="token_edit_hint">Digite a chave de segurança</string>
+    <string name="token_key">Chave de segurança (Token)</string>
+    <string name="user">Usuário</string>
+    <string name="access_credentials">Credenciais</string>
 </resources>
