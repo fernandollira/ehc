@@ -61,7 +61,10 @@ abstract class BaseDAO extends SQLiteOpenHelper {
                     "port INTEGER default 80," +
                     "authorization_type VARCHAR(40)," +
                     "access_token VARCHAR(200)," +
+                    "token_send_method VARCHAR(20)," +
+                    "token_flag VARCHAR(20) DEFAULT 'token'," +
                     "user_credentials VARCHAR(300)," +
+                    "credential_flag VARCHAR(20) DEFAULT 'Basic'," +
                     "name VARCHAR(100)," +
                     "description TEXT," +
                     "icon TEXT," +

@@ -85,6 +85,9 @@ public class PlaceDAO extends BaseDAO {
         data.put("authorization_type", place.getAuthorizationType());
         data.put("access_token", place.getAccessToken());
         data.put("user_credentials", place.getUserCredentials());
+        data.put("token_send_method", place.getTokenSendMethod());
+        data.put("token_flag", place.getTokenFlag());
+        data.put("credential_flag", place.getCredentialFlag());
         data.put("icon", place.getIcon());
         data.put("creation_date", DateHelper.asIsoDateTime(place.getCreatedAt()));
         data.put("modification_date", DateHelper.asIsoDateTime(place.getModificationAt()));
@@ -138,6 +141,9 @@ public class PlaceDAO extends BaseDAO {
             place.setPort(c.getInt(c.getColumnIndex("port")));
             place.setAuthorizationType(c.getString(c.getColumnIndex("authorization_type")));
             place.setAccessToken(c.getString(c.getColumnIndex("access_token")));
+            place.setTokenSendMethod(c.getString(c.getColumnIndex("token_send_method")));
+            place.setTokenFlag(c.getString(c.getColumnIndex("token_flag")));
+            place.setCredentialFlag(c.getString(c.getColumnIndex("credential_flag")));
             place.setUserCredentials(c.getString(c.getColumnIndex("user_credentials")));
             place.setIcon(c.getString(c.getColumnIndex("icon")));
             place.setCreatedBy(c.getString(c.getColumnIndex("created_by")));

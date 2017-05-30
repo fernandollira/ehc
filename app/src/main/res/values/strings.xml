@@ -71,4 +71,9 @@
     <string name="deleted">Removed</string>
     <string name="login" translatable="false">Login</string>
     <string name="auth_server">Authentication with the server</string>
+    <string name="how_to_send_token">Como você deseja enviar o token?</string>
+    <string name="send_token_by_headers">Headers (Authorization: token {token key})</string>
+    <string name="send_token_by_url">URL (?token={token key})</string>
+    <string name="send_token_param">Parâmetro de envio. Padrão: token</string>
+    <string name="advanced_options">Configurações avançadas</string>
 </resources>

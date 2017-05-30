@@ -17,8 +17,12 @@ import aiec.br.ehc.dao.PlaceDAO;
  * @since   2017-05-07
  */
 public class Place extends BaseModel implements Parcelable {
-    private String AUTHORIZATION_TYPE_CREDENTIAL = "credentials";
-    private String AUTHORIZATION_TYPE_TOKEN = "token";
+    private static final String AUTHORIZATION_TYPE_CREDENTIAL = "credentials";
+    private static final String AUTHORIZATION_TYPE_TOKEN = "token";
+    private static final String CREDENTIAL_DEFAULT_FLAG = "Basic";
+    private static final String TOKEN_DEFAULT_FLAG = "token";
+    public static final String TOKEN_SEND_BY_URL = "url";
+    public static final String TOKEN_SEND_BY_HEADERS = "headers";
 
     private String name;
     private String description;
@@ -28,6 +32,9 @@ public class Place extends BaseModel implements Parcelable {
     private String authorizationType;
     private String accessToken;
     private String userCredentials;
+    private String tokenSendMethod;
+    private String tokenFlag;
+    private String credentialFlag;
     private String icon;
     private Date createdAt;
     private Date modificationAt;
@@ -57,6 +64,9 @@ public class Place extends BaseModel implements Parcelable {
         this.authorizationType = in.readString();
         this.accessToken = in.readString();
         this.userCredentials = in.readString();
+        this.tokenSendMethod = in.readString();
+        this.tokenFlag = in.readString();
+        this.credentialFlag = in.readString();
         this.icon = in.readString();
 
         Long tmpDate = in.readLong();
@@ -146,6 +156,40 @@ public class Place extends BaseModel implements Parcelable {
         this.userCredentials = userCredentials;
     }
 
+    public String getTokenSendMethod() {
+        if (tokenSendMethod == null) {
+            return TOKEN_SEND_BY_HEADERS;
+        }
+
+        return tokenSendMethod;
+    }
+
+    public void setTokenSendMethod(String tokenSendMethod) {
+        this.tokenSendMethod = tokenSendMethod;
+    }
+
+    public String getTokenFlag() {
+        if (tokenFlag == null) {
+            return TOKEN_DEFAULT_FLAG;
+        }
+        return tokenFlag;
+    }
+
+    public void setTokenFlag(String tokenFlag) {
+        this.tokenFlag = tokenFlag;
+    }
+
+    public String getCredentialFlag() {
+        if (credentialFlag == null) {
+            return CREDENTIAL_DEFAULT_FLAG;
+        }
+        return credentialFlag;
+    }
+
+    public void setCredentialFlag(String credentialFlag) {
+        this.credentialFlag = credentialFlag;
+    }
+
     public String getHost() {
         return host;
     }
@@ -232,6 +276,9 @@ public class Place extends BaseModel implements Parcelable {
         parcel.writeString(authorizationType);
         parcel.writeString(accessToken);
         parcel.writeString(userCredentials);
+        parcel.writeString(tokenSendMethod);
+        parcel.writeString(tokenFlag);
+        parcel.writeString(credentialFlag);
         parcel.writeString(icon);
         parcel.writeLong(createdAt != null ? createdAt.getTime() : -1);
         parcel.writeLong(modificationAt != null ? modificationAt.getTime() : -1);
@@ -273,5 +320,23 @@ public class Place extends BaseModel implements Parcelable {
     public boolean isAuthorizationByCredentials()
     {
         return this.getAuthorizationType().equals(AUTHORIZATION_TYPE_CREDENTIAL);
+    }
+
+    /**
+     * verifica se o tipo de envio do token é por meio da url via parâmetros
+     * @return bool
+     */
+    public boolean isSendTokenByUrl()
+    {
+        return this.getTokenSendMethod().equals(TOKEN_SEND_BY_URL);
+    }
+
+    /**
+     * verifica se o tipo de envio do token é por meio do cabeçalho http
+     * @return bool
+     */
+    public boolean isSendTokenByHeaders()
+    {
+        return this.getTokenSendMethod().equals(TOKEN_SEND_BY_HEADERS);
     }
 }
