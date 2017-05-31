@@ -32,8 +32,9 @@
         android:layout_gravity="right"
         android:text="@string/advanced_options"
         android:textColor="@android:color/white"
-        android:layout_marginRight="10dp"
-        android:drawableLeft="@android:drawable/stat_notify_more"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/add_circle_white"
+        android:drawablePadding="4dp"
         android:layout_marginBottom="8dp"
         android:textSize="@dimen/text_medium"
         android:textStyle="bold"/>
@@ -41,6 +42,7 @@
     <LinearLayout
         android:id="@+id/place_send_token_block"
         android:orientation="vertical"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <RadioGroup
@@ -85,9 +87,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:inputType="text"
+        android:maxLines="1"
         android:hint="@string/send_token_param"
         android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorGrey"
-        android:layout_margin="10dp"/>
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
     </LinearLayout>
 </LinearLayout>

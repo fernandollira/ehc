@@ -65,7 +65,7 @@
     <string name="security_key">Chave de acesso</string>
     <string name="security_key_config">Configurar chave de acesso</string>
     <string name="token_edit_hint">Digite a chave de segurança</string>
-    <string name="token_key">Chave de segurança (Token)</string>
+    <string name="token_key">Chave de acesso (Token)</string>
     <string name="user">Usuário</string>
     <string name="access_credentials">Credenciais</string>
 </resources>

@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import aiec.br.ehc.R;
+import aiec.br.ehc.helper.AnimationHelper;
 import aiec.br.ehc.model.Place;
 
 /**
@@ -21,6 +24,10 @@ public class PlaceCredentialFragment extends Fragment implements IPlaceFragment 
     private EditText username;
     private EditText password;
     private Place place;
+    private EditText credentialFlag;
+    private TextView moreConfig;
+    private View configBlock;
+    private TextView configInfo;
 
     @Nullable
     @Override
@@ -30,8 +37,14 @@ public class PlaceCredentialFragment extends Fragment implements IPlaceFragment 
         icon.setColorFilter(Color.rgb(255, 255, 255));
         username = (EditText) view.findViewById(R.id.place_credential_username);
         password = (EditText) view.findViewById(R.id.place_credential_password);
+        credentialFlag = (EditText) view.findViewById(R.id.place_send_credential_tag);
+        moreConfig = (TextView) view.findViewById(R.id.place_credential_advanced_options);
+        configBlock = view.findViewById(R.id.place_send_credential_block);
+        configInfo = (TextView) view.findViewById(R.id.place_credential_label);
 
         place = getArguments().getParcelable("place");
+        String flag = String.format(getString(R.string.send_credential_tag), place.getCredentialFlag());
+        configInfo.setText(flag);
         if (place.getUserCredentials() != null && place.getUserCredentials().contains(":")) {
             String[] credentials = place.getUserCredentials().split(":");
             if (credentials.length == 2) {
@@ -40,6 +53,8 @@ public class PlaceCredentialFragment extends Fragment implements IPlaceFragment 
             }
         }
 
+        this.addParamTokenEditEvent();
+        this.addMoreOptionsEvents();
         return view;
     }
 
@@ -74,6 +89,43 @@ public class PlaceCredentialFragment extends Fragment implements IPlaceFragment 
         }
 
         place.setUserCredentials(credentials);
+        place.setCredentialFlag(credentialFlag.getText().toString());
+    }
 
+    private void addMoreOptionsEvents() {
+        AnimationHelper.collapse(configBlock);
+        moreConfig.setTag("collapsed");
+        this.moreConfig.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (moreConfig.getTag() == "collapsed") {
+                    moreConfig.setTag("expand");
+                    AnimationHelper.expand(configBlock);
+                }
+                else {
+                    moreConfig.setTag("collapsed");
+                    AnimationHelper.collapse(configBlock);
+                }
+            }
+        });
+    }
+
+    private void addParamTokenEditEvent() {
+        credentialFlag.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                configInfo.setText(String.format(getString(R.string.send_credential_tag), s));
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }

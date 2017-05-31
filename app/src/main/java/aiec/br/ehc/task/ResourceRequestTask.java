@@ -42,6 +42,8 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
     private String error;
     private URL url;
     private boolean use_authorization = false;
+    private String flagInfo = "";
+    private String queryString;
 
     public ResourceRequestTask(ResourceViewHolder holder) {
         this.holder = holder;
@@ -54,8 +56,14 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         StrictMode.setThreadPolicy(policy);
 
         this.resource = params[0];
+        Place place = resource.getPlace(context);
         URL url = resource.getRequestURL(context);
-        String queryString = resource.getParamsQueryString(context);
+        this.queryString = resource.getParamsQueryString(context);
+        if (place.isSendTokenByUrl() && place.isAuthorizationByToken()) {
+            String glue = queryString.isEmpty() ? "" : "&";
+            String token = place.getAccessToken();
+            this.queryString.concat(glue).concat(place.getTokenFlag()).concat("=").concat(token);
+        }
         respCode = -1;
         conn = this.getConnection(resource.getMethod(), url, queryString);
         if (conn != null) {
@@ -109,18 +117,20 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         String credentials = place.getUserCredentials();
         if (place.isAuthorizationByCredentials() && !TextUtils.isEmpty(credentials)) {
             byte[] encodedBytes = Base64.encode(credentials.getBytes(), 0);
-            String authorization = "Basic " + encodedBytes;
+            String authorization = place.getCredentialFlag().concat(" ") + encodedBytes;
             conn.setRequestProperty("Authorization", authorization);
             this.use_authorization = true;
+            this.flagInfo = "Authorization ".concat(place.getCredentialFlag().concat( "<token>"));
             return;
         }
 
         // autenticação por token
         String token = place.getAccessToken();
-        if (place.isAuthorizationByToken() && !TextUtils.isEmpty(token)) {
+        if (place.isAuthorizationByToken() && !TextUtils.isEmpty(token) && place.isSendTokenByHeaders()) {
             this.use_authorization = true;
-            token = "Token " + token;
+            token = place.getTokenFlag().concat(" ").concat(token);
             conn.setRequestProperty("Authorization", token);
+            this.flagInfo = "Authorization ".concat(place.getTokenFlag().concat( "<access key>"));
         }
     }
 
@@ -205,9 +215,10 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
                     .concat("URL: ")
                     .concat(resource.getRequestURL(context).toString().concat("\n"))
                     .concat("Parameters: ")
-                    .concat(resource.getParamsQueryString(context)).concat("\n")
+                    .concat(queryString).concat("\n")
                     .concat("Authentication mode: ")
-                    .concat(auth_mode).concat("\n");
+                    .concat(auth_mode).concat("\n")
+                    .concat(flagInfo);
 
             dialog.setView(getDialogView(message));
             dialog.setIcon(android.R.drawable.ic_dialog_alert);
