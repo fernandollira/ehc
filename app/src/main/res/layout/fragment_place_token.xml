@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/place_token_icon"
         android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="6dp"
         android:src="@drawable/three_lockers_key"
         android:layout_width="64dp"
         android:layout_height="64dp" />

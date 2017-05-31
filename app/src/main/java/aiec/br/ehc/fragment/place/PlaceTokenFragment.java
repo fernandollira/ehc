@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import aiec.br.ehc.R;
 import aiec.br.ehc.helper.AnimationHelper;
@@ -51,7 +50,7 @@ public class PlaceTokenFragment extends Fragment implements IPlaceFragment {
 
         String flag = place.getTokenFlag();
         rbTokenHeader.setText(String.format(getString(R.string.send_token_by_headers), flag));
-        rbTokenUrl.setText(String.format(getString(R.string.send_token_by_headers), flag));
+        rbTokenUrl.setText(String.format(getString(R.string.send_token_by_url), flag));
             if (place.getAccessToken() != null) {
             token.setText(place.getAccessToken());
         }
@@ -97,7 +96,7 @@ public class PlaceTokenFragment extends Fragment implements IPlaceFragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 rbTokenHeader.setText(String.format(getString(R.string.send_token_by_headers), s));
-                rbTokenUrl.setText(String.format(getString(R.string.send_token_by_headers), s));
+                rbTokenUrl.setText(String.format(getString(R.string.send_token_by_url), s));
             }
 
             @Override

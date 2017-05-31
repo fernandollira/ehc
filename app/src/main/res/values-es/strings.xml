@@ -68,4 +68,8 @@
     <string name="user">Nombre de usuario</string>
     <string name="wait">Espere</string>
     <string name="access_credentials">Credenciales de acceso</string>
+    <string name="send_credential_param">Parámetro de envío. Estándar: Basic</string>
+    <string name="how_to_send_token">¿Cómo se enviará el token?</string>
+    <string name="send_token_param">Parámetro de envío. Estándar: token</string>
+    <string name="advanced_options">Configuración</string>
 </resources>

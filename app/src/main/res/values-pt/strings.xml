@@ -10,8 +10,8 @@
     <string name="empty_environments">0 ambientes</string>
     <string name="host">Host</string>
     <string name="my_account">Minha conta</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Fechar aba</string>
+    <string name="navigation_drawer_open">Abrir aba</string>
     <string name="parameters">Parâmetros</string>
     <string name="places">Locais</string>
     <string name="port">Porta</string>
@@ -68,4 +68,8 @@
     <string name="token_key">Chave de acesso (Token)</string>
     <string name="user">Usuário</string>
     <string name="access_credentials">Credenciais</string>
+    <string name="send_credential_param">Parâmetro de envio. Padrão: Basic</string>
+    <string name="how_to_send_token">Como o token deverá ser enviado?</string>
+    <string name="send_token_param">Parâmetro de envio. Padrão: token</string>
+    <string name="advanced_options">Configurações</string>
 </resources>

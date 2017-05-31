@@ -71,11 +71,11 @@
     <string name="deleted">Removed</string>
     <string name="login" translatable="false">Login</string>
     <string name="auth_server">Authentication with the server</string>
-    <string name="how_to_send_token">Como o token deverá ser enviado?</string>
-    <string name="send_token_by_headers">Headers (Authorization: %s {token key})</string>
-    <string name="send_token_by_url">URL (?%s={token key})</string>
-    <string name="send_token_param">Parâmetro de envio. Padrão: token</string>
-    <string name="send_credential_param">Parâmetro de envio. Padrão: Basic</string>
-    <string name="send_credential_tag">"Authorization: %s [access token]"</string>
-    <string name="advanced_options">Configurações</string>
+    <string name="how_to_send_token">How to send the token?</string>
+    <string name="send_token_by_headers" translatable="false">Headers (Authorization: %s {token key})</string>
+    <string name="send_token_by_url" translatable="false">URL (?%s={token key})</string>
+    <string name="send_token_param">Parameter send. Default: token</string>
+    <string name="send_credential_param">Parameter send. Default: Basic</string>
+    <string name="send_credential_tag" translatable="false">"Authorization: %s [access token]"</string>
+    <string name="advanced_options">Settings</string>
 </resources>
