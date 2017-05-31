@@ -95,8 +95,10 @@ public class PlaceTokenFragment extends Fragment implements IPlaceFragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                rbTokenHeader.setText(String.format(getString(R.string.send_token_by_headers), s));
-                rbTokenUrl.setText(String.format(getString(R.string.send_token_by_url), s));
+                String tokenFlag = String.format(getString(R.string.send_token_by_headers), s);
+                String urlFlag = String.format(getString(R.string.send_token_by_url), s);
+                rbTokenHeader.setText(tokenFlag.replace("= {", "={"));
+                rbTokenUrl.setText(urlFlag.replace("==", "="));
             }
 
             @Override
