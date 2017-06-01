@@ -54,13 +54,25 @@
                 android:textSize="@dimen/text_normal" />
 
             <TextView
+                android:id="@+id/place_item_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="6dp"
+                android:paddingTop="4dp"
+                android:text="@string/checking"
+                android:layout_gravity="right"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/colorGrey"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
                 android:id="@+id/place_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/name"
                 android:textColor="@color/colorGreen"
                 android:textSize="@dimen/text_big"
-                android:layout_marginTop="-4dp"
+                android:layout_marginTop="-28dp"
                 android:textStyle="normal" />
 
             <TextView

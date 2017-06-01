@@ -1,15 +1,13 @@
 package aiec.br.ehc.task;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import aiec.br.ehc.model.Place;
 
@@ -17,32 +15,47 @@ import aiec.br.ehc.model.Place;
  * Created by gilmar on 01/06/17.
  */
 
-public class CheckPlaceAvailable extends AsyncTask {
-    private final Context context;
+public class CheckPlaceAvailable extends AsyncTask <Place, Boolean, Boolean> {
     private final TextView view;
     private Place place;
 
-    public CheckPlaceAvailable(Context context, Place place, TextView view) {
-        this.place = place;
-        this.context = context;
+    public CheckPlaceAvailable(TextView view) {
         this.view = view;
     }
 
     @Override
-    protected Object doInBackground(Object[] objects) {
+    protected Boolean doInBackground(Place... places) {
+        this.place = places[0];
         try {
-            String domain = place.getProtocol().concat("://").concat(place.getHost());
-            SocketAddress sockaddr = new InetSocketAddress(domain, place.getPort());
-            // Create an unbound socket
-            Socket sock = new Socket();
-
-            // This method will block no more than timeoutMs.
-            // If the timeout occurs, SocketTimeoutException is thrown.
-            int timeoutMs = 2000;   // 2 seconds
-            sock.connect(sockaddr, timeoutMs);
-            return true;
-        } catch(IOException e) {
+            URL url = new URL(place.getProtocol().concat("://").concat(place.getHost()));
+            HttpURLConnection.setFollowRedirects(false);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setConnectTimeout(1000);
+            con.setReadTimeout(1000);
+            con.setRequestMethod("HEAD");
+            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(Boolean isAvailable) {
+        Drawable drawable = view.getContext().getDrawable(android.R.drawable.presence_online);
+        drawable.setColorFilter(Color.rgb(205, 85, 85), PorterDuff.Mode.SRC_ATOP);
+        drawable.setBounds(0, 0, 40, 40);
+        String state = "offline";
+        if (isAvailable) {
+            drawable.setColorFilter(Color.rgb(122, 172, 65), PorterDuff.Mode.SRC_ATOP);
+            state = "online";
+        }
+        view.setCompoundDrawables(drawable, null, null, null);
+        view.setText(state);
     }
 }

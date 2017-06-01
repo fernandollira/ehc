@@ -120,7 +120,6 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
             conn.setRequestProperty("Authorization", authorization);
             this.use_authorization = true;
             this.flagInfo = "Authorization: ".concat(place.getCredentialFlag().concat( "<token>"));
-            String authorization1 = conn.getHeaderField("Authorization");
             return;
         }
 
@@ -210,6 +209,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
                 auth_mode = place.isAuthorizationByCredentials() ?
                         "Login" : "Token";
             }
+
             String message = "Method: "
                     .concat(resource.getMethod()).concat("\n")
                     .concat("URL: ")
@@ -219,7 +219,9 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
                     .concat("Authentication mode: ")
                     .concat(auth_mode).concat("\n")
                     .concat(flagInfo);
-
+            if (this.result !=null) {
+                message = result;
+            }
             dialog.setView(getDialogView(message));
             dialog.setIcon(android.R.drawable.ic_dialog_alert);
             dialog.setCancelable(true);

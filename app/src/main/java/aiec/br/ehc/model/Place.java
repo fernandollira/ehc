@@ -169,7 +169,7 @@ public class Place extends BaseModel implements Parcelable {
     }
 
     public String getTokenFlag() {
-        if (tokenFlag == null) {
+        if (tokenFlag == null || tokenFlag.isEmpty()) {
             return TOKEN_DEFAULT_FLAG;
         }
         return tokenFlag;

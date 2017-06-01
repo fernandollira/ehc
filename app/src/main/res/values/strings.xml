@@ -78,4 +78,6 @@
     <string name="send_credential_param">Parameter send. Default: Basic</string>
     <string name="send_credential_tag" translatable="false">"Authorization: %s [access token]"</string>
     <string name="advanced_options">Settings</string>
+    <string name="loading">Carregando...</string>
+    <string name="checking">Verificando...</string>
 </resources>

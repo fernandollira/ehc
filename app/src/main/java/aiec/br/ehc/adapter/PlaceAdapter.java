@@ -16,6 +16,7 @@ import aiec.br.ehc.R;
 import aiec.br.ehc.helper.ImageHelper;
 import aiec.br.ehc.helper.SharedPreferenceHelper;
 import aiec.br.ehc.model.Place;
+import aiec.br.ehc.task.CheckPlaceAvailable;
 
 /**
  * Adapter personalizado para listagem de locais
@@ -98,6 +99,7 @@ public class PlaceAdapter extends BaseAdapter {
         TextView txtDescription = (TextView) view.findViewById(R.id.place_item_description);
         TextView txtHost = (TextView) view.findViewById(R.id.place_item_host);
         TextView txtItemCount = (TextView) view.findViewById(R.id.place_item_count);
+        TextView txtItemState = (TextView) view.findViewById(R.id.place_item_state);
         ImageView imgIcon = (ImageView) view.findViewById(R.id.place_item_icon);
         Place place = this.listPlaces.get(position);
 
@@ -123,6 +125,10 @@ public class PlaceAdapter extends BaseAdapter {
 
         // aplica uma filtro de color na imagem
         imgIcon.setColorFilter(color);
+
+        // verifica disponibilidade do host
+        CheckPlaceAvailable check = new CheckPlaceAvailable(txtItemState);
+        check.execute(place);
 
         return view;
     }
