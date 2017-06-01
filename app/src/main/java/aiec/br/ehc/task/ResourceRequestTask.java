@@ -115,11 +115,12 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         // autenticação por login e senha
         String credentials = place.getUserCredentials();
         if (place.isAuthorizationByCredentials() && !TextUtils.isEmpty(credentials)) {
-            byte[] encodedBytes = Base64.encode(credentials.getBytes(), 0);
-            String authorization = place.getCredentialFlag().concat(" ") + encodedBytes;
+            String credentialEncoded = Base64.encodeToString(credentials.getBytes(), Base64.DEFAULT);
+            String authorization = place.getCredentialFlag().concat(" ") + credentialEncoded;
             conn.setRequestProperty("Authorization", authorization);
             this.use_authorization = true;
             this.flagInfo = "Authorization: ".concat(place.getCredentialFlag().concat( "<token>"));
+            String authorization1 = conn.getHeaderField("Authorization");
             return;
         }
 

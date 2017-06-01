@@ -180,7 +180,7 @@ public class Place extends BaseModel implements Parcelable {
     }
 
     public String getCredentialFlag() {
-        if (credentialFlag == null) {
+        if (credentialFlag == null || credentialFlag.isEmpty()) {
             return CREDENTIAL_DEFAULT_FLAG;
         }
         return credentialFlag;
