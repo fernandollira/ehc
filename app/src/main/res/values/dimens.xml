@@ -10,4 +10,5 @@
     <dimen name="text_normal">12dp</dimen>
     <dimen name="text_medium">14dp</dimen>
     <dimen name="text_big">16dp</dimen>
+    <dimen name="text_info">24dp</dimen>
 </resources>

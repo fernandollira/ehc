@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/resource_dialog_intensity_info"
+        android:textSize="@dimen/text_info"
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_gravity="top|right"
+        android:fontFamily="monospace"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="0"
+        android:layout_height="40dp" />
+
     <ImageView
         android:id="@+id/resource_dialog_intensity_icon"
         android:layout_width="96dp"
@@ -12,10 +24,11 @@
         android:padding="6dp"
         android:contentDescription="@string/action_settings"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="-10dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/lamp_off"
         android:scaleType="centerCrop" />
+
 
     <SeekBar
         android:id="@+id/resource_dialog_intensity_value"

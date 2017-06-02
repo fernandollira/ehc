@@ -5,18 +5,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import aiec.br.ehc.R;
 import aiec.br.ehc.ResourceActivity;
@@ -34,9 +30,7 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
     private final Bundle properties;
     private ImageView imgResourceIcon;
     private SeekBar control;
-    private AnimationEffectsHelper helper;
-    private int speed = AnimationEffectsHelper.SPEED_DEFAULT;
-    private int progress = 0;
+    private TextView txtIntensity;
 
     public ResourceIntensityControlDialog(Context context, Resource resource, Bundle properties) {
         super(context, R.style.StyledDialog);
@@ -52,17 +46,17 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
 
         this.setCancelable(true);
         imgResourceIcon = (ImageView) findViewById(R.id.resource_dialog_intensity_icon);
+        txtIntensity = (TextView) findViewById(R.id.resource_dialog_intensity_info);
         control = (SeekBar) findViewById(R.id.resource_dialog_intensity_value);
         control.setMax(resource.getMaxValue());
         control.incrementProgressBy(resource.getStepValue());
         control.setProgress(resource.getIntensityValue() / resource.getStepValue());
         control.setSecondaryProgress(resource.getIntensityValue());
         control.setEnabled(resource.getState().equals("on"));
+        txtIntensity.setText(resource.getIntensityValue().toString());
 
         // aplica os efeitos na imagem
-        this.helper = new AnimationEffectsHelper(getContext(), properties);
         this.applyEffects(resource.getState());
-
 
         this.updateControlColor();
         this.addOnResourceChangeState();
@@ -138,9 +132,11 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
         imgResourceIcon.setImageResource(ResourceHelper.from(getContext()).getIdentifierFromDrawable(newIcon));
         this.updateControlColor();
 
+
         // Aplica os efeitos visuais definidos nas propriedades da imagem
         AnimationEffectsHelper helper = new AnimationEffectsHelper(getContext(), properties);
         helper.applyEffects(imgResourceIcon, state);
+        txtIntensity.setText(resource.getIntensityValue().toString());
     }
 
     @Override
