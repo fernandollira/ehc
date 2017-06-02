@@ -1,5 +1,6 @@
 package aiec.br.ehc.task;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -68,8 +69,8 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         respCode = -1;
         conn = this.getConnection(resource.getMethod(), url, queryString);
         if (conn != null) {
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(15000);
+            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(10000);
             this.setCredentials();
             try {
                 conn.connect();
@@ -200,6 +201,11 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
+        // se a Activity foi finalizada antes do término da execução, para por aqui
+        if(((Activity) context).isFinishing()) {
+            return;
+        }
+
         if (respCode != HttpURLConnection.HTTP_OK) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.StyledDialog);
             dialog.setTitle(this.error);

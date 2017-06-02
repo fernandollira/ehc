@@ -72,34 +72,66 @@
             android:layout_width="match_parent"
             android:layout_weight="2"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/resource_intensity_param_icon"
+                android:src="@drawable/speed_indicator"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="6dp"
+                android:layout_gravity="bottom"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
             <EditText
                 android:id="@+id/resource_edit_intensity_param"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_normal"
+                android:textSize="@dimen/text_medium"
                 android:textColor="@color/colorWhite"
-                android:layout_weight="1"
                 android:hint="@string/intensity_param_hint"
                 android:inputType="text" />
-            <EditText
-                android:id="@+id/resource_edit_min_value"
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_normal"
-                android:textColor="@color/colorWhite"
-                android:layout_weight="2"
-                android:hint="@string/min_value"
-                android:inputType="number" />
-            <EditText
-                android:id="@+id/resource_edit_max_value"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/text_normal"
-                android:layout_weight="2"
-                android:hint="@string/max_value"
-                android:inputType="number" />
-        </LinearLayout>
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/resource_intensity_min_icon"
+                    android:src="@drawable/volume_controller_min"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_gravity="bottom"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <EditText
+                    android:id="@+id/resource_edit_min_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_medium"
+                    android:textColor="@color/colorWhite"
+                    android:layout_weight="2"
+                    android:hint="@string/min_value"
+                    android:inputType="number" />
+
+                <ImageView
+                    android:id="@+id/resource_intensity_max_icon"
+                    android:src="@drawable/volume_controller_max"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_gravity="bottom"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <EditText
+                    android:id="@+id/resource_edit_max_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_normal"
+                    android:layout_weight="2"
+                    android:hint="@string/max_value"
+                    android:inputType="number" />
+            </LinearLayout>
     </LinearLayout>
 
 

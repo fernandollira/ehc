@@ -1,5 +1,8 @@
 package aiec.br.ehc;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 
@@ -50,11 +54,18 @@ public class ResourceEditorActivity extends AppCompatActivity {
         images = getResources().getStringArray(R.array.object_resource_icons);
         intensityControl = (Switch) findViewById(R.id.resource_intensity_control);
         intensityBlock = findViewById(R.id.resource_intensity_control_block);
+        ImageView imgMax = (ImageView) findViewById(R.id.resource_intensity_max_icon);
+        ImageView imgMin = (ImageView) findViewById(R.id.resource_intensity_min_icon);
+        ImageView imgParam = (ImageView) findViewById(R.id.resource_intensity_param_icon);
+
+        imgMax.setColorFilter(Color.rgb(255, 255, 255));
+        imgMin.setColorFilter(Color.rgb(255, 255, 255));
+        imgParam.setColorFilter(Color.rgb(255, 255, 255));
 
         // recebe os objetos serializados
         this.environment = getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
         this.resource = getIntent().getParcelableExtra("EXTRA_RESOURCE");
-        if (this.resource.isNew()) {
+        if (this.resource == null) {
             this.resource = new Resource();
             AnimationHelper.collapse(intensityBlock);
         }
@@ -123,6 +134,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
         this.setTitle(getString(R.string.add_resource));
         txtMinValue.setText(resource.getMinValue().toString());
         txtMaxValue.setText(resource.getMaxValue().toString());
+
         if (!resource.isNew()) {
             this.setTitle(getString(R.string.edit_resource));
             txtName.setText(resource.getName());
@@ -161,7 +173,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
                 int description = R.string.intensity_control_deactivate;
                 resource.setIntensityControl(isEnabled);
                 if(isEnabled) {
-                    description = R.string.intensity_control_deactivate;
+                    description = R.string.intensity_control_active;
                     AnimationHelper.expand(intensityBlock);
                 }
                 else {
