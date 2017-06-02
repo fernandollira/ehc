@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/resource_dialog_intensity_info"
         android:textSize="@dimen/text_info"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorAccent"
         android:layout_width="wrap_content"
         android:layout_gravity="top|right"
         android:fontFamily="monospace"
