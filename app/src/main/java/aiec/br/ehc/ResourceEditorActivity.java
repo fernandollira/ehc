@@ -9,11 +9,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Switch;
 
 import aiec.br.ehc.adapter.ImageArrayAdapter;
+import aiec.br.ehc.helper.AnimationHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
 import aiec.br.ehc.fragment.parameter.IParameterFragment;
@@ -23,12 +25,16 @@ public class ResourceEditorActivity extends AppCompatActivity {
     private Resource resource;
     private Environment environment;
     private EditText txtName;
-    private TextView txtDescription;
     private Spinner spinner_icon;
     private Spinner spinner_http_method;
 
     private IParameterFragment fragment;
     private String[] images;
+    private Switch intensityControl;
+    private View intensityBlock;
+    private EditText txtMinValue;
+    private EditText txtMaxValue;
+    private EditText txtIntensityParam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +42,32 @@ public class ResourceEditorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resource_editor);
 
         txtName = (EditText) findViewById(R.id.resource_edit_name);
-        txtDescription = (TextView) findViewById(R.id.resource_view_description);
+        txtMinValue = (EditText) findViewById(R.id.resource_edit_min_value);
+        txtMaxValue = (EditText) findViewById(R.id.resource_edit_max_value);
+        txtIntensityParam = (EditText) findViewById(R.id.resource_edit_intensity_param);
         spinner_icon = (Spinner) findViewById(R.id.resource_edit_icon);
         spinner_http_method = (Spinner) findViewById(R.id.resource_edit_method);
         images = getResources().getStringArray(R.array.object_resource_icons);
+        intensityControl = (Switch) findViewById(R.id.resource_intensity_control);
+        intensityBlock = findViewById(R.id.resource_intensity_control_block);
 
         // recebe os objetos serializados
         this.environment = getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
         this.resource = getIntent().getParcelableExtra("EXTRA_RESOURCE");
-        if (this.resource == null) {
+        if (this.resource.isNew()) {
             this.resource = new Resource();
+            AnimationHelper.collapse(intensityBlock);
         }
+
+        // exibe a parte de controle de intensidade caso o recurso esteja habilitado pra tal
+        if (resource.hasIntensityControl()) {
+            AnimationHelper.expand(intensityBlock);
+        }
+
         this.fillParameters();
         this.addButtonEvents();
         this.addSpinnerEvents();
+        this.addSwitchIntensityEvents();
     }
 
     /**
@@ -64,6 +82,9 @@ public class ResourceEditorActivity extends AppCompatActivity {
             public void onClick(View view) {
                 resource.setIcon(spinner_icon.getSelectedItem().toString());
                 resource.setMethod(spinner_http_method.getSelectedItem().toString());
+                resource.setIntensityParam(txtIntensityParam.getText().toString());
+                resource.setMinValue(Integer.parseInt(txtMinValue.getText().toString()));
+                resource.setMaxValue(Integer.parseInt(txtMaxValue.getText().toString()));
                 if (txtName.getText().toString().isEmpty()) {
                     txtName.setError(getString(R.string.required_field_message));
                     txtName.requestFocus();
@@ -100,11 +121,13 @@ public class ResourceEditorActivity extends AppCompatActivity {
         spinner_icon.setBackgroundResource(R.color.colorPrimaryDark);
 
         this.setTitle(getString(R.string.add_resource));
+        txtMinValue.setText(resource.getMinValue().toString());
+        txtMaxValue.setText(resource.getMaxValue().toString());
         if (!resource.isNew()) {
             this.setTitle(getString(R.string.edit_resource));
             txtName.setText(resource.getName());
-            txtDescription.setText(resource.getDescription());
-
+            intensityControl.setChecked(resource.hasIntensityControl());
+            txtIntensityParam.setText(resource.getIntensityParam());
             int pos = spinnerAdapter.getPosition(resource.getIcon());
             spinner_icon.setSelection(pos);
 
@@ -126,6 +149,26 @@ public class ResourceEditorActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+    }
+
+    private void addSwitchIntensityEvents()
+    {
+        intensityControl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isEnabled) {
+                int description = R.string.intensity_control_deactivate;
+                resource.setIntensityControl(isEnabled);
+                if(isEnabled) {
+                    description = R.string.intensity_control_deactivate;
+                    AnimationHelper.expand(intensityBlock);
+                }
+                else {
+                    AnimationHelper.collapse(intensityBlock);
+                }
+
+                compoundButton.setText(getString(description));
             }
         });
     }

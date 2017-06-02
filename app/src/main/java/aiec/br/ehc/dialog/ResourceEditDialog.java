@@ -55,7 +55,6 @@ public class ResourceEditDialog extends Dialog implements View.OnClickListener {
 
         txtTitle = (TextView) findViewById(R.id.dialog_resource_dialog_title);
         txtName = (EditText) findViewById(R.id.dialog_resource_edit_name);
-        txtDescription = (TextView) findViewById(R.id.dialog_resource_view_description);
         spinner = (Spinner) findViewById(R.id.dialog_resource_edit_icon);
 
         ImageArrayAdapter spinnerAdapter = new ImageArrayAdapter(getContext(), images);
@@ -69,7 +68,6 @@ public class ResourceEditDialog extends Dialog implements View.OnClickListener {
         if (resource.getId() != null) {
             txtTitle.setText(this.activity.getString(R.string.edit_resource));
             txtName.setText(resource.getName());
-            txtDescription.setText(resource.getDescription());
             int pos = spinnerAdapter.getPosition(resource.getIcon());
             spinner.setSelection(pos);
         }
@@ -89,7 +87,6 @@ public class ResourceEditDialog extends Dialog implements View.OnClickListener {
                 this.resource.setEnvironmentId(this.environment.getId());
                 this.resource.setIcon(spinner.getSelectedItem().toString());
                 this.resource.setName(txtName.getText().toString());
-                this.resource.setDescription(txtDescription.getText().toString());
                 this.resource.save(getContext());
 
                 // Invocamos aqui o método da activity para atualizar a lista

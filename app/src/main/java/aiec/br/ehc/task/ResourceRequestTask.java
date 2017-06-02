@@ -119,7 +119,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
             String authorization = place.getCredentialFlag().concat(" ") + credentialEncoded;
             conn.setRequestProperty("Authorization", authorization);
             this.use_authorization = true;
-            this.flagInfo = "Authorization: ".concat(place.getCredentialFlag().concat( "<token>"));
+            this.flagInfo = "Authorization: ".concat(place.getCredentialFlag().concat(" <token>"));
             return;
         }
 
@@ -129,7 +129,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
             this.use_authorization = true;
             token = place.getTokenFlag().concat(" ").concat(token);
             conn.setRequestProperty("Authorization", token);
-            this.flagInfo = "Authorization: ".concat(place.getTokenFlag().concat( "<access key>"));
+            this.flagInfo = "Authorization: ".concat(place.getTokenFlag().concat(" <access key>"));
         }
     }
 
@@ -210,12 +210,17 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
                         "Login" : "Token";
             }
 
+            String qs = queryString;
+            if (!TextUtils.isEmpty(place.getAccessToken())) {
+                qs = queryString.replace(place.getAccessToken(), " <access key>");
+            }
+
             String message = "Method: "
                     .concat(resource.getMethod()).concat("\n")
                     .concat("URL: ")
                     .concat(resource.getRequestURL(context).toString().concat("\n"))
                     .concat("Parameters: ")
-                    .concat(queryString.replace(place.getAccessToken(), "<access key>")).concat("\n")
+                    .concat(qs).concat("\n")
                     .concat("Authentication mode: ")
                     .concat(auth_mode).concat("\n")
                     .concat(flagInfo);

@@ -22,7 +22,7 @@
             android:value="ehc.db" />
         <meta-data
             android:name="VERSION"
-            android:value="5" />
+            android:value="7" />
 
         <activity
             android:name=".PlaceActivity"

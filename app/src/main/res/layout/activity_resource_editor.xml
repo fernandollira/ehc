@@ -42,15 +42,12 @@
             android:layout_marginBottom="10dp"
             android:layout_marginTop="0dp" />
 
-        <TextView
-            android:id="@+id/resource_view_description"
+        <Switch
+            android:id="@+id/resource_intensity_control"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorGrey"
-            android:hint="@string/edit_environment_description_hint"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="16dp"/>
+            android:layout_marginLeft="18dp"
+            android:text="@string/intensity_control_active"/>
     </LinearLayout>
 
     <FrameLayout
@@ -61,6 +58,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/resource_intensity_control_block"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_weight="2"
+            android:layout_height="match_parent">
+            <EditText
+                android:id="@+id/resource_edit_intensity_param"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_normal"
+                android:textColor="@color/colorWhite"
+                android:layout_weight="1"
+                android:hint="@string/intensity_param_hint"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/resource_edit_min_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_normal"
+                android:textColor="@color/colorWhite"
+                android:layout_weight="2"
+                android:hint="@string/min_value"
+                android:inputType="number" />
+            <EditText
+                android:id="@+id/resource_edit_max_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/text_normal"
+                android:layout_weight="2"
+                android:hint="@string/max_value"
+                android:inputType="number" />
+        </LinearLayout>
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"

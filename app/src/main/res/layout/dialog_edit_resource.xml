@@ -42,15 +42,14 @@
         android:textColorHint="@color/colorGrey"
         android:layout_margin="10dp"/>
 
-    <TextView
-        android:id="@+id/dialog_resource_view_description"
+    <Switch
+        android:id="@+id/dialog_intensity_control"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorGrey"
-        android:hint="@string/edit_environment_description_hint"
-        android:layout_margin="10dp"/>
+        android:switchTextAppearance="@string/intensity_control"
+        android:text="Ativar controle de intensidade"
+        android:textOff="Off"
+        android:textOn="On" />
 
     <fragment
         android:name="aiec.br.ehc.fragment.parameter.TurnOnOffFragment"

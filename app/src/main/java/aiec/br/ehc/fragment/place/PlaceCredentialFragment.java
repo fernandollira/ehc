@@ -1,6 +1,8 @@
 package aiec.br.ehc.fragment.place;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -95,15 +97,21 @@ public class PlaceCredentialFragment extends Fragment implements IPlaceFragment 
     private void addMoreOptionsEvents() {
         AnimationHelper.collapse(configBlock);
         moreConfig.setTag("collapsed");
+        final Drawable iconMore = getContext().getDrawable(R.drawable.add_circle_white);
+        final Drawable iconLess = getContext().getDrawable(R.drawable.less_circle_white);
+        iconMore.setBounds(0, 0, 40, 40);
+        iconLess.setBounds(0, 0, 40, 40);
         this.moreConfig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (moreConfig.getTag() == "collapsed") {
                     moreConfig.setTag("expand");
+                    moreConfig.setCompoundDrawables(iconLess, null, null, null);
                     AnimationHelper.expand(configBlock);
                 }
                 else {
                     moreConfig.setTag("collapsed");
+                    moreConfig.setCompoundDrawables(iconMore, null, null, null);
                     AnimationHelper.collapse(configBlock);
                 }
             }

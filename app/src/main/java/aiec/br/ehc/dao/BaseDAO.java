@@ -121,6 +121,8 @@ abstract class BaseDAO extends SQLiteOpenHelper {
                     "description TEXT," +
                     "type VARCHAR(50) NOT NULL DEFAULT 'switch'," +
                     "state VARCHAR(50) NOT NULL DEFAULT 'off'," +
+                    "intensity_control INTEGER NOT NULL DEFAULT 0," +
+                    "intensity_param VARCHAR(50)," +
                     "method TEXT NOT NULL DEFAULT 'GET'," +
                     "min_value INTEGER," +
                     "max_value INTEGER," +

@@ -87,6 +87,8 @@ public class ResourceDAO extends BaseDAO {
         data.put("type", resource.getType());
         data.put("method", resource.getMethod());
         data.put("state", resource.getState());
+        data.put("intensity_control", resource.hasIntensityControl() ? 1 : 0);
+        data.put("intensity_param", resource.getIntensityParam());
         data.put("min_value", resource.getMinValue());
         data.put("max_value", resource.getMaxValue());
         data.put("step_value", resource.getStepValue());
@@ -161,6 +163,7 @@ public class ResourceDAO extends BaseDAO {
             resource.setType(c.getString(c.getColumnIndex("type")));
             resource.setState(c.getString(c.getColumnIndex("state")));
             resource.setMethod(c.getString(c.getColumnIndex("method")));
+            resource.setIntensityParam(c.getString(c.getColumnIndex("intensity_param")));
             resource.setMinValue(c.getInt(c.getColumnIndex("min_value")));
             resource.setMaxValue(c.getInt(c.getColumnIndex("max_value")));
             resource.setStepValue(c.getInt(c.getColumnIndex("step_value")));
@@ -168,6 +171,9 @@ public class ResourceDAO extends BaseDAO {
             resource.setModifiedBy(c.getString(c.getColumnIndex("modified_by")));
             resource.setCreatedAt(DateHelper.asDate(c.getString(c.getColumnIndex("creation_date"))));
             resource.setModificationAt(DateHelper.asDate(c.getString(c.getColumnIndex("modification_date"))));
+
+            int intensityControl = c.getInt(c.getColumnIndex("intensity_control"));
+            resource.setIntensityControl(intensityControl == 1);
         }
 
         return resource;

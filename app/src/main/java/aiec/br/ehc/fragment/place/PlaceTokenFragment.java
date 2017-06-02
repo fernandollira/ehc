@@ -1,6 +1,7 @@
 package aiec.br.ehc.fragment.place;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -51,7 +52,7 @@ public class PlaceTokenFragment extends Fragment implements IPlaceFragment {
         String flag = place.getTokenFlag();
         rbTokenHeader.setText(String.format(getString(R.string.send_token_by_headers), flag));
         rbTokenUrl.setText(String.format(getString(R.string.send_token_by_url), flag));
-            if (place.getAccessToken() != null) {
+        if (place.getAccessToken() != null) {
             token.setText(place.getAccessToken());
         }
 
@@ -71,15 +72,21 @@ public class PlaceTokenFragment extends Fragment implements IPlaceFragment {
     private void addMoreOptionsEvents() {
         AnimationHelper.collapse(tokenAdvancedOptions);
         moreOptions.setTag("collapsed");
+        final Drawable iconMore = getContext().getDrawable(R.drawable.add_circle_white);
+        final Drawable iconLess = getContext().getDrawable(R.drawable.less_circle_white);
+        iconMore.setBounds(0, 0, 40, 40);
+        iconLess.setBounds(0, 0, 40, 40);
         this.moreOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (moreOptions.getTag() == "collapsed") {
                     moreOptions.setTag("expand");
+                    moreOptions.setCompoundDrawables(iconLess, null, null, null);
                     AnimationHelper.expand(tokenAdvancedOptions);
                 }
                 else {
                     moreOptions.setTag("collapsed");
+                    moreOptions.setCompoundDrawables(iconMore, null, null, null);
                     AnimationHelper.collapse(tokenAdvancedOptions);
                 }
             }

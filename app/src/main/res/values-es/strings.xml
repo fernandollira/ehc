@@ -72,4 +72,11 @@
     <string name="how_to_send_token">¿Cómo se enviará el token?</string>
     <string name="send_token_param">Parámetro de envío. Estándar: token</string>
     <string name="advanced_options">Configuración</string>
+    <string name="intensity_control_active">Ativar controle de intensidade</string>
+    <string name="intensity_control">Control de intensidad</string>
+    <string name="intensity_control_deactivate">Deshabilitar el control de intensidad</string>
+    <string name="loading">Cargando...</string>
+    <string name="intensity_param_hint">Parâmetro de intensidade.</string>
+    <string name="min_value">Valor mínimo</string>
+    <string name="max_value">Valor máximo</string>
 </resources>

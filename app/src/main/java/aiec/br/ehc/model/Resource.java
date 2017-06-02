@@ -28,6 +28,9 @@ import aiec.br.ehc.dao.ResourceDAO;
  * @since   2017-05-13
  */
 public class Resource extends BaseModel implements Parcelable {
+    private final static int INTENSITY_DEFAULT_MIN_VALUE = 0;
+    private final static int INTENSITY_DEFAULT_MAX_VALUE = 100;
+
     private Integer environmentId;
     private String name;
     private String description;
@@ -35,6 +38,8 @@ public class Resource extends BaseModel implements Parcelable {
     private String icon;
     private String method;
     private String state;
+    private boolean intensityControl = false;
+    private String intensityParam;
     private Integer minValue;
     private Integer maxValue;
     private Integer stepValue;
@@ -55,6 +60,8 @@ public class Resource extends BaseModel implements Parcelable {
         icon = in.readString();
         type = in.readString();
         state = in.readString();
+        intensityControl = in.readInt() == 1;
+        intensityParam = in.readString();
         method = in.readString();
         minValue = in.readInt();
         maxValue = in.readInt();
@@ -126,6 +133,22 @@ public class Resource extends BaseModel implements Parcelable {
         this.state = state;
     }
 
+    public boolean hasIntensityControl() {
+        return intensityControl;
+    }
+
+    public void setIntensityControl(boolean intensityControl) {
+        this.intensityControl = intensityControl;
+    }
+
+    public String getIntensityParam() {
+        return intensityParam;
+    }
+
+    public void setIntensityParam(String intensityParam) {
+        this.intensityParam = intensityParam;
+    }
+
     public String getType() {
         return type;
     }
@@ -143,6 +166,9 @@ public class Resource extends BaseModel implements Parcelable {
     }
 
     public Integer getMinValue() {
+        if (minValue == null) {
+            return INTENSITY_DEFAULT_MIN_VALUE;
+        }
         return minValue;
     }
 
@@ -151,6 +177,9 @@ public class Resource extends BaseModel implements Parcelable {
     }
 
     public Integer getMaxValue() {
+        if (maxValue == null || maxValue == 0) {
+            return INTENSITY_DEFAULT_MAX_VALUE;
+        }
         return maxValue;
     }
 
@@ -247,6 +276,8 @@ public class Resource extends BaseModel implements Parcelable {
         parcel.writeString(icon);
         parcel.writeString(type);
         parcel.writeString(state);
+        parcel.writeInt(intensityControl ? 1 : 0);
+        parcel.writeString(intensityParam);
         parcel.writeString(method);
         parcel.writeInt(minValue);
         parcel.writeInt(maxValue);
