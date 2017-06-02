@@ -11,9 +11,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import aiec.br.ehc.dao.EnvironmentDAO;
 import aiec.br.ehc.dao.ParameterDAO;
@@ -30,6 +28,7 @@ import aiec.br.ehc.dao.ResourceDAO;
 public class Resource extends BaseModel implements Parcelable {
     private final static int INTENSITY_DEFAULT_MIN_VALUE = 0;
     private final static int INTENSITY_DEFAULT_MAX_VALUE = 100;
+    private final static int INTENSITY_DEFAULT_STEP_VALUE = 1;
 
     private Integer environmentId;
     private String name;
@@ -40,6 +39,7 @@ public class Resource extends BaseModel implements Parcelable {
     private String state;
     private boolean intensityControl = false;
     private String intensityParam;
+    private Integer intensityValue = 0;
     private Integer minValue;
     private Integer maxValue;
     private Integer stepValue;
@@ -62,6 +62,7 @@ public class Resource extends BaseModel implements Parcelable {
         state = in.readString();
         intensityControl = in.readInt() == 1;
         intensityParam = in.readString();
+        intensityValue = in.readInt();
         method = in.readString();
         minValue = in.readInt();
         maxValue = in.readInt();
@@ -149,6 +150,14 @@ public class Resource extends BaseModel implements Parcelable {
         this.intensityParam = intensityParam;
     }
 
+    public Integer getIntensityValue() {
+        return intensityValue;
+    }
+
+    public void setIntensityValue(Integer intensityValue) {
+        this.intensityValue = intensityValue;
+    }
+
     public String getType() {
         return type;
     }
@@ -188,6 +197,9 @@ public class Resource extends BaseModel implements Parcelable {
     }
 
     public Integer getStepValue() {
+        if (stepValue == null || stepValue == 0) {
+            return INTENSITY_DEFAULT_STEP_VALUE;
+        }
         return stepValue;
     }
 
@@ -278,6 +290,7 @@ public class Resource extends BaseModel implements Parcelable {
         parcel.writeString(state);
         parcel.writeInt(intensityControl ? 1 : 0);
         parcel.writeString(intensityParam);
+        parcel.writeInt(intensityValue);
         parcel.writeString(method);
         parcel.writeInt(minValue);
         parcel.writeInt(maxValue);
@@ -311,9 +324,18 @@ public class Resource extends BaseModel implements Parcelable {
         }
     }
 
+    /**
+     * Monta e retorna os parâmetros em formato de QueryString
+     * @param context   contexto de aplicação
+     * @return QueryString
+     */
     public String getParamsQueryString(Context context)
     {
         List<String> params = this.getUrlParams(context);
+        if (hasIntensityControl() && getMaxValue() > 0 && !TextUtils.isEmpty(intensityParam)) {
+            params.add(intensityParam.trim().concat("=").concat(intensityValue.toString()));
+        }
+
         return TextUtils.join("&", params);
     }
 
@@ -327,7 +349,7 @@ public class Resource extends BaseModel implements Parcelable {
     {
         List<String> urlParams = new ArrayList<>();
         String param = this.getEnvironment(context).getParameter();
-        if (param != null && !param.trim().isEmpty() && param.contains("=")) {
+        if (!TextUtils.isEmpty(param) && param.contains("=")) {
             try {
                 urlParams.add(URLEncoder.encode(param.trim(), "UTF-8"));
             } catch (UnsupportedEncodingException e) {

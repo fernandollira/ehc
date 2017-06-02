@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +12,6 @@ import java.util.List;
 import aiec.br.ehc.helper.DateHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
-import aiec.br.ehc.helper.ManifestHelper;
 
 /**
  * Provém a persistência de dados para os recursos de ambientes
@@ -89,6 +87,7 @@ public class ResourceDAO extends BaseDAO {
         data.put("state", resource.getState());
         data.put("intensity_control", resource.hasIntensityControl() ? 1 : 0);
         data.put("intensity_param", resource.getIntensityParam());
+        data.put("intensity_value", resource.getIntensityValue());
         data.put("min_value", resource.getMinValue());
         data.put("max_value", resource.getMaxValue());
         data.put("step_value", resource.getStepValue());
@@ -164,6 +163,7 @@ public class ResourceDAO extends BaseDAO {
             resource.setState(c.getString(c.getColumnIndex("state")));
             resource.setMethod(c.getString(c.getColumnIndex("method")));
             resource.setIntensityParam(c.getString(c.getColumnIndex("intensity_param")));
+            resource.setIntensityValue(c.getInt(c.getColumnIndex("intensity_value")));
             resource.setMinValue(c.getInt(c.getColumnIndex("min_value")));
             resource.setMaxValue(c.getInt(c.getColumnIndex("max_value")));
             resource.setStepValue(c.getInt(c.getColumnIndex("step_value")));

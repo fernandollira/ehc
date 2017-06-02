@@ -39,6 +39,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceViewHolder> im
     public void onBindViewHolder(ResourceViewHolder holder, int position) {
         Resource resource = resources.get(position);
         holder.resource = resource;
+        holder.context = context;
         holder.name.setText(resource.getName());
         int resId = ResourceHelper.from(context).getIdentifierFromDrawable(resource.getIcon());
         holder.icon.setImageResource(resId);

@@ -24,6 +24,7 @@ import java.net.ProtocolException;
 import java.net.URL;
 
 import aiec.br.ehc.R;
+import aiec.br.ehc.adapter.IResourceView;
 import aiec.br.ehc.adapter.ResourceViewHolder;
 import aiec.br.ehc.model.Place;
 import aiec.br.ehc.model.Resource;
@@ -34,7 +35,7 @@ import aiec.br.ehc.model.Resource;
  */
 public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
     private final Context context;
-    private ResourceViewHolder holder;
+    private IResourceView resourceView;
     private ProgressDialog dialog;
     private HttpURLConnection conn = null;
     private int respCode;
@@ -47,9 +48,9 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
     private String queryString;
     private Place place;
 
-    public ResourceRequestTask(ResourceViewHolder holder) {
-        this.holder = holder;
-        this.context = holder.itemView.getContext();
+    public ResourceRequestTask(IResourceView resourceView) {
+        this.resourceView = resourceView;
+        this.context = resourceView.getContext();
     }
 
     @Override
@@ -201,11 +202,6 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
-        // se a Activity foi finalizada antes do término da execução, para por aqui
-        if(((Activity) context).isFinishing()) {
-            return;
-        }
-
         if (respCode != HttpURLConnection.HTTP_OK) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.StyledDialog);
             dialog.setTitle(this.error);
@@ -238,7 +234,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
             dialog.setCancelable(true);
             dialog.show();
         } else {
-            holder.applyEffects(resource.getState());
+            resourceView.applyEffects(resource.getState());
             resource.save(context);
         }
 

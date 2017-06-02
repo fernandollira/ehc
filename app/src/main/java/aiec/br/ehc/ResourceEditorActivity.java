@@ -1,8 +1,6 @@
 package aiec.br.ehc;
 
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -140,6 +138,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
             txtName.setText(resource.getName());
             intensityControl.setChecked(resource.hasIntensityControl());
             txtIntensityParam.setText(resource.getIntensityParam());
+            intensityControl.setText(getSwitchDescription(resource.hasIntensityControl()));
             int pos = spinnerAdapter.getPosition(resource.getIcon());
             spinner_icon.setSelection(pos);
 
@@ -170,19 +169,30 @@ public class ResourceEditorActivity extends AppCompatActivity {
         intensityControl.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isEnabled) {
-                int description = R.string.intensity_control_deactivate;
                 resource.setIntensityControl(isEnabled);
                 if(isEnabled) {
-                    description = R.string.intensity_control_active;
                     AnimationHelper.expand(intensityBlock);
                 }
                 else {
                     AnimationHelper.collapse(intensityBlock);
                 }
 
-                compoundButton.setText(getString(description));
+                compoundButton.setText(getSwitchDescription(isEnabled));
             }
         });
+    }
+
+    /**
+     * Retorna a descrição do swith para habilitação/desabilitação de parâmetros de intensidade
+     * @param isEnabled Habilitado?
+     * @return descrição a ser utilizada
+     */
+    private String getSwitchDescription(Boolean isEnabled) {
+        if (isEnabled) {
+            return getString(R.string.intensity_control_deactivate);
+        }
+
+        return getString(R.string.intensity_control_active);
     }
 
     public void setFragmentFrom(Bundle properties)

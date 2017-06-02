@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import aiec.br.ehc.R;
 import aiec.br.ehc.ResourceEditorActivity;
 import aiec.br.ehc.dao.ResourceDAO;
+import aiec.br.ehc.dialog.ResourceIntensityControlDialog;
 import aiec.br.ehc.helper.AnimationEffectsHelper;
 import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Environment;
@@ -25,12 +27,13 @@ import aiec.br.ehc.task.ResourceRequestTask;
  */
 public class ResourceViewHolder
         extends RecyclerView.ViewHolder
-        implements View.OnClickListener, View.OnCreateContextMenuListener{
+        implements View.OnClickListener, View.OnCreateContextMenuListener, IResourceView{
 
     public TextView name;
     public ImageView icon;
     public Resource resource;
     public CardView cardView;
+    public Context context;
     private ResourceAdapter adapter;
     private Bundle properties;
     private ResourceHelper helper;
@@ -49,6 +52,12 @@ public class ResourceViewHolder
     @Override
     public void onClick(View view) {
         String newState = resource.getState().equals("on") ? "off" : "on";
+
+        if (resource.hasIntensityControl() && !TextUtils.isEmpty(resource.getIntensityParam())) {
+            ResourceIntensityControlDialog dialog = new ResourceIntensityControlDialog(context, resource, properties);
+            dialog.show();
+            return;
+        }
 
         // aplica os efeitos com base nas propriedades do recurso
         resource.setState(newState);
@@ -70,8 +79,18 @@ public class ResourceViewHolder
         icon.setImageResource(helper.getIdentifierFromDrawable(newIcon));
 
         // Aplica os efeitos visuais definidos nas propriedades da imagem
-        AnimationEffectsHelper helper = new AnimationEffectsHelper(itemView.getContext(), properties);
+        AnimationEffectsHelper helper = new AnimationEffectsHelper(context, properties);
         helper.applyEffects(icon, state);
+    }
+
+    /**
+     * Retorna o contexto de relação com esta view
+     *
+     * @return Contexto
+     */
+    @Override
+    public Context getContext() {
+        return itemView.getContext();
     }
 
     /**

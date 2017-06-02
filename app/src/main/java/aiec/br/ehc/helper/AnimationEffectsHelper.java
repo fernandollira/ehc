@@ -15,6 +15,7 @@ import aiec.br.ehc.R;
 public class AnimationEffectsHelper {
     private static final String ANIMATION_ROTATE = "rotate";
     private static final String ANIMATION_FRAME = "frame";
+    public static final int SPEED_DEFAULT = 800;
 
     private final AnimationHelper helper;
     private Context context;
@@ -38,11 +39,15 @@ public class AnimationEffectsHelper {
 
         switch (animationType) {
             case ANIMATION_ROTATE:
-                Animation anim = AnimationHelper.getRotateAroundSelfCenter(700);
+                int speed = SPEED_DEFAULT;
+                if (properties.getInt("speed") > 0 ) {
+                    speed = properties.getInt("speed");
+                }
+
+                Animation anim = AnimationHelper.getRotateAroundSelfCenter(speed);
                 image.setAnimation(anim);
                 break;
             case ANIMATION_FRAME:
-                image.setImageResource(R.drawable.animate_garage);
                 AnimationDrawable drawable = helper.getFrameAnimation(image, properties.getString("drawable"), state.equals("off"));
                 if (properties.getString("oneShot") != null) {
                     drawable.setOneShot(true);
