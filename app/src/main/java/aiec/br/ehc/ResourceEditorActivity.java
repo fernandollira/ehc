@@ -63,9 +63,9 @@ public class ResourceEditorActivity extends AppCompatActivity {
         // recebe os objetos serializados
         this.environment = getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
         this.resource = getIntent().getParcelableExtra("EXTRA_RESOURCE");
+        AnimationHelper.collapse(intensityBlock);
         if (this.resource == null) {
             this.resource = new Resource();
-            AnimationHelper.collapse(intensityBlock);
         }
 
         // exibe a parte de controle de intensidade caso o recurso esteja habilitado pra tal

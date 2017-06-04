@@ -85,11 +85,11 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
                 progress = progress / resource.getStepValue();
                 progress = progress * resource.getStepValue();
                 seekBar.setSecondaryProgress(progress);
+                txtIntensity.setText(String.valueOf(progress));
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
 
             @Override
@@ -124,6 +124,10 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
      */
     public void applyEffects(String state)
     {
+        if (state.equals("off")) {
+            this.dismiss();
+        }
+
         if (properties.isEmpty()) {
             return;
         }
@@ -131,7 +135,6 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
         String newIcon = properties.getString(state);
         imgResourceIcon.setImageResource(ResourceHelper.from(getContext()).getIdentifierFromDrawable(newIcon));
         this.updateControlColor();
-
 
         // Aplica os efeitos visuais definidos nas propriedades da imagem
         AnimationEffectsHelper helper = new AnimationEffectsHelper(getContext(), properties);

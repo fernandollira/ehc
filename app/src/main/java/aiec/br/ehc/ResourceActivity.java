@@ -27,8 +27,6 @@ public class ResourceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resource);
 
-        SystemUiHelper.from(this).fullScreenMode();
-
         // recebe o objeto serializado do local
         this.environment = getIntent().getParcelableExtra("EXTRA_ENVIRONMENT");
 
@@ -42,6 +40,7 @@ public class ResourceActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        SystemUiHelper.from(this).fullScreenMode();
         fillResourceList();
     }
 

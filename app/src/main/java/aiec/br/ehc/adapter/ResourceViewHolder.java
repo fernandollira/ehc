@@ -37,6 +37,7 @@ public class ResourceViewHolder
     private ResourceAdapter adapter;
     private Bundle properties;
     private ResourceHelper helper;
+    private boolean clicked = false;
 
     public ResourceViewHolder(View itemView, ResourceAdapter adapter) {
         super(itemView);
@@ -52,16 +53,23 @@ public class ResourceViewHolder
     @Override
     public void onClick(View view) {
         String newState = resource.getState().equals("on") ? "off" : "on";
+        this.clicked = true;
 
-        if (resource.hasIntensityControl() && !TextUtils.isEmpty(resource.getIntensityParam())) {
-            ResourceIntensityControlDialog dialog = new ResourceIntensityControlDialog(context, resource, properties);
-            dialog.show();
+        // aplica os efeitos com base nas propriedades do recurso
+
+        if (isShowControl() && resource.getState().equals("on")) {
+            applyEffects(resource.getState());
             return;
         }
 
-        // aplica os efeitos com base nas propriedades do recurso
         resource.setState(newState);
         new ResourceRequestTask(this).execute(resource);
+    }
+
+    // Verifica se o controle de intensidade deve ser exibido
+    private boolean isShowControl() {
+        return resource.hasIntensityControl()
+                && !TextUtils.isEmpty(resource.getIntensityParam());
     }
 
     /**
@@ -81,6 +89,12 @@ public class ResourceViewHolder
         // Aplica os efeitos visuais definidos nas propriedades da imagem
         AnimationEffectsHelper helper = new AnimationEffectsHelper(context, properties);
         helper.applyEffects(icon, state);
+
+        if (this.isShowControl() && this.clicked) {
+            this.clicked = false;
+            ResourceIntensityControlDialog dialog = new ResourceIntensityControlDialog(context, resource, properties);
+            dialog.show();
+        }
     }
 
     /**
