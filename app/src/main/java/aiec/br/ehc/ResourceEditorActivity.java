@@ -17,11 +17,12 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import aiec.br.ehc.adapter.ImageArrayAdapter;
+import aiec.br.ehc.fragment.parameter.ReaderParameterFragment;
 import aiec.br.ehc.helper.AnimationHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
 import aiec.br.ehc.fragment.parameter.IParameterFragment;
-import aiec.br.ehc.fragment.parameter.TurnOnOffFragment;
+import aiec.br.ehc.fragment.parameter.SwitchParameterFragment;
 
 public class ResourceEditorActivity extends AppCompatActivity {
     private Resource resource;
@@ -201,8 +202,12 @@ public class ResourceEditorActivity extends AppCompatActivity {
         FragmentTransaction tx = manager.beginTransaction();
         String type = properties.getString("type");
         switch (type) {
-            case "switch":
-                fragment = new TurnOnOffFragment();
+            case SwitchParameterFragment.TYPE:
+                fragment = new SwitchParameterFragment();
+                break;
+
+            case ReaderParameterFragment.TYPE:
+                fragment = new ReaderParameterFragment();
                 break;
         }
 

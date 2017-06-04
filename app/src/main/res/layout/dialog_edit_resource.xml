@@ -52,7 +52,7 @@
         android:textOn="On" />
 
     <fragment
-        android:name="aiec.br.ehc.fragment.parameter.TurnOnOffFragment"
+        android:name="aiec.br.ehc.fragment.parameter.SwitchParameterFragment"
         android:id="@+id/frame_parameter"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

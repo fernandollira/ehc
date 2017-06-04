@@ -144,6 +144,6 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
 
     @Override
     public void onDismiss(DialogInterface dialogInterface) {
-        ((ResourceActivity) getContext()).fillResourceList();
+        ((ResourceActivity) getOwnerActivity()).fillResourceList();
     }
 }

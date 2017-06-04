@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/parameter_switch_param_icon"
+            android:src="@drawable/open_close_brackets_enclosing"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="6dp"
+            android:layout_gravity="bottom"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+        <EditText
+            android:id="@+id/parameter_switch_param_name"
+            android:hint="Parâmetro. Ex: lamp"
+            android:inputType="text"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_medium"
+            android:textColorHint="@color/colorGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/parameter_switch_off_icon"
+            android:src="@drawable/lamp_off"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/parameter_switch_off_value"
+            android:inputType="text"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorGrey"
+            android:hint="Valor off"
+            android:textSize="@dimen/text_medium"
+            android:focusable="true"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="6dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/parameter_switch_on_icon"
+            android:src="@drawable/lamp_on"
+            android:layout_marginRight="4dp"
+            android:layout_gravity="center"
+            android:layout_width="24dp"
+            android:layout_height="24dp" />
+
+        <EditText
+            android:id="@+id/parameter_switch_on_value"
+            android:inputType="text"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorGrey"
+            android:textSize="@dimen/text_medium"
+            android:focusable="true"
+            android:hint="Valor on"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>
