@@ -13,6 +13,7 @@ import aiec.br.ehc.R;
 import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
+import aiec.br.ehc.task.ResourceRequestTask;
 
 /**
  * Adapter para exibição dos recursoss por ambiente
@@ -45,6 +46,13 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceViewHolder> im
         holder.icon.setImageResource(resId);
         holder.icon.setColorFilter(Color.rgb(255, 255, 255));
         holder.applyEffects(resource.getState());
+
+        if (resource.getType().equals("reader")) {
+            ResourceRequestTask.createFrom(holder)
+                    .showNotificationOnFailConnection(false)
+                    .showProgressDialog(false)
+                    .execute(resource);
+        }
     }
 
     /**

@@ -73,7 +73,7 @@ public class ResourceViewHolder
             resource.setState(newState);
         }
 
-        new ResourceRequestTask(this).execute(resource);
+        ResourceRequestTask.createFrom(this).execute(resource);
     }
 
     // Verifica se o controle de intensidade deve ser exibido

@@ -1,6 +1,5 @@
 package aiec.br.ehc.task;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -25,7 +24,6 @@ import java.net.URL;
 
 import aiec.br.ehc.R;
 import aiec.br.ehc.adapter.IResourceView;
-import aiec.br.ehc.adapter.ResourceViewHolder;
 import aiec.br.ehc.model.Place;
 import aiec.br.ehc.model.Resource;
 
@@ -47,6 +45,8 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
     private String flagInfo = "";
     private String queryString;
     private Place place;
+    private boolean showPogressDialog = true;
+    private boolean showFailConnectionNotification = true;
 
     public ResourceRequestTask(IResourceView resourceView) {
         this.resourceView = resourceView;
@@ -167,6 +167,16 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
     }
 
     /**
+     * Facilita a criação deste objeto
+     *
+     * @param resourceView view
+     * @return self
+     */
+    public static ResourceRequestTask createFrom(IResourceView resourceView) {
+        return new ResourceRequestTask(resourceView);
+    }
+
+    /**
      * Envia dados via POST
      * @param url   URL base
      * @param queryString   Parâmetros
@@ -193,16 +203,19 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
 
     @Override
     protected void onPreExecute() {
-        dialog = new ProgressDialog(context, R.style.StyledDialog);
-        dialog.setMessage(context.getString(R.string.wait));
-        dialog.setIndeterminate(false);
-        dialog.setCancelable(true);
-        dialog.show();
+        if (showPogressDialog) {
+            dialog = new ProgressDialog(context, R.style.StyledDialog);
+            dialog.setMessage(context.getString(R.string.wait));
+            dialog.setIndeterminate(false);
+            dialog.setCancelable(true);
+            dialog.show();
+        }
     }
 
     @Override
     protected void onPostExecute(String response) {
-        if (respCode != HttpURLConnection.HTTP_OK) {
+        resourceView.setRequestResponse(this.result);
+        if (respCode != HttpURLConnection.HTTP_OK && this.showFailConnectionNotification) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.StyledDialog);
             dialog.setTitle(this.error);
 
@@ -238,7 +251,6 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
             resource.save(context);
         }
 
-        resourceView.setRequestResponse(this.result);
         if (dialog != null) {
             dialog.dismiss();
         }
@@ -259,5 +271,21 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
         tw.setSingleLine(false);
         tw.setText(message);
         return tw;
+    }
+
+    /**
+     * Desabilita a exibição da mesagem quando há uma falha de comunicação com o servidor
+     */
+    public ResourceRequestTask showNotificationOnFailConnection(Boolean show) {
+        this.showFailConnectionNotification = show;
+        return this;
+    }
+
+    /**
+     * Desabilita a exibição da mensagem de 'Wait...'
+     */
+    public ResourceRequestTask showProgressDialog(Boolean show) {
+        this.showPogressDialog = show;
+        return this;
     }
 }
