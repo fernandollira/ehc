@@ -19,4 +19,11 @@ public interface IResourceView {
      * @return Contexto
      */
     public Context getContext();
+
+    /**
+     * Setter para informar o retorno da requisição
+     *
+     * @return String
+     */
+    public String setRequestResponse(String httpResponse);
 }

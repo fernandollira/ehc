@@ -84,6 +84,8 @@ public class ResourceDAO extends BaseDAO {
         data.put("icon", resource.getIcon());
         data.put("type", resource.getType());
         data.put("method", resource.getMethod());
+        data.put("read_format", resource.getReadFormat());
+        data.put("read_node", resource.getReadNode());
         data.put("state", resource.getState());
         data.put("intensity_control", resource.hasIntensityControl() ? 1 : 0);
         data.put("intensity_param", resource.getIntensityParam());
@@ -162,6 +164,8 @@ public class ResourceDAO extends BaseDAO {
             resource.setType(c.getString(c.getColumnIndex("type")));
             resource.setState(c.getString(c.getColumnIndex("state")));
             resource.setMethod(c.getString(c.getColumnIndex("method")));
+            resource.setReadFormat(c.getString(c.getColumnIndex("read_format")));
+            resource.setReadNode(c.getString(c.getColumnIndex("read_node")));
             resource.setIntensityParam(c.getString(c.getColumnIndex("intensity_param")));
             resource.setIntensityValue(c.getInt(c.getColumnIndex("intensity_value")));
             resource.setMinValue(c.getInt(c.getColumnIndex("min_value")));

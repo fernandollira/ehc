@@ -79,4 +79,5 @@
     <string name="intensity_param_hint">Parâmetro de intensidade.</string>
     <string name="min_value">Valor mínimo</string>
     <string name="max_value">Valor máximo</string>
+    <string name="service_output_format">Qual é o formato de resposta?</string>
 </resources>

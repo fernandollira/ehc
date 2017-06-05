@@ -207,6 +207,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
                 break;
 
             case ReaderParameterFragment.TYPE:
+                intensityControl.setVisibility(View.GONE);
                 fragment = new ReaderParameterFragment();
                 break;
         }

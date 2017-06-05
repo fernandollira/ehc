@@ -12,6 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import aiec.br.ehc.R;
 import aiec.br.ehc.ResourceEditorActivity;
 import aiec.br.ehc.dao.ResourceDAO;
@@ -29,6 +33,7 @@ public class ResourceViewHolder
         extends RecyclerView.ViewHolder
         implements View.OnClickListener, View.OnCreateContextMenuListener, IResourceView{
 
+    private final TextView info;
     public TextView name;
     public ImageView icon;
     public Resource resource;
@@ -38,6 +43,7 @@ public class ResourceViewHolder
     private Bundle properties;
     private ResourceHelper helper;
     private boolean clicked = false;
+    private String httpResponse = "";
 
     public ResourceViewHolder(View itemView, ResourceAdapter adapter) {
         super(itemView);
@@ -45,6 +51,7 @@ public class ResourceViewHolder
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);
         name = (TextView)itemView.findViewById(R.id.resource_item_name);
+        info = (TextView)itemView.findViewById(R.id.resource_item_info);
         icon = (ImageView)itemView.findViewById(R.id.resource_item_icon);
         cardView = (CardView) itemView.findViewById(R.id.resource_card_view);
         helper = new ResourceHelper(itemView.getContext());
@@ -62,7 +69,10 @@ public class ResourceViewHolder
             return;
         }
 
-        resource.setState(newState);
+        if (!resource.getType().equals("reader")) {
+            resource.setState(newState);
+        }
+
         new ResourceRequestTask(this).execute(resource);
     }
 
@@ -84,7 +94,24 @@ public class ResourceViewHolder
         }
 
         String newIcon = properties.getString(state);
-        icon.setImageResource(helper.getIdentifierFromDrawable(newIcon));
+        if (newIcon != null) {
+            icon.setImageResource(helper.getIdentifierFromDrawable(newIcon));
+        }
+
+        if (resource.getType().equals("reader") && !TextUtils.isEmpty(httpResponse)) {
+            String infoText = httpResponse;
+            if (resource.getReadFormat().equals("json")) {
+                try {
+                    JSONObject object = new JSONObject(httpResponse);
+                    infoText = object.getString(resource.getReadNode());
+                } catch (JSONException e) {
+                    infoText = "N/D";
+                }
+            }
+
+            info.setText(infoText);
+            info.setVisibility(View.VISIBLE);
+        }
 
         // Aplica os efeitos visuais definidos nas propriedades da imagem
         AnimationEffectsHelper helper = new AnimationEffectsHelper(context, properties);
@@ -105,6 +132,11 @@ public class ResourceViewHolder
     @Override
     public Context getContext() {
         return itemView.getContext();
+    }
+
+    @Override
+    public String setRequestResponse(String httpResponse) {
+        return this.httpResponse = httpResponse;
     }
 
     /**

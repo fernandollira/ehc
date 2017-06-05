@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="file_type_icons">
+        <item>file_type_xml</item>
+        <item>file_type_json</item>
+        <item>file_type_html</item>
+        <item>file_type_txt</item>
+    </string-array>
+</resources>

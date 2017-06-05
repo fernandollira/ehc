@@ -86,4 +86,7 @@
     <string name="intensity_param_hint">Parâmetro de intensidade.</string>
     <string name="min_value">Valor mínimo</string>
     <string name="max_value">Valor máximo</string>
+    <string name="service_output_format">What is the response format?</string>
+    <string name="parameter_reader_args_hint">Parâmetro. Ex: /sensor?info=temperatura</string>
+    <string name="parameter_reader_node_field_hint">Campo a ser lido na resposta</string>
 </resources>

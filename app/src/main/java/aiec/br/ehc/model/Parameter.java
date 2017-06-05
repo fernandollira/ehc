@@ -12,6 +12,7 @@ import aiec.br.ehc.dao.ParameterDAO;
  * @since   2017-05-13
  */
 public class Parameter extends BaseModel {
+    public static final String EXTRA_PARAM_ARGS = "__EXTRA_PARAM_URL__";
     private Integer resourceId;
     private String name;
     private String value;
@@ -111,5 +112,9 @@ public class Parameter extends BaseModel {
         ParameterDAO dao = new ParameterDAO(context);
         dao.delete(this.id);
         dao.close();
+    }
+
+    public boolean isExtraParameterUrl() {
+        return this.getName() != null && this.getName().trim().equals(EXTRA_PARAM_ARGS);
     }
 }

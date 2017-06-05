@@ -76,7 +76,8 @@
     <string name="intensity_control">Control de intensidad</string>
     <string name="intensity_control_deactivate">Deshabilitar el control de intensidad</string>
     <string name="loading">Cargando...</string>
-    <string name="intensity_param_hint">Parâmetro de intensidade.</string>
+    <string name="intensity_param_hint">Parámetro de intensidad.</string>
     <string name="min_value">Valor mínimo</string>
     <string name="max_value">Valor máximo</string>
+    <string name="service_output_format">¿Cuál es el formato de respuesta?</string>
 </resources>

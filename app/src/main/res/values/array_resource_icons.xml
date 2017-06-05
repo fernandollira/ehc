@@ -18,5 +18,6 @@
         <item>on:temperature;off:temperature;type:reader;color:#77c3ef</item>
         <item>on:thermometer1;off:thermometer1;type:reader;color:#77c3ef</item>
         <item>on:humidity1;off:humidity1;type:reader;color:#77c3ef</item>
+        <item>on:television;off:television;type:switch;color:#77c3ef</item>
     </string-array>
 </resources>

@@ -31,6 +31,7 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
     private ImageView imgResourceIcon;
     private SeekBar control;
     private TextView txtIntensity;
+    private String httpResponse;
 
     public ResourceIntensityControlDialog(Context context, Resource resource, Bundle properties) {
         super(context, R.style.StyledDialog);
@@ -140,6 +141,11 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
         AnimationEffectsHelper helper = new AnimationEffectsHelper(getContext(), properties);
         helper.applyEffects(imgResourceIcon, state);
         txtIntensity.setText(resource.getIntensityValue().toString());
+    }
+
+    @Override
+    public String setRequestResponse(String httpResponse) {
+        return this.httpResponse = httpResponse;
     }
 
     @Override

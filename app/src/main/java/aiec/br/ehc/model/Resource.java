@@ -29,6 +29,7 @@ public class Resource extends BaseModel implements Parcelable {
     private final static int INTENSITY_DEFAULT_MIN_VALUE = 0;
     private final static int INTENSITY_DEFAULT_MAX_VALUE = 100;
     private final static int INTENSITY_DEFAULT_STEP_VALUE = 1;
+    private static final String READ_DEFAULT_FORMAT = "txt";
 
     private Integer environmentId;
     private String name;
@@ -37,6 +38,8 @@ public class Resource extends BaseModel implements Parcelable {
     private String icon;
     private String method;
     private String state;
+    private String readFormat;
+    private String readNode;
     private boolean intensityControl = false;
     private String intensityParam;
     private Integer intensityValue = 0;
@@ -59,6 +62,8 @@ public class Resource extends BaseModel implements Parcelable {
         description = in.readString();
         icon = in.readString();
         type = in.readString();
+        readFormat = in.readString();
+        readNode = in.readString();
         state = in.readString();
         intensityControl = in.readInt() == 1;
         intensityParam = in.readString();
@@ -174,6 +179,29 @@ public class Resource extends BaseModel implements Parcelable {
         this.method = method;
     }
 
+    public String getReadNode() {
+        return readNode;
+    }
+
+    public void setReadNode(String readNode) {
+        this.readNode = readNode;
+    }
+
+    public String getReadFormat() {
+        if (TextUtils.isEmpty(readFormat)) {
+            return READ_DEFAULT_FORMAT;
+        }
+        return readFormat;
+    }
+
+    public void setReadFormat(String readFormat) {
+        this.readFormat = readFormat;
+    }
+
+    public boolean isIntensityControl() {
+        return intensityControl;
+    }
+
     public Integer getMinValue() {
         if (minValue == null) {
             return INTENSITY_DEFAULT_MIN_VALUE;
@@ -287,6 +315,8 @@ public class Resource extends BaseModel implements Parcelable {
         parcel.writeString(description);
         parcel.writeString(icon);
         parcel.writeString(type);
+        parcel.writeString(readFormat);
+        parcel.writeString(readNode);
         parcel.writeString(state);
         parcel.writeInt(intensityControl ? 1 : 0);
         parcel.writeString(intensityParam);
@@ -314,6 +344,11 @@ public class Resource extends BaseModel implements Parcelable {
             String path = "";
             if (!param.isEmpty() && (param.contains("/") || !param.contains("="))) {
                 path = param.startsWith("/") ? param : "/".concat(param);
+            }
+
+            String pathFromParams = this.getPathUrlFromParameters(context);
+            if (!TextUtils.isEmpty(pathFromParams)) {
+                path = path.concat("/").concat(pathFromParams).replace("//", "/");
             }
 
             String protocol = this.getPlace(context).getProtocol().toLowerCase();
@@ -358,10 +393,11 @@ public class Resource extends BaseModel implements Parcelable {
 
         for (Parameter parameter : getRelatedParameters(context)) {
             if (this.getState().equalsIgnoreCase(parameter.getAction())){
+                String name = parameter.getName().trim();
+                String value = parameter.getValue().trim();
+
                 try {
-                    String name = URLEncoder.encode(parameter.getName().trim(), "UTF-8");
-                    String value = URLEncoder.encode(parameter.getValue().trim(), "UTF-8");
-                    urlParams.add(name.concat("=").concat(value));
+                    this.addParam(urlParams, name, value);
                 } catch (UnsupportedEncodingException e) {
                     return null;
                 }
@@ -369,6 +405,59 @@ public class Resource extends BaseModel implements Parcelable {
         }
 
         return urlParams;
+    }
+
+    private void addParam(List<String> urlParams,
+                          String paramName,
+                          String paramValue) throws UnsupportedEncodingException {
+        if (!paramValue.contains("?")) {
+            paramName = URLEncoder.encode(paramName, "UTF-8");
+            paramValue = URLEncoder.encode(paramValue, "UTF-8");
+            urlParams.add(paramName.concat("=").concat(paramValue));
+            return;
+        }
+
+        // /get/?sensor=temperatura
+        paramValue = paramValue.replace("/?", "?");
+        String[] data = paramValue.split("\\?");
+        if (data.length == 2) {
+            String[] values = data[1].split("&");
+            for (String value : values) {
+                String pName = value;
+                String pValue = "true";
+                if (value.contains("=")) {
+                    String args[] = value.split("=");
+                    pName = args[0];
+                    pValue = args.length == 2 ? args[1] : "true";
+                }
+
+                urlParams.add(
+                        URLEncoder.encode(pName, "UTF-8")
+                                .concat("=")
+                                .concat(URLEncoder.encode(pValue, "UTF-8"))
+                );
+            }
+        }
+    }
+
+    public String getPathUrlFromParameters(Context context) {
+        for (Parameter parameter : getRelatedParameters(context)) {
+            if (!this.getState().equalsIgnoreCase(parameter.getAction())){
+                continue;
+            }
+
+            String value = parameter.getValue().trim();
+            if (value.startsWith("/") && !value.contains("?")) {
+                return parameter.getValue();
+            }
+
+            if (value.startsWith("/") && value.contains("?")) {
+                String[] data = value.split("\\?");
+                return data[0];
+            }
+        }
+
+        return null;
     }
 
     /**

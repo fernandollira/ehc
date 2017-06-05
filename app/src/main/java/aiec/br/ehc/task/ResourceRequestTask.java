@@ -238,6 +238,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
             resource.save(context);
         }
 
+        resourceView.setRequestResponse(this.result);
         if (dialog != null) {
             dialog.dismiss();
         }
