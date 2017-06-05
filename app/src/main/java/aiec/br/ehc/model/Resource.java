@@ -371,6 +371,12 @@ public class Resource extends BaseModel implements Parcelable {
             params.add(intensityParam.trim().concat("=").concat(intensityValue.toString()));
         }
 
+        for (String param : params) {
+            if (param.startsWith(Parameter.EXTRA_PARAM_ARGS)) {
+                params.remove(param);
+            }
+        }
+
         return TextUtils.join("&", params);
     }
 

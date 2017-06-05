@@ -225,7 +225,7 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
                         "Login" : "Token";
             }
 
-            String qs = queryString;
+            String qs = TextUtils.isEmpty(queryString) ? "none" : queryString;
             if (!TextUtils.isEmpty(place.getAccessToken())) {
                 qs = queryString.replace(place.getAccessToken(), " <access key>");
             }

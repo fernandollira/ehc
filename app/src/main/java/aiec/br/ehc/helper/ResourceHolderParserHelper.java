@@ -6,13 +6,20 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.view.View;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 
 import aiec.br.ehc.adapter.ResourceViewHolder;
 
@@ -101,13 +108,21 @@ public class ResourceHolderParserHelper {
         String infoText = DEFAULT_INFO;
         try {
             JSONObject object = new JSONObject(httpResponse);
-            String fieldName = holder.resource.getReadNode().trim();
-            if (object.has(fieldName)) {
-                infoText = object.getString(fieldName);
-                if (TextUtils.isEmpty(infoText)) {
-                    infoText = DEFAULT_INFO;
+            String[] nodes = holder.resource.getReadNode().trim().replace(" ", "").split("\\.");
+
+            String lastNode = nodes[nodes.length - 1];
+            for (String node : nodes) {
+                Iterator<String> keys = object.keys();
+                while (keys.hasNext() && !node.equals(lastNode)) {
+                    String key = keys.next();
+                    if (key.equalsIgnoreCase(node.trim())) {
+                        object = object.getJSONObject(key);
+                        break;
+                    }
                 }
             }
+
+            infoText = object.getString(lastNode);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -127,19 +142,29 @@ public class ResourceHolderParserHelper {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         try {
+            InputStream is = new ByteArrayInputStream(httpResponse.getBytes());
             XmlPullParser parser = xmlFactory.newPullParser();
+            parser.setInput(is, null);
+            String node = holder.resource.getReadNode().trim();
             int event = parser.getEventType();
             while (event != XmlPullParser.END_DOCUMENT)  {
                 String name = parser.getName();
                 switch (event){
                     case XmlPullParser.START_TAG:
+                        if(name.equalsIgnoreCase(node)){
+                            infoText = parser.getAttributeValue(null, "value");
+                        }
+                        break;
+
+                    case XmlPullParser.TEXT:
+                        if (TextUtils.isEmpty(infoText)) {
+                            infoText = parser.getText();
+                        }
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if(name.equals(holder.resource.getReadNode())){
-                            infoText = parser.getAttributeValue(null,"value");
-                        }
                         break;
                 }
 

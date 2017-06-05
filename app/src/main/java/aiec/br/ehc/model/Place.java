@@ -248,6 +248,10 @@ public class Place extends BaseModel implements Parcelable {
 
     @Override
     public void save(Context context) {
+        if (isSecurityProtocol() && this.port == null) {
+            this.setPort(443);
+        }
+
         PlaceDAO dao = new PlaceDAO(context);
         dao.save(this);
         dao.close();

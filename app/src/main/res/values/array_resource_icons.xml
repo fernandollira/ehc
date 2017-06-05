@@ -16,6 +16,10 @@
         <item>on:door_open;off:door_closed;type:switch</item>
         <item>on:garage1;off:garage5;type:switch;animation:frame;drawable:animate_garage;oneShot</item>
         <item>on:temperature;off:temperature;type:reader;color:#77c3ef</item>
+        <item>on:weather;off:weather;type:reader;color:#77c3ef</item>
+        <item>on:sky;off:sky;type:reader;color:#77c3ef</item>
+        <item>on:sky1;off:sky1;type:reader;color:#77c3ef</item>
+        <item>on:cloud;off:cloud;type:reader;color:#77c3ef</item>
         <item>on:thermometer1;off:thermometer1;type:reader;color:#77c3ef</item>
         <item>on:humidity1;off:humidity1;type:reader;color:#77c3ef</item>
         <item>on:television;off:television;type:switch;color:#77c3ef</item>
