@@ -10,6 +10,7 @@ import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -63,7 +64,6 @@ public class ResourceViewHolder
         this.clicked = true;
 
         // aplica os efeitos com base nas propriedades do recurso
-
         if (isShowControl() && resource.getState().equals("on")) {
             applyEffects(resource.getState());
             return;
@@ -103,14 +103,22 @@ public class ResourceViewHolder
             if (resource.getReadFormat().equals("json")) {
                 try {
                     JSONObject object = new JSONObject(httpResponse);
-                    infoText = object.getString(resource.getReadNode());
+                    String fieldName = resource.getReadNode().trim();
+                    if (object.has(fieldName)) {
+                        infoText = object.getString(fieldName);
+                    }
                 } catch (JSONException e) {
                     infoText = "N/D";
+                    e.printStackTrace();
                 }
             }
 
             info.setText(infoText);
             info.setVisibility(View.VISIBLE);
+
+            RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) icon.getLayoutParams();
+            lp.removeRule(RelativeLayout.CENTER_HORIZONTAL);
+            icon.setLayoutParams(lp);
         }
 
         // Aplica os efeitos visuais definidos nas propriedades da imagem

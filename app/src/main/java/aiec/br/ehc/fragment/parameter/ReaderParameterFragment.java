@@ -93,6 +93,10 @@ public class ReaderParameterFragment extends Fragment implements IParameterFragm
                 }
             }
         }
+
+        if (!isShowNodeField()) {
+            nodeBlock.setVisibility(View.GONE);
+        }
     }
 
     private void addGridSelectItem() {
@@ -103,7 +107,7 @@ public class ReaderParameterFragment extends Fragment implements IParameterFragm
                 ImageView img = (ImageView) view.findViewById(R.id.parameter_reader_file_type_icon);
                 img.setColorFilter(Color.parseColor("#22d5e5"));
                 selectedOutput = img.getTag().toString();
-                if (isShowNodeField()) {
+                if (!isShowNodeField()) {
                     visibility = View.GONE;
                 }
 
@@ -131,7 +135,7 @@ public class ReaderParameterFragment extends Fragment implements IParameterFragm
      * @return boolean
      */
     private boolean isShowNodeField() {
-        return selectedOutput.equals("html") || selectedOutput.equals("txt");
+        return selectedOutput.equals("xml") || selectedOutput.equals("json");
     }
 
     @Override
