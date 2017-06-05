@@ -9,8 +9,10 @@ import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -23,6 +25,7 @@ import aiec.br.ehc.dao.ResourceDAO;
 import aiec.br.ehc.dialog.ResourceIntensityControlDialog;
 import aiec.br.ehc.helper.AnimationEffectsHelper;
 import aiec.br.ehc.helper.ResourceHelper;
+import aiec.br.ehc.helper.ResourceHolderParserHelper;
 import aiec.br.ehc.model.Environment;
 import aiec.br.ehc.model.Resource;
 import aiec.br.ehc.task.ResourceRequestTask;
@@ -34,7 +37,7 @@ public class ResourceViewHolder
         extends RecyclerView.ViewHolder
         implements View.OnClickListener, View.OnCreateContextMenuListener, IResourceView{
 
-    private final TextView info;
+    public final TextView info;
     public TextView name;
     public ImageView icon;
     public Resource resource;
@@ -98,24 +101,10 @@ public class ResourceViewHolder
             icon.setImageResource(helper.getIdentifierFromDrawable(newIcon));
         }
 
+        // verifica o retorno e faz a conversão de acordo com o tipo (xml, json, html, txt)
         if (resource.getType().equals("reader") && !TextUtils.isEmpty(httpResponse)) {
-            String infoText = httpResponse;
-            if (resource.getReadFormat().equals("json")) {
-                try {
-                    JSONObject object = new JSONObject(httpResponse);
-                    String fieldName = resource.getReadNode().trim();
-                    if (object.has(fieldName)) {
-                        infoText = object.getString(fieldName);
-                    }
-                } catch (JSONException e) {
-                    infoText = "N/D";
-                    e.printStackTrace();
-                }
-            }
-
-            info.setText(infoText);
-            info.setVisibility(View.VISIBLE);
-
+            ResourceHolderParserHelper parserHelper = new ResourceHolderParserHelper(httpResponse, this);
+            parserHelper.showInfo();
             RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) icon.getLayoutParams();
             lp.removeRule(RelativeLayout.CENTER_HORIZONTAL);
             icon.setLayoutParams(lp);
