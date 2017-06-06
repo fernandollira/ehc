@@ -203,6 +203,7 @@ public class ResourceEditorActivity extends AppCompatActivity {
         String type = properties.getString("type");
         switch (type) {
             case SwitchParameterFragment.TYPE:
+                intensityControl.setVisibility(View.VISIBLE);
                 fragment = new SwitchParameterFragment();
                 break;
 
