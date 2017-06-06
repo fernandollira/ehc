@@ -4,23 +4,21 @@ import android.os.Build;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.View;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
+import aiec.br.ehc.R;
 import aiec.br.ehc.adapter.ResourceViewHolder;
 
 /**
@@ -64,6 +62,8 @@ public class ResourceHolderParserHelper {
         if (!TextUtils.isEmpty(infoText)) {
             holder.info.setText(infoText);
             holder.info.setVisibility(View.VISIBLE);
+            int textSize = infoText.length() > 3 ? 14 : 20;
+            holder.info.setTextSize(textSize);
         }
     }
 

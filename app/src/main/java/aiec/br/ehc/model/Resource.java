@@ -416,6 +416,11 @@ public class Resource extends BaseModel implements Parcelable {
     private void addParam(List<String> urlParams,
                           String paramName,
                           String paramValue) throws UnsupportedEncodingException {
+
+        if (paramName.equals(Parameter.EXTRA_PARAM_ARGS) && !paramValue.startsWith("/")) {
+            paramValue = "?".concat(paramValue);
+        }
+
         if (!paramValue.contains("?")) {
             paramName = URLEncoder.encode(paramName, "UTF-8");
             paramValue = URLEncoder.encode(paramValue, "UTF-8");

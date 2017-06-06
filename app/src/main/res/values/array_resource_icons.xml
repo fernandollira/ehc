@@ -5,10 +5,12 @@
         <item>on:fan_ac;off:fan_ac;type:switch;animation:rotate;color:#CCCCCC</item>
         <item>on:cctv;off:cctv;type:switch;color:#FFFF00</item>
         <item>on:cd;off:cd;type:switch;animation:rotate</item>
+        <item>on:disc;off:disc;type:switch;animation:rotate</item>
         <item>on:fan2;off:fan2;type:switch;color:#FFFF00</item>
         <item>on:gas;off:gas;type:switch;color:#CC99FF</item>
         <item>on:window2;off:window_two;type:switch;color:#FFCC66</item>
         <item>on:led_light_lamp;off:led_light_lamp;type:switch;color:#ADFF2F</item>
+        <item>on:alarm;off:alarm;type:switch;color:#ADFF2F</item>
         <item>on:kitchen_ceiling_lamp;off:kitchen_ceiling_lamp;type:switch;color:#d8ff00</item>
         <item>on:minisplit_on;off:minisplit_off;type:switch;color:#77c3ef;animation:frame;drawable:animate_minisplit</item>
         <item>on:lock;off:unlock;type:switch;color:#FFFAFA</item>
@@ -22,6 +24,8 @@
         <item>on:cloud;off:cloud;type:reader;color:#77c3ef</item>
         <item>on:thermometer1;off:thermometer1;type:reader;color:#77c3ef</item>
         <item>on:humidity1;off:humidity1;type:reader;color:#77c3ef</item>
+        <item>on:luminosity;off:luminosity;type:reader;color:#77c3ef</item>
+        <item>on:luminosity2;off:luminosity2;type:reader;color:#77c3ef</item>
         <item>on:television;off:television;type:switch;color:#77c3ef</item>
     </string-array>
 </resources>
