@@ -74,5 +74,12 @@
         <item>transport</item>
         <item>lamp1</item>
         <item>table</item>
+        <item>favorite1</item>
+        <item>favorite2</item>
+        <item>favorite3</item>
+        <item>favorite4</item>
+        <item>favorite5</item>
+        <item>star</item>
+        <item>approval_badge</item>
     </string-array>
 </resources>
