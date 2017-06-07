@@ -2,10 +2,8 @@ package aiec.br.ehc.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,8 +13,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import aiec.br.ehc.R;
-import aiec.br.ehc.ResourceActivity;
 import aiec.br.ehc.adapter.IResourceView;
+import aiec.br.ehc.adapter.ResourceViewHolder;
 import aiec.br.ehc.helper.AnimationEffectsHelper;
 import aiec.br.ehc.helper.ResourceHelper;
 import aiec.br.ehc.model.Resource;
@@ -25,17 +23,19 @@ import aiec.br.ehc.task.ResourceRequestTask;
 /**
  * Cria uma dialog customizado para controle de intensidade
  */
-public class ResourceIntensityControlDialog extends Dialog implements IResourceView, DialogInterface.OnDismissListener {
+public class ResourceIntensityControlDialog extends Dialog implements IResourceView {
     private final Resource resource;
     private final Bundle properties;
+    private final ResourceViewHolder parentView;
     private ImageView imgResourceIcon;
     private SeekBar control;
     private TextView txtIntensity;
     private String httpResponse;
 
-    public ResourceIntensityControlDialog(Context context, Resource resource, Bundle properties) {
+    public ResourceIntensityControlDialog(Context context, ResourceViewHolder viewHolder, Bundle properties) {
         super(context, R.style.StyledDialog);
-        this.resource = resource;
+        this.parentView = viewHolder;
+        this.resource = viewHolder.resource;
         this.properties = properties;
     }
 
@@ -141,15 +141,20 @@ public class ResourceIntensityControlDialog extends Dialog implements IResourceV
         AnimationEffectsHelper helper = new AnimationEffectsHelper(getContext(), properties);
         helper.applyEffects(imgResourceIcon, state);
         txtIntensity.setText(resource.getIntensityValue().toString());
+        this.parentView.applyEffects(state);
+        this.parentView.applyEffects(this.resource.getState());
     }
 
+    /**
+     * Setter para informar o retorno da requisição
+     *
+     * @param httpResponse
+     * @return String
+     */
     @Override
-    public String setRequestResponse(String httpResponse) {
-        return this.httpResponse = httpResponse;
+    public void setRequestResponse(String httpResponse) {
+        this.httpResponse = httpResponse;
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialogInterface) {
-        ((ResourceActivity) getOwnerActivity()).fillResourceList();
-    }
+
 }

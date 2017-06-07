@@ -25,5 +25,5 @@ public interface IResourceView {
      *
      * @return String
      */
-    public String setRequestResponse(String httpResponse);
+    public void setRequestResponse(String httpResponse);
 }

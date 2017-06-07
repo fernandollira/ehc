@@ -116,7 +116,7 @@ public class ResourceViewHolder
 
         if (this.isShowControl() && this.clicked) {
             this.clicked = false;
-            ResourceIntensityControlDialog dialog = new ResourceIntensityControlDialog(context, resource, properties);
+            ResourceIntensityControlDialog dialog = new ResourceIntensityControlDialog(context, this, properties);
             dialog.show();
         }
     }
@@ -132,8 +132,8 @@ public class ResourceViewHolder
     }
 
     @Override
-    public String setRequestResponse(String httpResponse) {
-        return this.httpResponse = httpResponse;
+    public void setRequestResponse(String httpResponse) {
+        this.httpResponse = httpResponse;
     }
 
     /**
