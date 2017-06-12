@@ -10,5 +10,23 @@
         sha1="96c9e074db04656ab37f18c5a3bbb314225c416a">
         <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/pre-dexed/debug/classes_09cbb7702add8c331fad2115a479509cbb9b7507.jar" />
     </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_87d63afcb50e94a3333793a0aa9e311df1da0153/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="abd1597980c4d4c0443ce1acf1abde23028ff5c4">
+        <dex dex="/home/gilmar/AndroidStudioProjects/ehc/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_34e079a6c82122a4500154af98e85c94727a5303/classes.dex" />
+    </item>
 
 </items>

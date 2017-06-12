@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -214,45 +215,50 @@ public class ResourceRequestTask extends AsyncTask<Resource, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
-        resourceView.setRequestResponse(this.result);
-        if (respCode != HttpURLConnection.HTTP_OK && this.showFailConnectionNotification) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.StyledDialog);
-            dialog.setTitle(this.error);
+        try {
+            resourceView.setRequestResponse(this.result);
+            if (respCode != HttpURLConnection.HTTP_OK && this.showFailConnectionNotification) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(context, R.style.StyledDialog);
+                dialog.setTitle(this.error);
 
-            String auth_mode = "none";
-            if (this.use_authorization) {
-                auth_mode = place.isAuthorizationByCredentials() ?
-                        "Login" : "Token";
+                String auth_mode = "none";
+                if (this.use_authorization) {
+                    auth_mode = place.isAuthorizationByCredentials() ?
+                            "Login" : "Token";
+                }
+
+                String qs = TextUtils.isEmpty(queryString) ? "none" : queryString;
+                if (!TextUtils.isEmpty(place.getAccessToken())) {
+                    qs = queryString.replace(place.getAccessToken(), " <access key>");
+                }
+
+                String message = "Method: "
+                        .concat(resource.getMethod()).concat("\n")
+                        .concat("URL: ")
+                        .concat(resource.getRequestURL(context).toString().concat("\n"))
+                        .concat("Parameters: ")
+                        .concat(qs).concat("\n")
+                        .concat("Authentication mode: ")
+                        .concat(auth_mode).concat("\n")
+                        .concat(flagInfo);
+                if (this.result != null) {
+                    message = result;
+                }
+                dialog.setView(getDialogView(message));
+                dialog.setIcon(android.R.drawable.ic_dialog_alert);
+                dialog.setCancelable(true);
+                dialog.show();
+            } else {
+                resourceView.applyEffects(resource.getState());
+                resource.save(context);
             }
 
-            String qs = TextUtils.isEmpty(queryString) ? "none" : queryString;
-            if (!TextUtils.isEmpty(place.getAccessToken())) {
-                qs = queryString.replace(place.getAccessToken(), " <access key>");
+            if (dialog != null) {
+                dialog.dismiss();
             }
 
-            String message = "Method: "
-                    .concat(resource.getMethod()).concat("\n")
-                    .concat("URL: ")
-                    .concat(resource.getRequestURL(context).toString().concat("\n"))
-                    .concat("Parameters: ")
-                    .concat(qs).concat("\n")
-                    .concat("Authentication mode: ")
-                    .concat(auth_mode).concat("\n")
-                    .concat(flagInfo);
-            if (this.result !=null) {
-                message = result;
-            }
-            dialog.setView(getDialogView(message));
-            dialog.setIcon(android.R.drawable.ic_dialog_alert);
-            dialog.setCancelable(true);
-            dialog.show();
-        } else {
-            resourceView.applyEffects(resource.getState());
-            resource.save(context);
-        }
-
-        if (dialog != null) {
-            dialog.dismiss();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
