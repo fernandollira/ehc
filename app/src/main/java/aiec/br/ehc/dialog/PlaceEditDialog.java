@@ -2,7 +2,15 @@ package aiec.br.ehc.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Path;
+import android.icu.text.RelativeDateTimeFormatter;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -12,7 +20,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import aiec.br.ehc.PlaceActivity;
 import aiec.br.ehc.R;
 import aiec.br.ehc.adapter.ImageArrayAdapter;
@@ -65,6 +73,9 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         params.height = 256;
         spinner.setLayoutParams(params);
 
+        String http_port = getContext().getString(R.string.default_http_port);
+        String portHint = String.format(getContext().getString(R.string.edit_place_port_hint), http_port);
+        txtPort.setHint(portHint);
         if (place.getId() != null) {
             txtTitle.setText(this.activity.getString(R.string.edit_place));
             txtName.setText(place.getName());
@@ -77,6 +88,9 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
             int pos = spinnerAdapter.getPosition(place.getIcon());
             spinner.setSelection(pos);
         }
+
+        this.addOnProtocolChange();
+        this.addOnHostTextChange();
     }
 
     @Override
@@ -85,7 +99,7 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
             case R.id.btn_yes:
                 String port = txtPort.getText().toString();
                 if (port.isEmpty() ) {
-                    port = getContext().getString(R.string.default_place_port);
+                    port = getContext().getString(R.string.default_http_port);
                 }
 
                 String requiredMessage = getContext().getString(R.string.required_field_message);
@@ -121,5 +135,60 @@ public class PlaceEditDialog extends Dialog implements View.OnClickListener {
         }
 
         dismiss();
+    }
+
+    private void addOnHostTextChange()
+    {
+        final String allow_text_digits = "abcdefghijklmnopqrstuvwxyz1234567890.-_";
+        final String allow_number_digits = "0123456789.";
+        txtHost.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence value, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence value, int i, int i1, int i2) {
+                if (value.length() == 1) {
+                    if (TextUtils.isDigitsOnly(value)) {
+                        txtHost.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        txtHost.setKeyListener(DigitsKeyListener.getInstance(allow_number_digits));
+                    }
+                    else {
+                        txtHost.setKeyListener(DigitsKeyListener.getInstance(allow_text_digits));
+                        txtHost.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+                    }
+
+                    txtHost.setSelection(1);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().isEmpty()) {
+                    txtHost.setKeyListener(DigitsKeyListener.getInstance(allow_text_digits));
+                    txtHost.setInputType(InputType.TYPE_TEXT_VARIATION_URI);
+                }
+            }
+        });
+    }
+
+    /**
+     * Adiciona o envento para escutar a alteração do protocolo
+     */
+    private void addOnProtocolChange()
+    {
+        rgProtocol.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, @IdRes int item) {
+                int portResId = R.string.default_http_port;
+                if (item == R.id.place_protocol_https) {
+                    portResId = R.string.default_https_port;
+                }
+
+                String port = getContext().getString(portResId);
+                String message = getContext().getString(R.string.edit_place_port_hint);
+                txtPort.setHint(String.format(message, port));
+            }
+        });
     }
 }

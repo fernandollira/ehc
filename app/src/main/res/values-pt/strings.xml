@@ -2,7 +2,7 @@
     <string name="about">Sobre</string>
     <string name="action_settings">Configurações</string>
     <string name="app_full_name" translatable="false">EHC - Easy Home Control</string>
-    <string name="app_name" translatable="false">EHC</string>
+    <string name="app_name" translatable="false">Easy Home Control</string>
     <string name="developer1_email" translatable="false">professorgilmagro@gmail.com</string>
     <string name="developer2_email" translatable="false">ricardoboreto@gmail.com</string>
     <string name="ehc_description" translatable="false">Easy Home Control</string>
@@ -25,7 +25,7 @@
     <string name="edit_place_name_hint">Nome do local. Ex: Minha Casa</string>
     <string name="edit_place_description_hint">Descrição. Ex: São Paulo</string>
     <string name="edit_place_host_hint">Host. Ex: 192.168.1.100</string>
-    <string name="edit_place_port_hint">Porta para conexão. Ex: 80</string>
+    <string name="edit_place_port_hint">Porta para conexão. Ex: %s</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="cancel">Cancelar</string>

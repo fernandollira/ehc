@@ -78,7 +78,8 @@
 
     <EditText
         android:id="@+id/place_edit_host"
-        android:inputType="textWebEditText|text|"
+        android:inputType="textUri"
+        android:digits="abcdefghijklmnopqrstuvwxyz0123456789.-_"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

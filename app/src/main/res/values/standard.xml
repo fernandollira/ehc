@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="default_place_icon" translatable="false">home</string>
-    <string name="default_place_port" translatable="false">80</string>
+    <string name="default_http_port" translatable="false">80</string>
+    <string name="default_https_port" translatable="false">430</string>
 </resources>
