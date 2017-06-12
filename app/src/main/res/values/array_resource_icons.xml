@@ -11,7 +11,7 @@
         <item>on:gas_level;off:gas_level;type:reader</item>
         <item>on:window2;off:window_two;type:switch</item>
         <item>on:led_light_lamp;off:led_light_lamp;type:switch;color:#ADFF2F</item>
-        <item>on:alarm;off:alarm_on;type:switch</item>
+        <item>on:alarm_on;off:alarm_off;type:switch</item>
         <item>on:kitchen_ceiling_lamp;off:kitchen_ceiling_lamp;type:switch;color:#d8ff00</item>
         <item>on:minisplit_on;off:minisplit_off;type:switch;color:#77c3ef;animation:frame;drawable:animate_minisplit</item>
         <item>on:lock;off:unlock;type:switch;color:#FFFAFA</item>
