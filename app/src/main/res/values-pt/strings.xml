@@ -80,4 +80,9 @@
     <string name="min_value">Valor mínimo</string>
     <string name="max_value">Valor máximo</string>
     <string name="service_output_format">Qual é o formato de resposta?</string>
+    <string name="rate_dialog_title">Avalie-nos</string>
+    <string name="rate_dialog_message">Se você gosta deste aplicativo, se importaria de tomar um momento para avaliá-lo? Não demorará mais de um minuto. \n Obrigado por seu apoio!</string>
+    <string name="rate_dialog_ok">Avaliar agora</string>
+    <string name="rate_dialog_cancel">Me lembre depois</string>
+    <string name="rate_dialog_no">Não, obrigado</string>
 </resources>

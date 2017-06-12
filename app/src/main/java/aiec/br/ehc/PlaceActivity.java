@@ -25,6 +25,7 @@ import aiec.br.ehc.dialog.PlaceEditDialog;
 import aiec.br.ehc.helper.SharedPreferenceHelper;
 import aiec.br.ehc.helper.SystemUiHelper;
 import aiec.br.ehc.model.Place;
+import hotchemi.android.rate.AppRate;
 
 public class PlaceActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,6 +53,7 @@ public class PlaceActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         this.addCreateEvent();
         this.addEventPlaceList();
+        this.appRateEvent();
     }
 
     /**
@@ -232,5 +234,18 @@ public class PlaceActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void appRateEvent() {
+        AppRate.with(this)
+                .setInstallDays(0)
+                .setLaunchTimes(10)
+                .setRemindInterval(2)
+                .setDebug(false)
+                .setShowLaterButton(true)
+                .monitor();
+
+        // Show a dialog if meets conditions
+        AppRate.showRateDialogIfMeetsConditions(this);
     }
 }
